@@ -24,7 +24,7 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
 		<ParallaxBanner
 			layers={[
 				{
-					image: "/images/cover.png",
+					image: "/images/cover.jpg",
 					amount: 0.2,
 				}
 			]}
