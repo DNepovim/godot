@@ -1,7 +1,8 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import type { NextPage } from "next"
+import Head from "next/head"
+import { data } from "../data"
+import { Navigation } from "../components/Navigation/Navigation"
+import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
 
 const Home: NextPage = () => {
@@ -79,7 +80,9 @@ const Home: NextPage = () => {
 
 
       `} />
+
       <main>
+        <Navigation logo={logo} data={data.config.navigation} />
       </main>
     </div>
   )
