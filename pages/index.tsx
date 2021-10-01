@@ -1,7 +1,9 @@
+/** @jsxImportSource @emotion/react */
 import type { NextPage } from "next"
 import Head from "next/head"
 import { data } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
+import { Cover } from "../blocks/Cover/Cover"
 import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
 
@@ -78,11 +80,17 @@ const Home: NextPage = () => {
           font-display: auto;
         }
 
+        body {
+          margin: 0;
+          padding: 0;
+        }
+
 
       `} />
 
       <main>
         <Navigation logo={logo} data={data.config.navigation} />
+        <Cover data={data.pages.frontPage.blocks[0].fields} />
       </main>
     </div>
   )
