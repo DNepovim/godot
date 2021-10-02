@@ -55,6 +55,16 @@ export const data = {
 						`,
 						textAlign: "center"
 					}
+				},
+				{
+					template: "video",
+					fields: {
+						video: {
+							src: "https://www.youtube.com/embed/9xdZA-f1IfI",
+							width: 560,
+							height: 315
+						}
+					}
 				}
 			]
 		}
