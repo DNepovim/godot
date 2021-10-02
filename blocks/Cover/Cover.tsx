@@ -28,21 +28,36 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
 					amount: 0.2,
 				}
 			]}
+			css={css`
+				height: auto !important;
+
+				.parallax-outer {
+					background-color: black;
+				}
+
+				.parallax-banner-layer-0 {
+					opacity: 0.5;
+				}
+			`}
 		>
-			<Container>
+			<Container
+				css={css`padding: 64px 16px;`}
+			>
 				<h1 css={css`
 					font-family: skautbold;
-					font-size: ${theme.font.sizes[4]};
+					font-size: 2.2em;
 					font-weight: bold;
 					color: white;
+					margin: 0 0 4px;
 				`}>
 					{data.title}
 				</h1>
 				<p css={css`
-					font-family: themix;
-					font-size: ${theme.font.sizes[3]};
+					font-family: skautbold;
+					font-size: 1.8em;
 					font-weight: bold;
 					color: white;
+					margin: 0 0 4px;
 				`}>
 					{data.subtitle}
 				</p>
@@ -51,9 +66,10 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
 					font-family: themix;
 					font-weight: bold;
 					color: white;
-				`}>
-					{data.claim}
-				</p>
+					margin: 0 0 12px;
+				`}
+					dangerouslySetInnerHTML={{ __html: data.claim }}
+				/>
 				<a
 					href={data.button.link}
 					{...(data.button.targetBlank ? {
