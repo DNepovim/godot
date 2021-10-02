@@ -63,7 +63,6 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
 				</p>
 				<p css={css`
 					font-size: ${theme.font.sizes[2]};
-					font-family: themix;
 					font-weight: bold;
 					color: white;
 					margin: 0 0 12px;

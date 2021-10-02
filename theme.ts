@@ -12,7 +12,7 @@ export const theme = {
 			1: "1rem",
 			2: "1.4rem",
 			3: "2.2rem",
-			4: "2.8rem",
+			4: "2.2rem",
 		}
 	}
 }

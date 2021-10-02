@@ -42,6 +42,19 @@ export const data = {
 							targetBlank: true
 						}
 					}
+				},
+				{
+					template: "richText",
+					fields: {
+						title: "Čekatelský lesní kurz",
+						text: `
+						<p>Co ti v noci nedá spát? Strach z vedení, obava z přebírání zodpovědnosti? Množství čekatelských kompetencí, které musíš splnit?</p>
+						<p><strong>Na Insomnii ti s tím pomůžeme!</strong></p>
+						<p>ČK Insomnia je víkendový čekatelský kurz, který ale rozsahem odpovídá lesním kurzům. I díky tomu se do něj vejde i to,<br> co zrovna tvůj oddíl trápí, večerní hraní na kytaru nebo zážitkové hry. Kurz v příštím roce proběhne koronaviru navzdory <br>– a to podle situace částečně ve fyzickém a částečně v digitálním prostoru.</p>
+						<p>Pokud toužíš po kvalitním víkendovém čekatelském kurzu – Insomnia je přímo pro tebe.</p>
+						`,
+						textAlign: "center"
+					}
 				}
 			]
 		}

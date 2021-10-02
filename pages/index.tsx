@@ -6,6 +6,7 @@ import { Navigation } from "../components/Navigation/Navigation"
 import { Cover } from "../blocks/Cover/Cover"
 import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
+import { RichText } from "../blocks/RichText/RichText"
 
 const Home: NextPage = () => {
   return (
@@ -84,14 +85,16 @@ const Home: NextPage = () => {
           margin: 0;
           padding: 0;
           font-size: 18px;
+          font-family: themix;
         }
 
 
       `} />
 
-      <main>
+      <main css={css`min-height: 300vh;`}>
         <Navigation logo={logo} data={data.config.navigation} />
         <Cover data={data.pages.frontPage.blocks[0].fields} />
+        <RichText data={data.pages.frontPage.blocks[1].fields} />
       </main>
     </div>
   )
