@@ -8,6 +8,7 @@ import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
 import { RichText } from "../blocks/RichText/RichText"
 import { Video } from "../blocks/Video/Video"
+import { Columns } from "../blocks/Columns/Columns"
 
 const Home: NextPage = () => {
   return (
@@ -97,6 +98,7 @@ const Home: NextPage = () => {
         <Cover data={data.pages.frontPage.blocks[0].fields} />
         <RichText data={data.pages.frontPage.blocks[1].fields} />
         <Video {...data.pages.frontPage.blocks[2].fields} />
+        <Columns {...data.pages.frontPage.blocks[3].fields} />
       </main>
     </div>
   )

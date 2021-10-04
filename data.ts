@@ -3,27 +3,27 @@ export const data = {
 		navigation: [
 			{
 				title: "Domů",
-				link: "/"
+				link: "/",
 			},
 			{
 				title: "Insomnia",
-				link: "/insomnia"
+				link: "/insomnia",
 			},
 			{
 				title: "Proč?",
-				link: "/proc"
+				link: "/proc",
 			},
 			{
 				title: "Inso 2021",
-				link: "/inso2021"
+				link: "/inso2021",
 			},
 			{
 				title: "Tým",
-				link: "/tym"
+				link: "/tym",
 			},
 			{
 				title: "Kontakt",
-				link: "/kontakt"
+				link: "/kontakt",
 			},
 		]
 	},
@@ -39,7 +39,7 @@ export const data = {
 						button: {
 							label: "Chci na Insomnii!",
 							link: "/",
-							targetBlank: true
+							targetBlank: true,
 						}
 					}
 				},
@@ -53,7 +53,7 @@ export const data = {
 						<p>ČK Insomnia je víkendový čekatelský kurz, který ale rozsahem odpovídá lesním kurzům. I díky tomu se do něj vejde i to,<br> co zrovna tvůj oddíl trápí, večerní hraní na kytaru nebo zážitkové hry. Kurz v příštím roce proběhne koronaviru navzdory <br>– a to podle situace částečně ve fyzickém a částečně v digitálním prostoru.</p>
 						<p>Pokud toužíš po kvalitním víkendovém čekatelském kurzu – Insomnia je přímo pro tebe.</p>
 						`,
-						textAlign: "center"
+						textAlign: "center",
 					}
 				},
 				{
@@ -62,8 +62,46 @@ export const data = {
 						video: {
 							src: "https://www.youtube.com/embed/9xdZA-f1IfI",
 							width: 560,
-							height: 315
+							height: 315,
 						}
+					}
+				},
+				{
+					template: "columnsBlock",
+					fields: {
+						title: "Proč právě Insomnia?",
+						columns: [
+							{
+								title: "Kurz na míru",
+								text: "Program je uzpůsoben potřebám jednotlivých účastníků. Budeme po tobě proto chtít hodně informací ještě před začátkem kurzu. Je pro nás důležité, abys to, co se na Insomnii naučíš, mohl/a rovnou vyzkoušet v oddíle. Odměnou ti ale budou smysluplně strávené čtyři „víkendy“.",
+								icon: "star",
+							},
+							{
+								title: "Zážitky a sebepoznání",
+								text: "Kromě naučných a praktických programů se můžeš těšit i na sebepoznávací a zážitkové akce. Chceme, aby sis odvezl/a i vzpomínky a myšlenky, které v tobě zůstanou ještě dlouho po kurzu.",
+								icon: "person",
+							},
+							{
+								title: "Učení praxí",
+								text: "Vynasnažíme se vše dělat co nejvíc prakticky!  Na nějaké memorování nepotřebných formalit nás neužije. Chceme jednotlivé čekatelské kompetence co nejvíc provázat s tím, co děláš v oddíle i jinde.",
+								icon: "stars",
+							},
+							{
+								title: "Víkendový, přesto intenzivní",
+								text: "Insomnia má v roce 2021 4 víkendy (z toho jeden prodloužený) a několik online workshopů.  Společně strávíme okolo patnácti dní, to není zrovna málo. Když chce člověk vzdělání, zážitky a sebepoznání, musí tomu věnovat nějaký čas.",
+								icon: "stars",
+							},
+							{
+								title: "Chceme výstupy",
+								text: "Proč jsou část kurzu na jaře a část na podzim?  Chceme totiž znát výstupy toho, co jsi v oddíle vyzkoušel/a, ať už to bude jednoduchá hra nebo naplánování celé víkendovky. Chceme vědět, jak se ti to povedlo, být ti při ruce, když budeš potřebovat radu a poskytnout ti kvalitní zpětnou vazbu.",
+								icon: "mark",
+							},
+							{
+								title: "Bude to výzva",
+								text: "Už tě možná napadlo, že to vše asi nebude jednoduché. Ale není se čeho obávat, za zády ti bude stát tým ochotných instruktorů, kteří udělají vše pro to, abys kurz úspěšně dokončil/a.",
+								icon: "moon",
+							},
+						]
 					}
 				}
 			]

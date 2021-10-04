@@ -1,11 +1,12 @@
 export const theme = {
 	layout: {
-		width: 1000
+		width: 1000,
 	},
 	color: {
 		background: "#ffffff",
 		brand: "#9dcfc3",
 		gray: "#787671",
+		beige: "#f3f2eb",
 	},
 	font: {
 		sizes: {

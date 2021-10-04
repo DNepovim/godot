@@ -2,6 +2,7 @@
 import { css } from "@emotion/react"
 import React from "react"
 import { Container } from "../../components/Container/Container"
+import { Heading } from "../../components/Heading/Heading"
 import { theme } from "../../theme"
 
 interface Props {
@@ -17,7 +18,7 @@ export const RichText: React.FC<{data: Props}> = ({data}) => (
 				text-align: ${data.textAlign};
 			`}
 		>
-			<h2 css={css`font-size: ${theme.font.sizes[3]}; font-family: skautbold`}>{data.title}</h2>
+			<Heading level={2}>{data.title}</Heading>
 			<div dangerouslySetInnerHTML={{__html: data.text}} />
 		</Container>
 	</section>
