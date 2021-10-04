@@ -116,6 +116,14 @@ export const data = {
 							"/images/image_6.png",
 						]
 					}
+				},
+				{
+					template: "quotation",
+					fields: {
+						text: "Insomnie (nespavost) je porucha spánku, při níž jedinec nemůže usnout nebo se v spánku často probouzí",
+						source: "Wikipedia",
+						sourceUrl: "https://cs.wikipedia.org/wiki/Insomnie",
+					}
 				}
 			]
 		}

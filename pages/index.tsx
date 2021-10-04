@@ -10,6 +10,8 @@ import { RichText } from "../blocks/RichText/RichText"
 import { Video } from "../blocks/Video/Video"
 import { Columns } from "../blocks/Columns/Columns"
 import { Gallery } from "../blocks/Gallery/Gallery"
+import { Quotation } from "../blocks/Quotation/Quotation"
+import { theme } from "../theme"
 
 const Home: NextPage = () => {
   return (
@@ -91,6 +93,15 @@ const Home: NextPage = () => {
           font-family: themix;
         }
 
+        a {
+          color: ${theme.color.brand};
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+
 
       `} />
 
@@ -101,6 +112,7 @@ const Home: NextPage = () => {
         <Video {...data.pages.frontPage.blocks[2].fields} />
         <Columns {...data.pages.frontPage.blocks[3].fields} />
         <Gallery {...data.pages.frontPage.blocks[4].fields} />
+        <Quotation {...data.pages.frontPage.blocks[5].fields} />
       </main>
     </div>
   )
