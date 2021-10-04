@@ -7,9 +7,9 @@ import { Container } from "../../components/Container/Container"
 
 interface Props {
   title: string,
-  subtitle?: string,
-  claim?: string,
-  button?: {
+  subtitle: string,
+  claim: string,
+  button: {
     label: string,
     link: string,
     targetBlank: boolean
