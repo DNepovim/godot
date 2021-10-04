@@ -111,15 +111,25 @@ const Home: NextPage = () => {
         min-height: 300vh;
         padding-top: 96px;
       `}>
+        {/* @ts-ignore */}
         <Navigation logo={logo} data={data.config.navigation} />
+        {/* @ts-ignore */}
         <Cover data={data.pages.frontPage.blocks[0].fields} />
+        {/* @ts-ignore */}
         <RichText data={data.pages.frontPage.blocks[1].fields} />
+        {/* @ts-ignore */}
         <Video {...data.pages.frontPage.blocks[2].fields} />
+        {/* @ts-ignore */}
         <Columns {...data.pages.frontPage.blocks[3].fields} />
+        {/* @ts-ignore */}
         <Gallery {...data.pages.frontPage.blocks[4].fields} />
+        {/* @ts-ignore */}
         <Quotation {...data.pages.frontPage.blocks[5].fields} />
+        {/* @ts-ignore */}
         <Columns {...data.pages.frontPage.blocks[6].fields} />
+        {/* @ts-ignore */}
         <Persons {...data.pages.frontPage.blocks[7].fields} />
+        {/* @ts-ignore */}
         <Contacts {...data.pages.frontPage.blocks[8].fields} />
       </main>
     </div>
