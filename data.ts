@@ -204,6 +204,31 @@ export const data = {
 							},
 						]
 					}
+				},
+				{
+					template: "contacts",
+					fields: {
+						title: "Chceš se nás na něco zeptat?",
+						subtitle: "Ať už máš dotaz, chceš s námi vyřešit jakýkoli nápad či problém napiš na <a href='mailto:ckinsomnia@skaut.cz' rel='noreferrer noopener'>ckinsomnia@skaut.cz</a> nebo prostě klikni:",
+						contacts: [
+							{
+								type: "e-mail",
+								icon: "",
+								url: "ckinsomnia@skaut.cz"
+							},
+							{
+								type: "facebook",
+								icon: "",
+								url: "https://www.facebook.com/ckinsomnia"
+							},
+							{
+								type: "instagram",
+								icon: "",
+								url: "https://www.instagram.com/ckinsomnia/"
+							},
+						]
+
+					}
 				}
 			]
 		}

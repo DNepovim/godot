@@ -13,6 +13,7 @@ import { Gallery } from "../blocks/Gallery/Gallery"
 import { Quotation } from "../blocks/Quotation/Quotation"
 import { Persons } from "../blocks/Persons/Persons"
 import { theme } from "../theme"
+import { Contacts } from "../blocks/Contacts/Contacts"
 
 const Home: NextPage = () => {
   return (
@@ -116,6 +117,7 @@ const Home: NextPage = () => {
         <Quotation {...data.pages.frontPage.blocks[5].fields} />
         <Columns {...data.pages.frontPage.blocks[6].fields} />
         <Persons {...data.pages.frontPage.blocks[7].fields} />
+        <Contacts {...data.pages.frontPage.blocks[8].fields} />
       </main>
     </div>
   )
