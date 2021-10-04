@@ -29,6 +29,6 @@ export const Column: React.FC<ColumnProps> = ({title, text, icon}) => (
 			/>
 			<h3 css={css`margin: 0`}>{title}</h3>
 		</header>
-		<p>{text}</p>
+		<p dangerouslySetInnerHTML={{__html: text}}/>
 	</article>
 )

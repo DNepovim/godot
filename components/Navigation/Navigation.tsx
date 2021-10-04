@@ -56,6 +56,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem
 									padding: 0.4rem;
 									transition: color 300ms;
 									font-family: themix;
+									color: black;
 
 									&:after {
 										content: "";

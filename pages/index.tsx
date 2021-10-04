@@ -11,6 +11,7 @@ import { Video } from "../blocks/Video/Video"
 import { Columns } from "../blocks/Columns/Columns"
 import { Gallery } from "../blocks/Gallery/Gallery"
 import { Quotation } from "../blocks/Quotation/Quotation"
+import { Persons } from "../blocks/Persons/Persons"
 import { theme } from "../theme"
 
 const Home: NextPage = () => {
@@ -113,6 +114,8 @@ const Home: NextPage = () => {
         <Columns {...data.pages.frontPage.blocks[3].fields} />
         <Gallery {...data.pages.frontPage.blocks[4].fields} />
         <Quotation {...data.pages.frontPage.blocks[5].fields} />
+        <Columns {...data.pages.frontPage.blocks[6].fields} />
+        <Persons {...data.pages.frontPage.blocks[7].fields} />
       </main>
     </div>
   )
