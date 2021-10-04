@@ -107,7 +107,10 @@ const Home: NextPage = () => {
 
       `} />
 
-      <main css={css`min-height: 300vh;`}>
+      <main css={css`
+        min-height: 300vh;
+        padding-top: 96px;
+      `}>
         <Navigation logo={logo} data={data.config.navigation} />
         <Cover data={data.pages.frontPage.blocks[0].fields} />
         <RichText data={data.pages.frontPage.blocks[1].fields} />
