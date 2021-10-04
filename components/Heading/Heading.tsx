@@ -8,9 +8,9 @@ type TitleLevel = 1 | 2 | 3
 export const Heading: React.FC<{children: string; level: TitleLevel}> = ({children, level}) => {
   const props = {
     css: css`
-			font-size: ${theme.font.sizes[3]};
-			font-family: skautbold;
-			text-align: center;
+      font-size: ${theme.font.sizes[3]};
+      font-family: skautbold;
+      text-align: center;
     `,
     children
   }
