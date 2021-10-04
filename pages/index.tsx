@@ -9,6 +9,7 @@ import { css, Global } from "@emotion/react"
 import { RichText } from "../blocks/RichText/RichText"
 import { Video } from "../blocks/Video/Video"
 import { Columns } from "../blocks/Columns/Columns"
+import { Gallery } from "../blocks/Gallery/Gallery"
 
 const Home: NextPage = () => {
   return (
@@ -99,6 +100,7 @@ const Home: NextPage = () => {
         <RichText data={data.pages.frontPage.blocks[1].fields} />
         <Video {...data.pages.frontPage.blocks[2].fields} />
         <Columns {...data.pages.frontPage.blocks[3].fields} />
+        <Gallery {...data.pages.frontPage.blocks[4].fields} />
       </main>
     </div>
   )

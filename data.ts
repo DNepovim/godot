@@ -103,6 +103,19 @@ export const data = {
 							},
 						]
 					}
+				},
+				{
+					template: "gallery",
+					fields: {
+						images: [
+							"/images/image_1.png",
+							"/images/image_2.png",
+							"/images/image_3.png",
+							"/images/image_4.png",
+							"/images/image_5.png",
+							"/images/image_6.png",
+						]
+					}
 				}
 			]
 		}

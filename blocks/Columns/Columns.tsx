@@ -16,10 +16,7 @@ interface Props {
 }
 
 export const Columns: React.FC<Props> = ({title, columns}) => (
-	<section css={css`
-		background-color: ${theme.color.beige};
-		padding: 64px 0;
-	`}>
+	<section css={css`background-color: ${theme.color.beige};`}>
 		<Container>
 			<Heading level={2}>{title}</Heading>
 			<div css={css`
