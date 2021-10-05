@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Image, { ImageProps } from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
@@ -10,6 +10,7 @@ import { useWindowWidth } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll";
 import { data } from "../../data"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
+import useOnClickOutside from "use-onclickoutside"
 
 
 interface NavigationItem {
@@ -25,6 +26,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
   const [isScrolled, setIsScrolled] = useState(false)
   const width = useWindowWidth()
   const scrolled = useScrollPosition()
+  const navRef = useRef(null)
 
   useEffect(() => {
     setIsMobile(width < BREAKPOINT)
@@ -34,14 +36,16 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
     setIsScrolled(scrolled > 50)
   }, [scrolled])
 
+  useOnClickOutside(navRef, () => setIsOpened(false))
+
   return (
     <NavBar>
       <Container css={css`
         padding-top: 0;
         padding-bottom: 0;
       `}>
-        <Nav>
-          <AnchorLink href={`#${data.config.navigation[0].link}`}>
+        <Nav ref={navRef}>
+          <AnchorLink href={`#${data.config.navigation[0].link}`} onClick={() => setIsOpened(false)}>
             <Image
               css={css`padding: 8px; width: auto; height: 100%`}
               src={logo}
@@ -53,7 +57,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
           {!isMobile && (
             <NavList>
               {items.map(item => (
-                <NavItem key={item.link}>
+                <NavItem key={item.link} onClick={() => setIsOpened(false)}>
                   <NavLink href={`#${item.link}`}>{item.title}</NavLink>
                 </NavItem>
               ))}
@@ -61,7 +65,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
             )
           }
           {isMobile && (
-            <NavListMobile isOpened={isOpened}>
+            <NavListMobile isOpened={isOpened} onClick={() => setIsOpened(false)}>
               {items.map(item => (
                 <NavItem key={item.link}>
                   <NavLinkMobile href={`#${item.link}`}>{item.title}</NavLinkMobile>
@@ -70,7 +74,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
             </NavListMobile>
             )
           }
-          {isMobile && <Hamburger color={theme.color.brand} onToggle={() => setIsOpened(!isOpened)} />}
+          {isMobile && <Hamburger color={theme.color.brand} toggled={isOpened} onToggle={() => setIsOpened(!isOpened)} />}
         </Nav>
       </Container>
     </NavBar>
