@@ -5,8 +5,9 @@ import { theme } from "../../theme"
 import { Container } from "../../components/Container/Container"
 import { Column } from "../../components/Column/Column"
 import { Heading } from "../../components/Heading/Heading"
+import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props {
+interface Props extends BlockProps {
   title: string
   columns: {
     title: string
@@ -15,8 +16,8 @@ interface Props {
   }[]
 }
 
-export const Columns: React.FC<Props> = ({title, columns}) => (
-  <section css={css`background-color: ${theme.color.beige};`}>
+export const Columns: React.FC<Props> = ({id, title, columns}) => (
+  <Block id={id} withBackground>
     <Container>
       <Heading level={2}>{title}</Heading>
       <div css={css`
@@ -39,5 +40,5 @@ export const Columns: React.FC<Props> = ({title, columns}) => (
         ))}
       </div>
     </Container>
-  </section>
+  </Block>
 )

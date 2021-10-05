@@ -2,11 +2,17 @@
 import { css } from "@emotion/react"
 import React from "react"
 import { ParallaxBanner } from "react-scroll-parallax"
-import { Container } from "../../components/Container/Container"
+import { Block, BlockProps } from "../../components/Block/Block"
 import { theme } from "../../theme"
 
-export const Quotation: React.FC<{text: string, source: string, sourceUrl: string}> = ({text, source, sourceUrl}) => (
-  <section>
+interface Props extends BlockProps {
+  text: string
+  source: string
+  sourceUrl: string
+}
+
+export const Quotation: React.FC<Props> = ({id, text, source, sourceUrl}) => (
+  <Block id={id}>
     <ParallaxBanner
       layers={[
         {
@@ -56,5 +62,5 @@ export const Quotation: React.FC<{text: string, source: string, sourceUrl: strin
         </a>
       </div>
     </ParallaxBanner>
-  </section>
+  </Block>
 )

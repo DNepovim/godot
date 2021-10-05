@@ -3,27 +3,27 @@ export const data = {
     navigation: [
       {
         title: "Domů",
-        link: "/",
+        link: "domu",
       },
       {
         title: "Insomnia",
-        link: "/insomnia",
+        link: "insomnia",
       },
       {
         title: "Proč?",
-        link: "/proc",
+        link: "proc",
       },
       {
         title: "Inso 2021",
-        link: "/inso2021",
+        link: "inso2021",
       },
       {
         title: "Tým",
-        link: "/tym",
+        link: "tym",
       },
       {
         title: "Kontakt",
-        link: "/kontakt",
+        link: "kontakt",
       },
     ]
   },

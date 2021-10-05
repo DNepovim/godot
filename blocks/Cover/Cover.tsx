@@ -4,8 +4,9 @@ import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { Container } from "../../components/Container/Container"
+import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props {
+interface Props extends BlockProps {
   title: string,
   subtitle: string,
   claim: string,
@@ -16,11 +17,8 @@ interface Props {
   }
 }
 
-export const Cover: React.FC<{data: Props}> = ({data}) => (
-  <section css={css`
-    position: relative;
-    width: 100vw;
-  `}>
+export const Cover: React.FC<Props> = ({id, title, subtitle, claim, button}) => (
+  <Block id={id}>
     <ParallaxBanner
       layers={[
         {
@@ -50,7 +48,7 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
           color: white;
           margin: 0 0 4px;
         `}>
-          {data.title}
+          {title}
         </h1>
         <p css={css`
           font-family: skautbold;
@@ -59,7 +57,7 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
           color: white;
           margin: 0 0 4px;
         `}>
-          {data.subtitle}
+          {subtitle}
         </p>
         <p css={css`
           font-size: ${theme.font.sizes[2]};
@@ -67,11 +65,11 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
           color: white;
           margin: 0 0 12px;
         `}
-          dangerouslySetInnerHTML={{ __html: data.claim }}
+          dangerouslySetInnerHTML={{ __html: claim }}
         />
         <a
-          href={data.button.link}
-          {...(data.button.targetBlank ? {
+          href={button.link}
+          {...(button.targetBlank ? {
             target: "_blank",
             rel: "noreferrer noopener"
           } : {})}
@@ -86,9 +84,9 @@ export const Cover: React.FC<{data: Props}> = ({data}) => (
             background-color: ${theme.color.brand};
           `}
         >
-          {data.button.label}
+          {button.label}
         </a>
       </Container>
     </ParallaxBanner>
-  </section>
+  </Block>
 )

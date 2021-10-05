@@ -116,25 +116,25 @@ const Home: NextPage = () => {
         padding-top: 96px;
       `}>
         {/* @ts-ignore */}
-        <Navigation logo={logo} data={data.config.navigation} />
+        <Navigation logo={logo} items={data.config.navigation} />
         {/* @ts-ignore */}
-        <Cover data={data.pages.frontPage.blocks[0].fields} />
+        <Cover id={data.config.navigation[0].link} {...data.pages.frontPage.blocks[0].fields} />
         {/* @ts-ignore */}
-        <RichText data={data.pages.frontPage.blocks[1].fields} />
+        <RichText id={data.config.navigation[1].link} {...data.pages.frontPage.blocks[1].fields} />
         {/* @ts-ignore */}
         <Video {...data.pages.frontPage.blocks[2].fields} />
         {/* @ts-ignore */}
-        <Columns {...data.pages.frontPage.blocks[3].fields} />
+        <Columns id={data.config.navigation[2].link} {...data.pages.frontPage.blocks[3].fields} />
         {/* @ts-ignore */}
         <Gallery {...data.pages.frontPage.blocks[4].fields} />
         {/* @ts-ignore */}
         <Quotation {...data.pages.frontPage.blocks[5].fields} />
         {/* @ts-ignore */}
-        <Columns {...data.pages.frontPage.blocks[6].fields} />
+        <Columns id={data.config.navigation[3].link} {...data.pages.frontPage.blocks[6].fields} />
         {/* @ts-ignore */}
-        <Persons {...data.pages.frontPage.blocks[7].fields} />
+        <Persons id={data.config.navigation[4].link} {...data.pages.frontPage.blocks[7].fields} />
         {/* @ts-ignore */}
-        <Contacts {...data.pages.frontPage.blocks[8].fields} />
+        <Contacts id={data.config.navigation[5].link} {...data.pages.frontPage.blocks[8].fields} />
       </main>
     </div>
   )

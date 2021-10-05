@@ -1,26 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
+import { Block, BlockProps } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import { theme } from "../../theme"
 
-interface Props {
+interface Props extends BlockProps {
   title: string
   text: string
   textAlign: string
 }
 
-export const RichText: React.FC<{data: Props}> = ({data}) => (
-  <section>
+export const RichText: React.FC<Props> = ({id, title, text, textAlign}) => (
+  <Block id={id}>
     <Container
       css={css`
-        text-align: ${data.textAlign};
+        text-align: ${textAlign};
       `}
     >
-      <Heading level={2}>{data.title}</Heading>
-      <div dangerouslySetInnerHTML={{__html: data.text}} />
+      <Heading level={2}>{title}</Heading>
+      <div dangerouslySetInnerHTML={{__html: text}} />
     </Container>
-  </section>
+  </Block>
 
 )

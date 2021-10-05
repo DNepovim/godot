@@ -4,11 +4,16 @@ import React from "react"
 import { Container } from "../../components/Container/Container"
 import Image from "next/image"
 import { theme } from "../../theme"
+import { Block, BlockProps } from "../../components/Block/Block"
 
 const gap = 4
 
-export const Gallery: React.FC<{images: string[]}> = ({images}) => (
-  <section>
+interface Props extends BlockProps {
+  images: string[]
+}
+
+export const Gallery: React.FC<Props> = ({id, images}) => (
+  <Block id={id}>
     <Container
       css={css`
         display: flex;
@@ -43,5 +48,5 @@ export const Gallery: React.FC<{images: string[]}> = ({images}) => (
         </figure>
       ))}
     </Container>
-  </section>
+  </Block>
 )

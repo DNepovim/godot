@@ -3,8 +3,9 @@ import React from "react"
 import { css } from "@emotion/react"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { theme } from "../../theme"
+import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props {
+interface Props extends BlockProps {
   title: string
   subtitle: string
   contacts: {
@@ -14,8 +15,8 @@ interface Props {
   }[]
 }
 
-export const Contacts: React.FC<Props> = ({title, subtitle, contacts}) => (
-  <section>
+export const Contacts: React.FC<Props> = ({id, title, subtitle, contacts}) => (
+  <Block id={id}>
     <ParallaxBanner
       layers={[
         {
@@ -73,7 +74,7 @@ export const Contacts: React.FC<Props> = ({title, subtitle, contacts}) => (
         </div>
       </div>
     </ParallaxBanner>
-  </section>
+  </Block>
 )
 
 const getHref = (url: string): string => url.includes("@") ? `mailto:${url}` : url

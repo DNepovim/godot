@@ -17,7 +17,7 @@ interface NavigationItem {
 
 const BREAKPOINT = 600
 
-export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem[]}> = ({logo, data}) => {
+export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationItem[]}> = ({logo, items}) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -52,9 +52,9 @@ export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem
           </Link>
           {!isMobile && (
             <NavList>
-              {data.map(item => (
+              {items.map(item => (
                 <NavItem key={item.link}>
-                  <Link href={item.link}>
+                  <Link href={`#${item.link}`}>
                     <NavLink>{item.title}</NavLink>
                   </Link>
                 </NavItem>
@@ -64,9 +64,9 @@ export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem
           }
           {isMobile && (
             <NavListMobile isOpened={isOpened}>
-              {data.map(item => (
+              {items.map(item => (
                 <NavItem key={item.link}>
-                  <Link href={item.link}>
+                  <Link href={`#${item.link}`}>
                     <NavLinkMobile>{item.title}</NavLinkMobile>
                   </Link>
                 </NavItem>

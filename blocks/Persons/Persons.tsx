@@ -5,8 +5,9 @@ import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import { theme } from "../../theme"
 import Image from "next/image"
+import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props {
+interface Props extends BlockProps {
   title: string
   subtitle: string
   persons: {
@@ -17,8 +18,8 @@ interface Props {
   }[]
 }
 
-export const Persons: React.FC<Props> = ({title, subtitle, persons}) => (
-  <section>
+export const Persons: React.FC<Props> = ({id, title, subtitle, persons}) => (
+  <Block id={id}>
     <Container>
       <Heading level={2}>{title}</Heading>
       <p>{subtitle}</p>
@@ -74,5 +75,5 @@ export const Persons: React.FC<Props> = ({title, subtitle, persons}) => (
         ))}
       </div>
     </Container>
-  </section>
+  </Block>
 )
