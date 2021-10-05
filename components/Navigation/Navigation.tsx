@@ -5,6 +5,7 @@ import Image, { ImageProps } from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import { Container } from "../Container/Container"
+import styled from "@emotion/styled"
 
 interface NavigationItem {
   title: string
@@ -12,30 +13,16 @@ interface NavigationItem {
 }
 
 export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem[]}> = ({logo, data}) => (
-  <div css={css`
-    position: fixed;
-    z-index: 1000;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: ${theme.color.background};
-    width: 100vw;
-  `}>
+  <NavBar>
     <Container css={css`
       padding-top: 0;
       padding-bottom: 0;
     `}>
-      <nav css={css`
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      `}>
+      <Nav>
         <Link href="/">
           <a>
             <Image
-              css={css`
-                padding: 8px;
-              `}
+              css={css`padding: 8px;`}
               src={logo}
               alt="Insomnia – logo"
               width={90}
@@ -43,56 +30,76 @@ export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem
             />
           </a>
         </Link>
-        <ul css={css`
-          display: flex;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-        `}>
+        <NavList>
           {data.map(item => (
-            <li
-              css={css`
-                margin-left: 4px;
-              `}
-              key={item.link}
-            >
+            <NavItem key={item.link}>
               <Link href={item.link}>
-                <a css={css`
-                  position: relative;
-                  display: block;
-                  text-decoration: none;
-                  padding: 0.4rem;
-                  transition: color 300ms;
-                  font-family: themix;
-                  color: black;
-
-                  &:after {
-                    content: "";
-                    display: block;
-                    position: absolute;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    width: 0;
-                    height: 2px;
-                    transition: width 300ms;
-                    background-color: ${theme.color.brand};
-                  }
-
-                  &:hover {
-                    text-decoration: none;
-                    color: ${theme.color.brand};
-
-                    &:after {
-                      width: 100%;
-                    }
-                  }
-                `}>{item.title}</a>
+                <NavLink>{item.title}</NavLink>
               </Link>
-            </li>
+            </NavItem>
           ))}
-        </ul>
-      </nav>
+        </NavList>
+      </Nav>
     </Container>
-  </div>
+  </NavBar>
 )
+
+const NavBar = styled("div")`
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: ${theme.color.background};
+  width: 100vw;
+`
+
+const Nav = styled("nav")`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
+const NavList = styled("ul")`
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+`
+
+const NavItem = styled("li")`
+  margin-left: 4px;
+`
+
+const NavLink = styled("a")`
+  position: relative;
+  display: block;
+  text-decoration: none;
+  padding: 0.4rem;
+  transition: color 300ms;
+  font-family: themix;
+  color: black;
+  cursor: pointer;
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    transition: width 300ms;
+    background-color: ${theme.color.brand};
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: ${theme.color.brand};
+
+    &:after {
+      width: 100%;
+    }
+  }
+`
