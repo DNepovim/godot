@@ -8,6 +8,7 @@ import { Container } from "../Container/Container"
 import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"
 import { useWindowWidth } from "@react-hook/window-size"
+import useScrollPosition from "@react-hook/window-scroll";
 
 interface NavigationItem {
   title: string
@@ -19,13 +20,17 @@ const BREAKPOINT = 600
 export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem[]}> = ({logo, data}) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
   const width = useWindowWidth()
+  const scrolled = useScrollPosition()
 
   useEffect(() => {
     setIsMobile(width < BREAKPOINT)
-
-
   }, [width])
+
+  useEffect(() => {
+    setIsScrolled(scrolled > 50)
+  }, [scrolled])
 
   return (
     <NavBar>
@@ -37,11 +42,11 @@ export const Navigation: React.FC<{logo: ImageProps["src"], data: NavigationItem
           <Link href="/">
             <a>
               <Image
-                css={css`padding: 8px;`}
+                css={css`padding: 8px; width: auto; height: 100%`}
                 src={logo}
                 alt="Insomnia – logo"
-                width={90}
-                height={90}
+                width={isScrolled ? 50 : 90}
+                height={isScrolled ? 50 : 90}
               />
             </a>
           </Link>
