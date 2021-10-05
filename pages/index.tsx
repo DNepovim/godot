@@ -104,6 +104,10 @@ const Home: NextPage = () => {
           }
         }
 
+        ::selection {
+          background-color: ${theme.color.brand};
+        }
+
 
       `} />
 
