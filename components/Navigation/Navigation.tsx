@@ -1,6 +1,5 @@
 /** @jsxImportSource @emotion/react */
 import React, { useEffect, useState } from "react"
-import Link from "next/link"
 import Image, { ImageProps } from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
@@ -9,6 +8,9 @@ import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"
 import { useWindowWidth } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll";
+import { data } from "../../data"
+import AnchorLink from 'react-anchor-link-smooth-scroll'
+
 
 interface NavigationItem {
   title: string
@@ -39,24 +41,20 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
         padding-bottom: 0;
       `}>
         <Nav>
-          <Link href="/">
-            <a>
-              <Image
-                css={css`padding: 8px; width: auto; height: 100%`}
-                src={logo}
-                alt="Insomnia – logo"
-                width={isScrolled ? 50 : 90}
-                height={isScrolled ? 50 : 90}
-              />
-            </a>
-          </Link>
+          <AnchorLink href={`#${data.config.navigation[0].link}`}>
+            <Image
+              css={css`padding: 8px; width: auto; height: 100%`}
+              src={logo}
+              alt="Insomnia – logo"
+              width={isScrolled ? 50 : 90}
+              height={isScrolled ? 50 : 90}
+            />
+          </AnchorLink>
           {!isMobile && (
             <NavList>
               {items.map(item => (
                 <NavItem key={item.link}>
-                  <Link href={`#${item.link}`}>
-                    <NavLink>{item.title}</NavLink>
-                  </Link>
+                  <NavLink href={`#${item.link}`}>{item.title}</NavLink>
                 </NavItem>
               ))}
             </NavList>
@@ -66,9 +64,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
             <NavListMobile isOpened={isOpened}>
               {items.map(item => (
                 <NavItem key={item.link}>
-                  <Link href={`#${item.link}`}>
-                    <NavLinkMobile>{item.title}</NavLinkMobile>
-                  </Link>
+                  <NavLinkMobile href={`#${item.link}`}>{item.title}</NavLinkMobile>
                 </NavItem>
               ))}
             </NavListMobile>
@@ -108,7 +104,7 @@ const NavItem = styled("li")`
   margin-left: 4px;
 `
 
-const NavLink = styled("a")`
+const NavLink = styled(AnchorLink)`
   position: relative;
   display: block;
   padding: 0.4rem;
@@ -151,7 +147,7 @@ const NavListMobile = styled.ul((props: { isOpened: boolean }) => `
   transition: transform 200ms;
 `)
 
-const NavLinkMobile = styled("a")`
+const NavLinkMobile = styled(AnchorLink)`
   display: block;
   color: black;
   padding: 0.6em 1.6em;
