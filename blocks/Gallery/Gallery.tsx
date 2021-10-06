@@ -8,7 +8,7 @@ import { Block, BlockProps } from "../../components/Block/Block"
 
 const gap = 4
 
-interface Props extends BlockProps {
+export interface GalleryProps extends BlockProps {
   images: string[]
 }
 

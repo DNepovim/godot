@@ -4,15 +4,14 @@ import React from "react"
 import { Block, BlockProps } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
-import { theme } from "../../theme"
 
-interface Props extends BlockProps {
+export interface RichTextProps extends BlockProps {
   title: string
   text: string
   textAlign: string
 }
 
-export const RichText: React.FC<Props> = ({id, title, text, textAlign}) => (
+export const RichText: React.FC<RichTextProps> = ({id, title, text, textAlign}) => (
   <Block id={id}>
     <Container
       css={css`

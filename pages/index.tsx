@@ -1,19 +1,13 @@
 /** @jsxImportSource @emotion/react */
+import React from "react"
 import type { NextPage } from "next"
 import Head from "next/head"
 import { data } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
-import { Cover } from "../blocks/Cover/Cover"
 import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
-import { RichText } from "../blocks/RichText/RichText"
-import { Video } from "../blocks/Video/Video"
-import { Columns } from "../blocks/Columns/Columns"
-import { Gallery } from "../blocks/Gallery/Gallery"
-import { Quotation } from "../blocks/Quotation/Quotation"
-import { Persons } from "../blocks/Persons/Persons"
 import { theme } from "../theme"
-import { Contacts } from "../blocks/Contacts/Contacts"
+import { blocks } from "../blocks/blocks"
 
 const Home: NextPage = () => {
   return (
@@ -115,26 +109,8 @@ const Home: NextPage = () => {
         min-height: 300vh;
         padding-top: 96px;
       `}>
-        {/* @ts-ignore */}
         <Navigation logo={logo} items={data.config.navigation} />
-        {/* @ts-ignore */}
-        <Cover id={data.config.navigation[0].link} {...data.pages.frontPage.blocks[0].fields} />
-        {/* @ts-ignore */}
-        <RichText id={data.config.navigation[1].link} {...data.pages.frontPage.blocks[1].fields} />
-        {/* @ts-ignore */}
-        <Video {...data.pages.frontPage.blocks[2].fields} />
-        {/* @ts-ignore */}
-        <Columns id={data.config.navigation[2].link} {...data.pages.frontPage.blocks[3].fields} />
-        {/* @ts-ignore */}
-        <Gallery {...data.pages.frontPage.blocks[4].fields} />
-        {/* @ts-ignore */}
-        <Quotation {...data.pages.frontPage.blocks[5].fields} />
-        {/* @ts-ignore */}
-        <Columns id={data.config.navigation[3].link} {...data.pages.frontPage.blocks[6].fields} />
-        {/* @ts-ignore */}
-        <Persons id={data.config.navigation[4].link} {...data.pages.frontPage.blocks[7].fields} />
-        {/* @ts-ignore */}
-        <Contacts id={data.config.navigation[5].link} {...data.pages.frontPage.blocks[8].fields} />
+        {data.pages.frontPage.blocks.map(block => React.createElement(blocks[block.template], block.fields))}
       </main>
     </div>
   )

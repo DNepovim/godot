@@ -6,7 +6,7 @@ import { ParallaxBanner } from "react-scroll-parallax"
 import { Container } from "../../components/Container/Container"
 import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props extends BlockProps {
+export interface CoverProps extends BlockProps {
   title: string,
   subtitle: string,
   claim: string,
@@ -17,7 +17,7 @@ interface Props extends BlockProps {
   }
 }
 
-export const Cover: React.FC<Props> = ({id, title, subtitle, claim, button}) => (
+export const Cover: React.FC<CoverProps> = ({id, title, subtitle, claim, button}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[

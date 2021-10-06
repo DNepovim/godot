@@ -1,4 +1,19 @@
-export const data = {
+import { BlocksDefs, BlockTemplates } from "./blocks/blocks";
+
+export interface Data {
+  config: {
+    navigation: {
+      title: string
+      link: string
+    }[]
+  },
+  pages: Record<string,{
+    blocks: BlocksDefs[]
+
+  }>
+}
+
+export const data: Data = {
   config: {
     navigation: [
       {
@@ -31,8 +46,9 @@ export const data = {
     frontPage: {
       blocks: [
         {
-          template: "cover",
+          template: BlockTemplates.Cover,
           fields: {
+            id: "domu",
             title: "Insomnia 2021 bude.",
             subtitle: "Přihlašování spuštěno!",
             claim: "Na tvou přihlášku se těšíme<br>od 4. do 27. ledna 2021.",
@@ -44,8 +60,9 @@ export const data = {
           }
         },
         {
-          template: "richText",
+          template: BlockTemplates.RichText,
           fields: {
+            id: "insomnia",
             title: "Čekatelský lesní kurz",
             text: `
             <p>Co ti v noci nedá spát? Strach z vedení, obava z přebírání zodpovědnosti? Množství čekatelských kompetencí, které musíš splnit?</p>
@@ -57,7 +74,7 @@ export const data = {
           }
         },
         {
-          template: "video",
+          template: BlockTemplates.Video,
           fields: {
             video: {
               src: "https://www.youtube.com/embed/9xdZA-f1IfI",
@@ -67,8 +84,9 @@ export const data = {
           }
         },
         {
-          template: "columns",
+          template: BlockTemplates.Columns,
           fields: {
+            id: "proc",
             title: "Proč právě Insomnia?",
             columns: [
               {
@@ -106,7 +124,7 @@ export const data = {
           }
         },
         {
-          template: "gallery",
+          template: BlockTemplates.Gallery,
           fields: {
             images: [
               "/images/image_1.png",
@@ -119,7 +137,7 @@ export const data = {
           }
         },
         {
-          template: "quotation",
+          template: BlockTemplates.Quotation,
           fields: {
             text: "Insomnie (nespavost) je porucha spánku, při níž jedinec nemůže usnout nebo se v spánku často probouzí",
             source: "Wikipedia",
@@ -127,8 +145,9 @@ export const data = {
           }
         },
         {
-          template: "columns",
+          template: BlockTemplates.Columns,
           fields: {
+            id: "inso2021",
             title: "Insomnia 2021",
             columns: [
               {
@@ -150,8 +169,9 @@ export const data = {
           }
         },
         {
-          template: "persons",
+          template: BlockTemplates.Persons,
           fields: {
+            id: "tym",
             title: "Instruktorský tým, který se na vás těší",
             subtitle: "Insomnia tým je složen z lidí, kteří jsou stále aktivní v rámci různých jednotek Junáka – českého skauta. Najdeš zde vedoucí oddílu či střediska, tak i ty zastávající funkce ve vyšších organizačních složkách. Snažíme se spojovat naší praxi se znalostmi získanými v rámci instruktorského vzdělávání a připravit tak účastníkům program, který bude pro jejich působení v oddíle co nejužitečnější.",
             persons: [
@@ -207,8 +227,9 @@ export const data = {
           }
         },
         {
-          template: "contacts",
+          template: BlockTemplates.Contacts,
           fields: {
+            id: "kontakt",
             title: "Chceš se nás na něco zeptat?",
             subtitle: "Ať už máš dotaz, chceš s námi vyřešit jakýkoli nápad či problém napiš na <a href='mailto:ckinsomnia@skaut.cz' rel='noreferrer noopener'>ckinsomnia@skaut.cz</a> nebo prostě klikni:",
             contacts: [

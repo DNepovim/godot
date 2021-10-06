@@ -5,13 +5,13 @@ import { ParallaxBanner } from "react-scroll-parallax"
 import { Block, BlockProps } from "../../components/Block/Block"
 import { theme } from "../../theme"
 
-interface Props extends BlockProps {
+export interface QuotationProps extends BlockProps {
   text: string
   source: string
   sourceUrl: string
 }
 
-export const Quotation: React.FC<Props> = ({id, text, source, sourceUrl}) => (
+export const Quotation: React.FC<QuotationProps> = ({id, text, source, sourceUrl}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[

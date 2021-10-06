@@ -7,7 +7,7 @@ import { theme } from "../../theme"
 import Image from "next/image"
 import { Block, BlockProps } from "../../components/Block/Block"
 
-interface Props extends BlockProps {
+export interface PersonsProps extends BlockProps {
   title: string
   subtitle: string
   persons: {
@@ -18,7 +18,7 @@ interface Props extends BlockProps {
   }[]
 }
 
-export const Persons: React.FC<Props> = ({id, title, subtitle, persons}) => (
+export const Persons: React.FC<PersonsProps> = ({id, title, subtitle, persons}) => (
   <Block id={id}>
     <Container>
       <Heading level={2}>{title}</Heading>
