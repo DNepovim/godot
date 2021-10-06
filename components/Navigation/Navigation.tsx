@@ -45,7 +45,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
         padding-bottom: 0;
       `}>
         <Nav ref={navRef}>
-          <AnchorLink href={`#${data.config.navigation[0].link}`} onClick={() => setIsOpened(false)}>
+          <AnchorLink href={`#${items[0].link}`} onClick={() => setIsOpened(false)}>
             <Image
               css={css`padding: 8px; width: auto; height: 100%`}
               src={logo}
