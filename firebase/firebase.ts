@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app"
-import { child, get, getDatabase, ref } from  "firebase/database"
+import { child, get, set, getDatabase, ref } from  "firebase/database"
 import { Navigation, Page } from "../data";
 
 const firebaseConfig = {
@@ -12,7 +12,10 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig)
+const dbRef = ref(getDatabase(app))
+
+
 
 export const getNavigation = async (): Promise<Navigation | undefined> => getData(`config/navigation/`)
 
@@ -20,7 +23,6 @@ export const getPage = async (page: string): Promise<Page | undefined> => getDat
 
 export const getData = async (path: string): Promise<any> => {
   try {
-    const dbRef = ref(getDatabase(app))
     const snapshot = await get(child(dbRef, path))
 
     if (snapshot.exists()) {
@@ -31,5 +33,15 @@ export const getData = async (path: string): Promise<any> => {
     }
   } catch {
     throw new Error(`Loading data form firebase failed.`)
+  }
+}
+
+export const updateBlock = async (page: string, block: number, values: any) => writeData(`pages/${page}/blocks/${block}/fields`, values)
+
+export const writeData = async (path: string, values: any): Promise<void> => {
+  try {
+    set(child(dbRef, path), values)
+  } catch {
+    throw new Error(`Sending data to firebase failed`)
   }
 }
