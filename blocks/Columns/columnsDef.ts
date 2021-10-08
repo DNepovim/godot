@@ -5,3 +5,9 @@ export interface ColumnBlock {
   template: BlockTemplates.Columns
   fields: ColumnsProps
 }
+
+export const columnsDef = {
+  admin: {
+
+  }
+}

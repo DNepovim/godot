@@ -1,5 +1,5 @@
 import React from "react";
-import { ColumnBlock } from "./Columns/columnDef";
+import { ColumnBlock } from "./Columns/columnsDef";
 import { Columns } from "./Columns/Columns";
 import { Contacts } from "./Contacts/Contacts";
 import { ContactsBlock } from "./Contacts/contactsDef";
