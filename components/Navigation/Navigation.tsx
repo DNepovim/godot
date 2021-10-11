@@ -3,14 +3,13 @@ import React, { useEffect, useRef, useState } from "react"
 import Image, { ImageProps } from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
-import { Container } from "../Container/Container"
 import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"
 import { useWindowWidth } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll";
-import { data } from "../../data"
 import AnchorLink from 'react-anchor-link-smooth-scroll'
 import useOnClickOutside from "use-onclickoutside"
+import { Container } from "../Container/Container"
 
 
 interface NavigationItem {
@@ -24,6 +23,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeItem, setActiveItem] = useState<string | undefined>()
   const width = useWindowWidth()
   const scrolled = useScrollPosition()
   const navRef = useRef(null)
@@ -37,6 +37,27 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
   }, [scrolled])
 
   useOnClickOutside(navRef, () => setIsOpened(false))
+
+  useEffect(() => {
+    return window.addEventListener("scroll", onScrollHandler)
+  }, [])
+
+  const onScrollHandler = () => {
+    if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 100) {
+      setActiveItem(items[items.length - 1].link)
+      return
+    }
+    const active = items.reduce<string | undefined>((acc, item) => {
+      const block = document.getElementById(item.link)
+      if (!block) {
+        return
+      }
+      const { top } = block.getBoundingClientRect()
+      return top < 100 ? item.link : acc
+
+    }, undefined)
+    setActiveItem(active)
+  }
 
   return (
     <NavBar>
@@ -58,7 +79,7 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
             <NavList>
               {items.map(item => (
                 <NavItem key={item.link} onClick={() => setIsOpened(false)}>
-                  <NavLink href={`#${item.link}`}>{item.title}</NavLink>
+                  <NavLink active={item.link === activeItem} href={`#${item.link}`}>{item.title}</NavLink>
                 </NavItem>
               ))}
             </NavList>
@@ -108,7 +129,17 @@ const NavItem = styled("li")`
   margin-left: 4px;
 `
 
-const NavLink = styled(AnchorLink)`
+const activeNavLink = css`
+  text-decoration: none;
+  color: ${theme.color.brand};
+
+  &:after {
+    transform-origin: left top;
+    transform: scale(1, 1);
+  }
+`
+
+const NavLink = styled(AnchorLink)((props: { active: boolean}) => css`
   position: relative;
   display: block;
   padding: 0.4rem;
@@ -120,24 +151,22 @@ const NavLink = styled(AnchorLink)`
     content: "";
     display: block;
     position: absolute;
-    right: 0;
+    right: 0.4rem;
     bottom: 0;
-    left: 0;
-    width: 0;
+    left: 0.4rem;
     height: 2px;
-    transition: width 300ms;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     background-color: ${theme.color.brand};
   }
 
-  &:hover {
-    text-decoration: none;
-    color: ${theme.color.brand};
+  ${props.active ? activeNavLink : ""}
 
-    &:after {
-      width: 100%;
-    }
+  &:hover {
+    ${activeNavLink}
   }
-`
+`)
 
 const NavListMobile = styled.ul((props: { isOpened: boolean }) => `
   background-color: white;
