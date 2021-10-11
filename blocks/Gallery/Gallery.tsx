@@ -12,7 +12,7 @@ export interface GalleryProps extends BlockProps {
   images: string[]
 }
 
-export const Gallery: React.FC<Props> = ({id, images}) => (
+export const Gallery: React.FC<GalleryProps> = ({id, images}) => (
   <Block id={id}>
     <Container
       css={css`
