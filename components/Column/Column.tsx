@@ -2,7 +2,6 @@
 import React from "react"
 import { css } from "@emotion/react"
 import Image from "next/image"
-import starIcon from "../../images/icon_star.png"
 
 export interface ColumnProps {
   title: string
@@ -22,12 +21,12 @@ export const Column: React.FC<ColumnProps> = ({title, text, icon}) => (
           height: 3em;
           margin-right: 8px !important;
         `}
-        src={starIcon}
+        src={`/icons/${icon}.svg`}
         alt=""
-        width={80}
-        height={80}
+        width={100}
+        height={100}
       />
-      <h3 css={css`margin: 0`}>{title}</h3>
+      <h3 css={css`margin: 0 0 20px`}>{title}</h3>
     </header>
     <p dangerouslySetInnerHTML={{__html: text}}/>
   </article>

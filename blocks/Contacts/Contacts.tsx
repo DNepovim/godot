@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
+import Image from "next/image"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { theme } from "../../theme"
 import { Block, BlockProps } from "../../components/Block/Block"
@@ -20,7 +21,7 @@ export const Contacts: React.FC<ContactsProps> = ({id, title, subtitle, contacts
     <ParallaxBanner
       layers={[
         {
-          image: "/images/sky_wide.png",
+          image: "/images/sky_footer.png",
           amount: 0.2,
         }
       ]}
@@ -62,14 +63,19 @@ export const Contacts: React.FC<ContactsProps> = ({id, title, subtitle, contacts
               href={getHref(contact.url)}
               rel="noreferrer noopener"
               title={contact.type}
-              css={css`
-                background-color: ${theme.color.brand};
-                border-radius: 8px;
-                width: 48px;
-                height: 48px;
-                margin: 8px;
-              `}
-            />
+            >
+              <Image
+                css={css`
+                  width: 3em;
+                  height: 3em;
+                  margin-right: 8px !important;
+                `}
+                src={`/icons/${contact.icon}.svg`}
+                alt=""
+                width={70}
+                height={70}
+              />
+            </a>
           ))}
         </div>
       </div>
