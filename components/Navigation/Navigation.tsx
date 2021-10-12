@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useEffect, useRef, useState } from "react"
+import React, { useCallback, useEffect, useRef, useState } from "react"
 import Image, { ImageProps } from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
@@ -22,32 +22,23 @@ const BREAKPOINT = 600
 export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationItem[]}> = ({logo, items}) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
   const [activeItem, setActiveItem] = useState<string | undefined>()
   const width = useWindowWidth()
-  const scrolled = useScrollPosition()
+  const scrollPosition = useScrollPosition()
   const navRef = useRef(null)
 
   useEffect(() => {
     setIsMobile(width < BREAKPOINT)
   }, [width])
 
-  useEffect(() => {
-    setIsScrolled(scrolled > 50)
-  }, [scrolled])
-
   useOnClickOutside(navRef, () => setIsOpened(false))
 
-  useEffect(() => {
-    return window.addEventListener("scroll", onScrollHandler)
-  }, [])
-
-  const onScrollHandler = () => {
-    if (document.body.scrollHeight - (window.scrollY + window.innerHeight) < 100) {
+  const onScrollHandler = useCallback((scrollPossition: number) => {
+    if (document.body.scrollHeight - (scrollPosition + window.innerHeight) < 100) {
       setActiveItem(items[items.length - 1].link)
       return
     }
-    const active = items.reduce<string | undefined>((acc, item) => {
+    setActiveItem(items.reduce<string | undefined>((acc, item) => {
       const block = document.getElementById(item.link)
       if (!block) {
         return
@@ -55,9 +46,13 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
       const { top } = block.getBoundingClientRect()
       return top < 100 ? item.link : acc
 
-    }, undefined)
-    setActiveItem(active)
-  }
+    }, undefined))
+  }, [items, scrollPosition])
+
+
+  useEffect(() => {
+    onScrollHandler(scrollPosition)
+  }, [onScrollHandler, scrollPosition])
 
   return (
     <NavBar>
@@ -71,8 +66,8 @@ export const Navigation: React.FC<{logo: ImageProps["src"], items: NavigationIte
               css={css`padding: 8px; width: auto; height: 100%`}
               src={logo}
               alt="Insomnia – logo"
-              width={isScrolled ? 50 : 90}
-              height={isScrolled ? 50 : 90}
+              width={scrollPosition > 50 ? 50 : 90}
+              height={scrollPosition > 50 ? 50 : 90}
             />
           </AnchorLink>
           {!isMobile && (
