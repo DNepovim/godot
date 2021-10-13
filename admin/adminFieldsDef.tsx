@@ -49,17 +49,20 @@ export const AdminBlockFields: React.FC<BlockDef<any>> = ({title, adminFields}) 
 
 interface AdminFieldsetProps<T> {
   legend: string
+  path?: string
   fields: AdminFields<T>
 }
 
-const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields}) => {
+const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}) => {
   return (
     <fieldset>
       <legend>{legend}</legend>
       {Object.entries(fields).map(([name, field]) => isGroupField(field)
-        ? <AdminFieldset legend={field.label} fields={field.fields} />
-        : React.createElement(field.input.component, { key: name, name, label: field.label })
+        ? <AdminFieldset legend={field.label} fields={field.fields} path={name} />
+        : React.createElement(field.input.component, { key: getPath(name, path), name: getPath(name, path), label: field.label })
       )}
     </fieldset>
   )
 }
+
+const getPath = (name: string, path?: string): string => path ? `${path}[${name}]` : name
