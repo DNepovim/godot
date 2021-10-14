@@ -1,5 +1,6 @@
+import styled from "@emotion/styled"
 import { FieldArray, useField } from "formik"
-import React from "react"
+import React, { useState } from "react"
 import * as yup from 'yup'
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
@@ -40,17 +41,24 @@ interface InputDef<T> {
 
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
 
-export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number, onRemove: (index: number) => void }> = ({index, title, adminFields, onRemove}) => (
-  <div>
-    <SelectInput
-      name={`[${index}].template`}
-      label="Šablona"
-      options={Object.values(blockDefs).map(block => ({ label: block.title, value: block.template }))}
-    />
-    {adminFields && <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />}
-    <button type="button" onClick={() => onRemove(index)}>Odebrat blok</button>
-    <hr />
-  </div>)
+export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number, onRemove: (index: number) => void }> = ({index, title, adminFields, onRemove}) => {
+  const [isOpened, setIsOpened] = useState(false)
+  return (
+    <div>
+      <AdminBlockHeader>
+        <button type="button" onClick={() => setIsOpened(!isOpened)}>{isOpened ? "Zavřít" : "Otevřít"}</button>
+        <SelectInput
+          name={`[${index}].template`}
+          label="Šablona"
+          options={Object.values(blockDefs).map(block => ({ label: block.title, value: block.template }))}
+        />
+        <button type="button" onClick={() => onRemove(index)}>Odebrat blok</button>
+      </AdminBlockHeader>
+      {isOpened && (adminFields ? <AdminFieldset path={`[${index}].fields`} fields={adminFields} /> : <div>Vyberte šablonu</div>)}
+      <hr />
+    </div>
+  )
+}
 
 interface AdminFieldsetProps<T> {
   fields: AdminFields<T>
@@ -107,3 +115,8 @@ const ClonableFields: React.FC<{name: string, fields?: AdminFields<any>, compone
     />
   )
 }
+
+const AdminBlockHeader = styled("header")`
+  display: flex;
+  align-items: center;
+`
