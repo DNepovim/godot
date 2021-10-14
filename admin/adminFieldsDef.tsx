@@ -41,7 +41,9 @@ interface InputDef<T> {
 
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
 
-export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number, onRemove: (index: number) => void }> = ({index, title, adminFields, onRemove}) => {
+export type AdminBlockFieldsProps = Partial<BlockDef<any>> & { index: number, onRemove: (index: number) => void }
+
+export const AdminBlockFields: React.FC<AdminBlockFieldsProps> = ({index, adminFields, onRemove}) => {
   const [isOpened, setIsOpened] = useState(false)
   return (
     <div>

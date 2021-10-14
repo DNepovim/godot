@@ -1,10 +1,15 @@
 import { NextPage } from "next"
-import { FieldArray, Form, Formik } from "formik"
+import { Form, Formik } from "formik"
+import {arrayMove, SortableContainer, SortableElement} from 'react-sortable-hoc'
 import { getPage, updateBlock } from "../../firebase/firebase"
-import { AdminBlockFields } from "../../admin/adminFieldsDef"
+import { AdminBlockFields, AdminBlockFieldsProps } from "../../admin/adminFieldsDef"
 import { blockDefs, BlocksDefs } from "../../blocks/blocks"
 
 type Blocks = Partial<BlocksDefs>[]
+
+const Container = SortableContainer(({children}) => <div>{children}</div>)
+
+const SortableItem = SortableElement<AdminBlockFieldsProps & { order: number }>(props => <AdminBlockFields index={props.order} {...props} />)
 
 const Admin: NextPage<Props> = ({blocks}) => (
   <Formik<Blocks>
@@ -15,7 +20,20 @@ const Admin: NextPage<Props> = ({blocks}) => (
   >
     {props => (
       <Form>
-        {props.values.map((block, index) => <AdminBlockFields key={index} index={index} {...(block.template ? blockDefs[block.template] : {})} onRemove={() => props.setValues(props.values.filter((_, i) => i !== index))} />)}
+        <Container
+          onSortEnd={({oldIndex, newIndex}) => {
+            props.setValues(arrayMove(props.values, oldIndex, newIndex))
+          }}>
+          {props.values.map((block, index) => (
+            <SortableItem
+              key={index}
+              index={index}
+              order={index}
+              {...(block.template ? blockDefs[block.template] : {})}
+              onRemove={() => props.setValues(props.values.filter((_, i) => i !== index))}
+            />
+          ))}
+        </Container>
         <button
           type="button"
           onClick={() => props.setValues([...props.values, {}])}
