@@ -1,13 +1,48 @@
+import { BlockDef, adminComponentsDef } from "../../admin/adminFieldsDef"
+import { BlockProps } from "../../components/Block/Block"
 import { BlockTemplates } from "../blocks"
-import { ColumnsProps } from "./Columns"
+import { Columns } from "./Columns"
 
-export interface ColumnBlock {
+export interface ColumnsBlock {
   template: BlockTemplates.Columns
-  fields: ColumnsProps
+  fields: ColumnsFields
 }
 
-export const columnsDef = {
-  admin: {
+export interface ColumnsFields extends BlockProps {
+  title: string
+  columns: {
+    title: string
+    text: string
+    icon: string
+  }[]
+}
 
-  }
+
+export const columnsDef: BlockDef<ColumnsFields> = {
+  title: "Columns",
+  adminFields: {
+    title: {
+      label: "Nadpis",
+      input: adminComponentsDef.text
+    },
+    columns: {
+      label: "Sloupce",
+      clonable: true,
+      fields: {
+        title: {
+          label: "Nadpis",
+          input: adminComponentsDef.text
+        },
+        text: {
+          label: "Text",
+          input: adminComponentsDef.text
+        },
+        icon: {
+          label: "Ikona",
+          input: adminComponentsDef.text
+        }
+      }
+    }
+  },
+  component: Columns
 }

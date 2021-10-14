@@ -1,32 +1,59 @@
-import React, { useEffect } from "react"
 import { NextPage } from "next"
 import { Form, Formik } from "formik"
-import { CoverBlock, coverDef } from "../../blocks/Cover/coverDef"
+import { CoverBlock, coverDef, CoverFields } from "../../blocks/Cover/coverDef"
 import { getPage, updateBlock } from "../../firebase/firebase"
-import { CoverProps } from "../../blocks/Cover/Cover"
-import { AdminBlockFields, BlockDef } from "../../admin/adminFieldsDef"
-import { Page } from "../../data"
+import { AdminBlockFields } from "../../admin/adminFieldsDef"
+import { ColumnsBlock, columnsDef, ColumnsFields } from "../../blocks/Columns/columnsDef"
 
-const Admin: NextPage<Props> = ({ page }) => (
-  <Formik<CoverProps>
-    onSubmit={(values: CoverProps) => updateBlock("frontPage", 0, values)}
-    initialValues={(page.blocks[0] as CoverBlock).fields}
+type Blocks = (CoverBlock | ColumnsBlock)[]
+
+const blockDefs = {
+  cover: coverDef,
+  columns: columnsDef
+}
+
+const Admin: NextPage<Props> = ({blocks}) => (
+  <Formik<Blocks>
+    onSubmit={(values: Blocks) => values.forEach((block, index) => {
+      updateBlock("frontPage", index, block)
+    })}
+    initialValues={blocks}
   >
-    <Form>
-      <AdminBlockFields {...coverDef} />
-      <button type="submit" >Uložit</button>
-    </Form>
+    {props => (
+      <Form>
+        {blocks.map((block, index) => <AdminBlockFields key={index} index={index} {...blockDefs[block.template]} />)}
+        <button type="submit" >Uložit</button>
+      </Form>
+    )}
   </Formik>
 )
 
 interface Props {
-  page: Page
+  blocks: Blocks
 }
 
-export const getStaticProps = async () => ({
-  props: {
-    page: await getPage("frontPage") ?? []
+export const getStaticProps = async (): Promise<{ props: Props }> => {
+
+  const page = await getPage("frontPage")
+
+  if (!page) {
+    return {
+      props: {
+        blocks: []
+      }
+    }
   }
-})
+
+  const blocks = [
+    (page.blocks[0] as CoverBlock),
+    (page.blocks[3] as ColumnsBlock)
+  ]
+
+  return {
+    props: {
+      blocks
+    }
+  }
+}
 
 export default Admin

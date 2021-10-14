@@ -1,5 +1,5 @@
 import React from "react";
-import { ColumnBlock } from "./Columns/columnsDef";
+import { ColumnsBlock } from "./Columns/columnsDef";
 import { Columns } from "./Columns/Columns";
 import { Contacts } from "./Contacts/Contacts";
 import { ContactsBlock } from "./Contacts/contactsDef";
@@ -40,4 +40,4 @@ export const blocks: Blocks = {
   video: Video
 }
 
-export type BlocksDefs = ColumnBlock | ContactsBlock | CoverBlock | GalleryBlock | PersonsBlock | QuotationBlock | RichTextBlock | VideoBlock
+export type BlocksDefs = ColumnsBlock | ContactsBlock | CoverBlock | GalleryBlock | PersonsBlock | QuotationBlock | RichTextBlock | VideoBlock

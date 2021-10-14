@@ -1,14 +1,25 @@
 import { adminComponentsDef, BlockDef } from "../../admin/adminFieldsDef"
+import { BlockProps as BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blocks"
-import { Cover, CoverProps } from "./Cover"
+import { Cover } from "./Cover"
+
+export interface CoverFields extends BlockFields {
+  title: string,
+  subtitle: string,
+  claim: string,
+  button: {
+    label: string,
+    link: string,
+    targetBlank: boolean
+  }
+}
 
 export interface CoverBlock {
   template: BlockTemplates.Cover
-  fields: CoverProps
+  fields: CoverFields
 }
 
-export const coverDef: BlockDef<CoverProps> = {
-  id: "62524766-cd93-4efe-8731-2710abaff2e5",
+export const coverDef: BlockDef<CoverFields> = {
   title: "Cover",
   adminFields: {
     title: {
@@ -44,3 +55,5 @@ export const coverDef: BlockDef<CoverProps> = {
   },
   component: Cover
 }
+
+export default coverDef

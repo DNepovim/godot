@@ -36,7 +36,7 @@ export const getData = async (path: string): Promise<any> => {
   }
 }
 
-export const updateBlock = async (page: string, block: number, values: any) => writeData(`pages/${page}/blocks/${block}/fields`, values)
+export const updateBlock = async (page: string, block: number, values: any) => writeData(`pages/${page}/blocks/${block}`, values)
 
 export const writeData = async (path: string, values: any): Promise<void> => {
   try {

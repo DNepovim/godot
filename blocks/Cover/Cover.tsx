@@ -4,20 +4,10 @@ import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { Container } from "../../components/Container/Container"
-import { Block, BlockProps } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
+import { CoverFields } from "./coverDef"
 
-export interface CoverProps extends BlockProps {
-  title: string,
-  subtitle: string,
-  claim: string,
-  button: {
-    label: string,
-    link: string,
-    targetBlank: boolean
-  }
-}
-
-export const Cover: React.FC<CoverProps> = ({id, title, subtitle, claim, button}) => (
+export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[

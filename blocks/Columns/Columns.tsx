@@ -7,15 +7,6 @@ import { Column } from "../../components/Column/Column"
 import { Heading } from "../../components/Heading/Heading"
 import { Block, BlockProps } from "../../components/Block/Block"
 
-export interface ColumnsProps extends BlockProps {
-  title: string
-  columns: {
-    title: string
-    text: string
-    icon: string
-  }[]
-}
-
 export const Columns: React.FC<ColumnsProps> = ({id, title, columns}) => (
   <Block id={id} withBackground>
     <Container>
