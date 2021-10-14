@@ -1,9 +1,7 @@
 import { NextPage } from "next"
 import { Form, Formik } from "formik"
-import { CoverBlock } from "../../blocks/Cover/coverDef"
 import { getPage, updateBlock } from "../../firebase/firebase"
 import { AdminBlockFields } from "../../admin/adminFieldsDef"
-import { ColumnsBlock } from "../../blocks/Columns/columnsDef"
 import { blockDefs, BlocksDefs } from "../../blocks/blocks"
 
 type Blocks = BlocksDefs[]
@@ -17,7 +15,7 @@ const Admin: NextPage<Props> = ({blocks}) => (
   >
     {props => (
       <Form>
-        {blocks.map((block, index) => <AdminBlockFields key={index} index={index} {...blockDefs[block.template]} />)}
+        {props.values.map((block, index) => <AdminBlockFields key={index} index={index} {...blockDefs[block.template]} />)}
         <button type="submit" >Uložit</button>
       </Form>
     )}

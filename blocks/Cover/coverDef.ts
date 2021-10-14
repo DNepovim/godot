@@ -1,4 +1,5 @@
-import { adminComponentsDef, BlockDef } from "../../admin/adminFieldsDef"
+import { BlockDef } from "../../admin/adminFieldsDef"
+import { adminComponentsDef } from "../../admin/adminComponentsDef"
 import { BlockFields as BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Cover } from "./Cover"

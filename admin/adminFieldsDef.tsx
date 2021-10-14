@@ -1,11 +1,10 @@
 import { FieldArray, useField } from "formik"
 import React from "react"
 import * as yup from 'yup'
+import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
-import { CheckInput } from "../components/CheckInput/CheckInput"
 import { FieldProps } from "../components/Fieldset/Fieldset"
-import { NumberInput } from "../components/NumberInput/NumberInput"
-import { TextInput } from "../components/TextInput/TextInput"
+import { SelectInput } from "../components/SelectInput/SelectInput"
 import { Unarray } from "./utilityTypes"
 
 export interface BlockDef<T> {
@@ -39,24 +38,18 @@ interface InputDef<T> {
   schema: yup.SchemaOf<T>
 }
 
-export const adminComponentsDef = {
-  text: {
-    component: (props: FieldProps) => <TextInput {...props} />,
-    schema: yup.string().required()
-  },
-  number: {
-    component: (props: FieldProps) => <NumberInput {...props} />,
-    schema: yup.number().required()
-  },
-  checkkbox: {
-    component: (props: FieldProps) => <CheckInput {...props} />,
-    schema: yup.bool()
-  }
-}
-
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
 
-export const AdminBlockFields: React.FC<BlockDef<any> & { index: number }> = ({index, title, adminFields}) => <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />
+export const AdminBlockFields: React.FC<BlockDef<any> & { index: number }> = ({index, title, adminFields}) => (
+  <div>
+    <SelectInput
+      name={`[${index}].template`}
+      label="Šablona"
+      options={Object.values(blockDefs).map(block => ({ label: block.title, value: block.template }))}
+    />
+    <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />
+    <hr />
+  </div>)
 
 interface AdminFieldsetProps<T> {
   fields: AdminFields<T>
