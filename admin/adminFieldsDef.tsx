@@ -40,7 +40,7 @@ interface InputDef<T> {
 
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
 
-export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number }> = ({index, title, adminFields}) => (
+export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number, onRemove: (index: number) => void }> = ({index, title, adminFields, onRemove}) => (
   <div>
     <SelectInput
       name={`[${index}].template`}
@@ -48,6 +48,7 @@ export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number
       options={Object.values(blockDefs).map(block => ({ label: block.title, value: block.template }))}
     />
     {adminFields && <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />}
+    <button type="button" onClick={() => onRemove(index)}>Odebrat blok</button>
     <hr />
   </div>)
 
