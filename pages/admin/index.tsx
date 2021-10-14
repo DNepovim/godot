@@ -4,7 +4,7 @@ import { getPage, updateBlock } from "../../firebase/firebase"
 import { AdminBlockFields } from "../../admin/adminFieldsDef"
 import { blockDefs, BlocksDefs } from "../../blocks/blocks"
 
-type Blocks = BlocksDefs[]
+type Blocks = Partial<BlocksDefs>[]
 
 const Admin: NextPage<Props> = ({blocks}) => (
   <Formik<Blocks>
@@ -15,7 +15,11 @@ const Admin: NextPage<Props> = ({blocks}) => (
   >
     {props => (
       <Form>
-        {props.values.map((block, index) => <AdminBlockFields key={index} index={index} {...blockDefs[block.template]} />)}
+        {props.values.map((block, index) => <AdminBlockFields key={index} index={index} {...(block.template ? blockDefs[block.template] : {})} />)}
+        <button
+          type="button"
+          onClick={() => props.setValues([...props.values, {}])}
+        >Přidat blok</button>
         <button type="submit" >Uložit</button>
       </Form>
     )}

@@ -40,14 +40,14 @@ interface InputDef<T> {
 
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
 
-export const AdminBlockFields: React.FC<BlockDef<any> & { index: number }> = ({index, title, adminFields}) => (
+export const AdminBlockFields: React.FC<Partial<BlockDef<any>> & { index: number }> = ({index, title, adminFields}) => (
   <div>
     <SelectInput
       name={`[${index}].template`}
       label="Šablona"
       options={Object.values(blockDefs).map(block => ({ label: block.title, value: block.template }))}
     />
-    <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />
+    {adminFields && <AdminFieldset path={`[${index}].fields`} legend={title} fields={adminFields} />}
     <hr />
   </div>)
 
