@@ -1,16 +1,12 @@
 import { NextPage } from "next"
 import { Form, Formik } from "formik"
-import { CoverBlock, coverDef, CoverFields } from "../../blocks/Cover/coverDef"
+import { CoverBlock } from "../../blocks/Cover/coverDef"
 import { getPage, updateBlock } from "../../firebase/firebase"
 import { AdminBlockFields } from "../../admin/adminFieldsDef"
-import { ColumnsBlock, columnsDef, ColumnsFields } from "../../blocks/Columns/columnsDef"
+import { ColumnsBlock } from "../../blocks/Columns/columnsDef"
+import { blockDefs, BlocksDefs } from "../../blocks/blocks"
 
-type Blocks = (CoverBlock | ColumnsBlock)[]
-
-const blockDefs = {
-  cover: coverDef,
-  columns: columnsDef
-}
+type Blocks = BlocksDefs[]
 
 const Admin: NextPage<Props> = ({blocks}) => (
   <Formik<Blocks>
@@ -44,14 +40,9 @@ export const getStaticProps = async (): Promise<{ props: Props }> => {
     }
   }
 
-  const blocks = [
-    (page.blocks[0] as CoverBlock),
-    (page.blocks[3] as ColumnsBlock)
-  ]
-
   return {
     props: {
-      blocks
+      blocks: page.blocks
     }
   }
 }

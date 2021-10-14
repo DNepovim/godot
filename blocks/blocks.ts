@@ -1,31 +1,21 @@
 import React from "react";
-import { ColumnsBlock } from "./Columns/columnsDef";
+import { ColumnsBlock, columnsDef } from "./Columns/columnsDef";
 import { Columns } from "./Columns/Columns";
 import { Contacts } from "./Contacts/Contacts";
-import { ContactsBlock } from "./Contacts/contactsDef";
+import { ContactsBlock, contactsDef } from "./Contacts/contactsDef";
 import { Cover } from "./Cover/Cover";
-import { CoverBlock } from "./Cover/coverDef";
+import coverDef, { CoverBlock } from "./Cover/coverDef";
 import { Gallery } from "./Gallery/Gallery";
-import { GalleryBlock } from "./Gallery/galleryDef";
+import { GalleryBlock, galleryDef } from "./Gallery/galleryDef";
 import { Persons } from "./Persons/Persons";
-import { PersonsBlock } from "./Persons/personsDef";
+import { PersonsBlock, personsDef } from "./Persons/personsDef";
 import { Quotation } from "./Quotation/Quotation";
-import { QuotationBlock } from "./Quotation/quotationDef";
+import { QuotationBlock, quotationDef } from "./Quotation/quotationDef";
 import { RichText } from "./RichText/RichText";
-import { RichTextBlock } from "./RichText/richTextDef";
+import { RichTextBlock, richTextDef } from "./RichText/richTextDef";
 import { Video } from "./Video/Video";
-import { VideoBlock } from "./Video/videoDef";
-
-export enum BlockTemplates {
-  Columns = "columns",
-  Contacts = "contacts",
-  Cover = "cover",
-  Gallery = "gallery",
-  Persons = "persons",
-  Quotation = "quotation",
-  RichText = "richText",
-  Video = "video"
-}
+import { VideoBlock, videoDef } from "./Video/videoDef";
+import { BlockTemplates } from "./blockTemplates";
 
 type Blocks = Record<BlockTemplates, React.FC<any>>
 
@@ -41,3 +31,14 @@ export const blocks: Blocks = {
 }
 
 export type BlocksDefs = ColumnsBlock | ContactsBlock | CoverBlock | GalleryBlock | PersonsBlock | QuotationBlock | RichTextBlock | VideoBlock
+
+export const blockDefs = {
+  columns: columnsDef,
+  contacts: contactsDef,
+  cover: coverDef,
+  gallery: galleryDef,
+  persons: personsDef,
+  quotation: quotationDef,
+  richText: richTextDef,
+  video: videoDef
+}

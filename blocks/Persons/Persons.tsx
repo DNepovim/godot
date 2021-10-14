@@ -5,20 +5,10 @@ import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import { theme } from "../../theme"
 import Image from "next/image"
-import { Block, BlockProps } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
+import { PersonsFields } from "./personsDef"
 
-export interface PersonsProps extends BlockProps {
-  title: string
-  subtitle: string
-  persons: {
-    nick: string
-    name: string
-    text: string
-    image: string
-  }[]
-}
-
-export const Persons: React.FC<PersonsProps> = ({id, title, subtitle, persons}) => (
+export const Persons: React.FC<PersonsFields> = ({id, title, subtitle, persons}) => (
   <Block id={id}>
     <Container>
       <Heading level={2}>{title}</Heading>

@@ -1,7 +1,12 @@
 import { adminComponentsDef, BlockDef } from "../../admin/adminFieldsDef"
-import { BlockProps as BlockFields } from "../../components/Block/Block"
-import { BlockTemplates } from "../blocks"
+import { BlockFields as BlockFields } from "../../components/Block/Block"
+import { BlockTemplates } from "../blockTemplates"
 import { Cover } from "./Cover"
+
+export interface CoverBlock {
+  template: BlockTemplates.Cover
+  fields: CoverFields
+}
 
 export interface CoverFields extends BlockFields {
   title: string,
@@ -14,13 +19,9 @@ export interface CoverFields extends BlockFields {
   }
 }
 
-export interface CoverBlock {
-  template: BlockTemplates.Cover
-  fields: CoverFields
-}
-
 export const coverDef: BlockDef<CoverFields> = {
-  title: "Cover",
+  title: "Plakát",
+  template: BlockTemplates.Cover,
   adminFields: {
     title: {
       label: "Nadpis",

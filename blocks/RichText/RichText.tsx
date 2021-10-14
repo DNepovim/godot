@@ -1,17 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
-import { Block, BlockProps } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
+import { RichTextFields } from "./richTextDef"
 
-export interface RichTextProps extends BlockProps {
-  title: string
-  text: string
-  textAlign: string
-}
-
-export const RichText: React.FC<RichTextProps> = ({id, title, text, textAlign}) => (
+export const RichText: React.FC<RichTextFields> = ({id, title, text, textAlign}) => (
   <Block id={id}>
     <Container
       css={css`

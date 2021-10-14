@@ -1,6 +1,6 @@
 import { BlockDef, adminComponentsDef } from "../../admin/adminFieldsDef"
-import { BlockProps } from "../../components/Block/Block"
-import { BlockTemplates } from "../blocks"
+import { BlockFields } from "../../components/Block/Block"
+import { BlockTemplates } from "../blockTemplates"
 import { Columns } from "./Columns"
 
 export interface ColumnsBlock {
@@ -8,7 +8,7 @@ export interface ColumnsBlock {
   fields: ColumnsFields
 }
 
-export interface ColumnsFields extends BlockProps {
+export interface ColumnsFields extends BlockFields {
   title: string
   columns: {
     title: string
@@ -17,9 +17,9 @@ export interface ColumnsFields extends BlockProps {
   }[]
 }
 
-
 export const columnsDef: BlockDef<ColumnsFields> = {
-  title: "Columns",
+  title: "Sloupce",
+  template: BlockTemplates.Columns,
   adminFields: {
     title: {
       label: "Nadpis",

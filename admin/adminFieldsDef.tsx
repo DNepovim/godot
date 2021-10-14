@@ -1,13 +1,16 @@
 import { FieldArray, useField } from "formik"
 import React from "react"
 import * as yup from 'yup'
+import { BlockTemplates } from "../blocks/blockTemplates"
 import { CheckInput } from "../components/CheckInput/CheckInput"
 import { FieldProps } from "../components/Fieldset/Fieldset"
+import { NumberInput } from "../components/NumberInput/NumberInput"
 import { TextInput } from "../components/TextInput/TextInput"
 import { Unarray } from "./utilityTypes"
 
 export interface BlockDef<T> {
   title: string
+  template: BlockTemplates
   adminFields: AdminFields<T>
   component: React.FC<T>
 }
@@ -40,6 +43,10 @@ export const adminComponentsDef = {
   text: {
     component: (props: FieldProps) => <TextInput {...props} />,
     schema: yup.string().required()
+  },
+  number: {
+    component: (props: FieldProps) => <NumberInput {...props} />,
+    schema: yup.number().required()
   },
   checkkbox: {
     component: (props: FieldProps) => <CheckInput {...props} />,
@@ -80,7 +87,7 @@ const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}
 
 const getPath = (name: string, path?: string): string => path ? `${path}[${name}]` : name
 
-const ClonableFields: React.FC<{name: string, fields: AdminFields<any>} | {name: string, component: React.FC<FieldProps>}> = ({name, fields, component}) => {
+const ClonableFields: React.FC<{name: string, fields?: AdminFields<any>, component?: React.FC<FieldProps>}> = ({name, fields, component}) => {
   const [field] = useField(name)
   return (
     <FieldArray

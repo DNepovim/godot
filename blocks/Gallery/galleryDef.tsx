@@ -1,7 +1,26 @@
-import { BlockTemplates } from "../blocks"
-import { GalleryProps } from "./Gallery"
+import { BlockDef, adminComponentsDef } from "../../admin/adminFieldsDef"
+import { BlockFields } from "../../components/Block/Block"
+import { BlockTemplates } from "../blockTemplates"
+import { Gallery } from "./Gallery"
 
 export interface GalleryBlock {
+  template: BlockTemplates.Gallery
+  fields: GalleryFields
+}
+
+export interface GalleryFields extends BlockFields {
+  images: string[]
+}
+
+export const galleryDef: BlockDef<GalleryFields> = {
+  title: "Galerie",
   template: BlockTemplates.Gallery,
-  fields: GalleryProps
+  adminFields: {
+    images: {
+      label: "Obrázky",
+      clonable: true,
+      input: adminComponentsDef.text
+    }
+  },
+  component: Gallery
 }

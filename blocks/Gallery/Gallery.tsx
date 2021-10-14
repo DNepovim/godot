@@ -4,15 +4,12 @@ import React from "react"
 import { Container } from "../../components/Container/Container"
 import Image from "next/image"
 import { theme } from "../../theme"
-import { Block, BlockProps } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
+import { GalleryFields } from "./galleryDef"
 
 const gap = 4
 
-export interface GalleryProps extends BlockProps {
-  images: string[]
-}
-
-export const Gallery: React.FC<GalleryProps> = ({id, images}) => (
+export const Gallery: React.FC<GalleryFields> = ({id, images}) => (
   <Block id={id}>
     <Container
       css={css`

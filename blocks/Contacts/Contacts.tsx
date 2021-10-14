@@ -4,19 +4,10 @@ import { css } from "@emotion/react"
 import Image from "next/image"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { theme } from "../../theme"
-import { Block, BlockProps } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
+import { ContactsFields } from "./contactsDef"
 
-export interface ContactsProps extends BlockProps {
-  title: string
-  subtitle: string
-  contacts: {
-    type: string
-    icon: string
-    url: string
-  }[]
-}
-
-export const Contacts: React.FC<ContactsProps> = ({id, title, subtitle, contacts}) => (
+export const Contacts: React.FC<ContactsFields> = ({id, title, subtitle, contacts}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[
