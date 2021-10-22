@@ -21,6 +21,8 @@
     "react": "17.0.2",
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-dom": "17.0.2",
+    "react-firebase-hooks": "^3.0.4",
+    "react-loader-spinner": "^4.0.0",
     "react-scroll-parallax": "^2.4.0",
     "react-sortable-hoc": "^2.0.0",
     "use-onclickoutside": "^0.4.0",
