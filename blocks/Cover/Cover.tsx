@@ -22,7 +22,7 @@ export const Cover: React.FC<CoverProps> = ({id, title, subtitle, claim, button}
     <ParallaxBanner
       layers={[
         {
-          image: "/images/cover.jpg",
+          image: "/images/cover.webp",
           amount: 0.2,
         }
       ]}
@@ -39,7 +39,7 @@ export const Cover: React.FC<CoverProps> = ({id, title, subtitle, claim, button}
       `}
     >
       <Container
-        css={css`padding: 64px 16px;`}
+        css={css`padding: 120px 16px;`}
       >
         <h1 css={css`
           font-family: skautbold;

@@ -21,7 +21,7 @@ export const Contacts: React.FC<ContactsProps> = ({id, title, subtitle, contacts
     <ParallaxBanner
       layers={[
         {
-          image: "/images/sky_footer.png",
+          image: "/images/sky_footer.webp",
           amount: 0.2,
         }
       ]}
