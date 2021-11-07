@@ -25,6 +25,7 @@ export const Column: React.FC<ColumnProps> = ({title, text, icon}) => (
         alt=""
         width={100}
         height={100}
+        lazyBoundary="600px"
       />
       <h3 css={css`margin: 0 0 20px`}>{title}</h3>
     </header>

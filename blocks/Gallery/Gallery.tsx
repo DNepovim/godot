@@ -44,6 +44,10 @@ export const Gallery: React.FC<GalleryProps> = ({id, images}) => (
             alt={`Fotka ${i}`}
             width={theme.layout.width / 3}
             height={theme.layout.width / 3 * 0.7}
+            lazyBoundary="600px"
+            css={css`
+              background-color: ${theme.color.brand};
+            `}
           />
         </figure>
       ))}

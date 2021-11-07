@@ -58,6 +58,7 @@ export const Persons: React.FC<PersonsProps> = ({id, title, subtitle, persons}) 
               alt={person.nick}
               width={300}
               height={300}
+              lazyBoundary="600px"
             />
             <h3 css={css`
               font-size: ${theme.font.sizes[2]};
