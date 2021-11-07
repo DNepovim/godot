@@ -15,6 +15,9 @@ const Home: NextPage<Props> = ({navigation, page}) => (
     <Head>
       <title>ČLK Insomnia</title>
       <link rel="icon" href="/favicon.ico" />
+
+      <link rel="preconnect" href="https://cdn.skauting.cz" />
+      <link href="https://cdn.skauting.cz/fonts/fonts.css" rel="stylesheet" />
     </Head>
 
     <Global styles={globalStyles} />
