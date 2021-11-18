@@ -3,7 +3,12 @@ import { css } from "@emotion/react";
 import { theme } from "./theme";
 
 export const globalStyles = css`
+	html {
+		background-color: ${theme.color.brand};
+	}
+
 	body {
+		background-color: ${theme.color.background};
 		margin: 0;
 		padding: 0;
 		font-size: 18px;
