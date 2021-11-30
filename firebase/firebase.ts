@@ -31,7 +31,8 @@ export const getData = async (path: string): Promise<any> => {
     } else {
       return undefined
     }
-  } catch {
+  } catch (e) {
+    console.error(e)
     throw new Error(`Loading data form firebase failed.`)
   }
 }
@@ -41,7 +42,8 @@ export const updateBlock = async (page: string, block: number, values: any) => w
 export const writeData = async (path: string, values: any): Promise<void> => {
   try {
     set(child(dbRef, path), values)
-  } catch {
+  } catch (e) {
+    console.error(e)
     throw new Error(`Sending data to firebase failed`)
   }
 }
