@@ -4,8 +4,9 @@ import { BlockFields } from "../../components/Block/Block"
 import { ResponsiveVideoProps } from "../../components/ResponsiveVideo/ResponsiveVideo"
 import { BlockTemplates } from "../blockTemplates"
 import { Video } from "./Video"
+import { Block } from "../blocks"
 
-export interface VideoBlock {
+export interface VideoBlock extends Block {
   template: BlockTemplates.Video
   fields: VideoFields
 }

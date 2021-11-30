@@ -3,8 +3,9 @@ import { adminComponentsDef } from "../../admin/adminComponentsDef"
 import { BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Columns } from "./Columns"
+import { Block } from "../blocks"
 
-export interface ColumnsBlock {
+export interface ColumnsBlock extends Block {
   template: BlockTemplates.Columns
   fields: ColumnsFields
 }

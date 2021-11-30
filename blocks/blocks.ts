@@ -30,6 +30,10 @@ export const blocks: Blocks = {
   video: Video
 }
 
+export interface Block {
+  id: string
+}
+
 export type BlocksDefs = ColumnsBlock | ContactsBlock | CoverBlock | GalleryBlock | PersonsBlock | QuotationBlock | RichTextBlock | VideoBlock
 
 export const blockDefs = {

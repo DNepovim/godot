@@ -3,8 +3,9 @@ import { adminComponentsDef } from "../../admin/adminComponentsDef"
 import { BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Gallery } from "./Gallery"
+import { Block } from "../blocks"
 
-export interface GalleryBlock {
+export interface GalleryBlock extends Block {
   template: BlockTemplates.Gallery
   fields: GalleryFields
 }

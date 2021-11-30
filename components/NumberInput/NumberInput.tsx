@@ -1,9 +1,14 @@
-import { Field } from "formik"
+import { InputNumber } from "antd"
+import { useField } from "formik"
 import React from "react"
 import { FieldProps, Fieldset } from "../Fieldset/Fieldset"
 
-export const NumberInput: React.FC<FieldProps> = (props) => (
+export const NumberInput: React.FC<FieldProps> = (props) => {
+  const [field] = useField(props.name)
+
+  return (
   <Fieldset {...props}>
-    <Field {...props} type="number" />
+    <InputNumber {...field} />
   </Fieldset>
-)
+  )
+}

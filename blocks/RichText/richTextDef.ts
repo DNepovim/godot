@@ -3,8 +3,10 @@ import { adminComponentsDef } from "../../admin/adminComponentsDef"
 import { BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { RichText } from "./RichText"
+import * as yup from "yup"
+import { Block } from "../blocks"
 
-export interface RichTextBlock {
+export interface RichTextBlock extends Block {
   template: BlockTemplates.RichText
   fields: RichTextFields
 }
@@ -24,8 +26,8 @@ export const richTextDef: BlockDef<RichTextFields> = {
       input: adminComponentsDef.text
     },
     text: {
-      label: "Nadpis",
-      input: adminComponentsDef.text
+      label: "Text",
+      input: adminComponentsDef.textArea
     },
     textAlign: {
       label: "Zarovnání",

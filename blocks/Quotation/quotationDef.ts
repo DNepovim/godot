@@ -3,8 +3,9 @@ import { adminComponentsDef } from "../../admin/adminComponentsDef"
 import { BlockFields } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Quotation } from "./Quotation"
+import { Block } from "../blocks"
 
-export interface QuotationBlock {
+export interface QuotationBlock extends Block {
   template: BlockTemplates.Quotation
   fields: QuotationFields
 }
@@ -21,7 +22,7 @@ export const quotationDef: BlockDef<QuotationFields> = {
   adminFields: {
     text: {
       label: "Citát",
-      input: adminComponentsDef.text
+      input: adminComponentsDef.textArea
     },
     source: {
       label: "Název zdroje",
