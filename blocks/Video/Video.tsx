@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
-import { Block, BlockFields } from "../../components/Block/Block"
+import { Block, } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { ResponsiveVideo } from "../../components/ResponsiveVideo/ResponsiveVideo"
 import { VideoFields } from "./videoDef"

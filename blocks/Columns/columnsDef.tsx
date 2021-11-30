@@ -1,9 +1,10 @@
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields } from "../../components/Block/Block"
+import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Columns } from "./Columns"
 import { Block } from "../blocks"
+import * as yup from "yup"
+import { TextInput } from "../../components/TextInput/TextInput"
 
 export interface ColumnsBlock extends Block {
   template: BlockTemplates.Columns
@@ -19,13 +20,23 @@ export interface ColumnsFields extends BlockFields {
   }[]
 }
 
+export const columnsSchema = withBlockSchema(yup.object().shape({
+  title: yup.string().required("Musíš vyplnit nadpis").max(80),
+  columns: yup.array().of(yup.object().shape({
+    title: yup.string().required(),
+    text: yup.string().required(),
+    icon: yup.string().required()
+  }))
+}))
+
 export const columnsDef: BlockDef<ColumnsFields> = {
   title: "Sloupce",
   template: BlockTemplates.Columns,
+  schema: columnsSchema,
   adminFields: {
     title: {
       label: "Nadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     columns: {
       label: "Sloupce",
@@ -33,15 +44,15 @@ export const columnsDef: BlockDef<ColumnsFields> = {
       fields: {
         title: {
           label: "Nadpis",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         text: {
           label: "Text",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         icon: {
           label: "Ikona",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         }
       }
     }

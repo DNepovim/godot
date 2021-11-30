@@ -1,9 +1,11 @@
+import * as yup from "yup"
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields } from "../../components/Block/Block"
+import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Quotation } from "./Quotation"
 import { Block } from "../blocks"
+import { TextAreaInput } from "../../components/TextAreaInput/TextAreaInput"
+import { TextInput } from "../../components/TextInput/TextInput"
 
 export interface QuotationBlock extends Block {
   template: BlockTemplates.Quotation
@@ -16,21 +18,28 @@ export interface QuotationFields extends BlockFields {
   sourceUrl: string
 }
 
+export const quotationSchema = withBlockSchema(yup.object().shape({
+  text: yup.string().required(),
+  source: yup.string().required(),
+  sourceUrl: yup.string().required(),
+}))
+
 export const quotationDef: BlockDef<QuotationFields> = {
   title: "Citát",
   template: BlockTemplates.Quotation,
+  schema: quotationSchema,
   adminFields: {
     text: {
       label: "Citát",
-      input: adminComponentsDef.textArea
+      component: props => <TextAreaInput {...props} />
     },
     source: {
       label: "Název zdroje",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     sourceUrl: {
       label: "Odkaz na zdroj",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     }
   },
   component: Quotation

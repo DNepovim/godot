@@ -1,10 +1,10 @@
+import * as yup from "yup"
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields } from "../../components/Block/Block"
+import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { RichText } from "./RichText"
-import * as yup from "yup"
 import { Block } from "../blocks"
+import { TextInput } from "../../components/TextInput/TextInput"
 
 export interface RichTextBlock extends Block {
   template: BlockTemplates.RichText
@@ -17,21 +17,28 @@ export interface RichTextFields extends BlockFields {
   textAlign: string
 }
 
+export const richTextSchema = withBlockSchema(yup.object().shape({
+  title: yup.string().required(),
+  text: yup.string().required(),
+  textAlign: yup.string().required()
+}))
+
 export const richTextDef: BlockDef<RichTextFields> = {
   title: "Text",
   template: BlockTemplates.RichText,
+  schema: richTextSchema,
   adminFields: {
     title: {
       label: "Nadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     text: {
       label: "Text",
-      input: adminComponentsDef.textArea
+      component: props => <TextInput {...props} />
     },
     textAlign: {
       label: "Zarovnání",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
   },
   component: RichText

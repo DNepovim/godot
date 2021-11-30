@@ -25,6 +25,7 @@ const {Panel} = Collapse
 export interface BlockDef<T> {
   title: string
   template: BlockTemplates
+  schema: yup.SchemaOf<T>
   adminFields: AdminFields<T>
   component: React.FC<T>
 }
@@ -41,16 +42,11 @@ interface GeneralDef {
 }
 
 interface FieldDef<T> extends GeneralDef {
-  input: InputDef<T>
+  component: React.FC<FieldProps>
 }
 
 interface GroupDef<T> extends GeneralDef {
   fields: AdminFields<T>
-}
-
-interface InputDef<T> {
-  component: React.FC<FieldProps>
-  schema: yup.SchemaOf<T>
 }
 
 export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
@@ -122,12 +118,12 @@ const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}
           if (isGroupField(field)) {
             return <ClonableFields name={getPath(name, path)} fields={field.fields} />
           }
-          return <ClonableFields name={getPath(name, path)} component={field.input.component} />
+          return <ClonableFields name={getPath(name, path)} component={field.component} />
         }
         if (isGroupField(field)) {
           return <AdminFieldset legend={field.label} fields={field.fields} path={getPath(name, path)} />
         }
-        return React.createElement(field.input.component, { key: getPath(name, path), name: getPath(name, path), label: field.label })
+        return React.createElement(field.component, { key: getPath(name, path), name: getPath(name, path), label: field.label })
       })}
     </fieldset>
   )

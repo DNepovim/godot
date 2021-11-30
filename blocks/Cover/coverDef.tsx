@@ -1,9 +1,11 @@
+import * as yup from "yup"
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields as BlockFields } from "../../components/Block/Block"
+import { BlockFields as BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Cover } from "./Cover"
 import { Block } from "../blocks"
+import { TextInput } from "../../components/TextInput/TextInput"
+import { CheckInput } from "../../components/CheckInput/CheckInput"
 
 export interface CoverBlock extends Block {
   template: BlockTemplates.Cover
@@ -21,37 +23,48 @@ export interface CoverFields extends BlockFields {
   }
 }
 
+export const coverSchema = withBlockSchema(yup.object().shape({
+  title: yup.string().required(),
+  subtitle: yup.string().required(),
+  claim: yup.string().required(),
+  button: yup.object().shape({
+    label: yup.string().required(),
+    link: yup.string().required(),
+    targetBlank: yup.bool().required()
+  })
+}))
+
 export const coverDef: BlockDef<CoverFields> = {
   title: "Plakát",
   template: BlockTemplates.Cover,
+  schema: coverSchema,
   adminFields: {
     title: {
       label: "Nadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     subtitle: {
       label: "Podnadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     claim: {
       label: "Podpodnadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     button: {
       label: "Button",
       fields: {
         label: {
           label: "Nápis",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         link: {
           label: "Odkaz",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         targetBlank: {
           label: "Otevřít v novém okně",
-          // @ts-ignore
-          input: adminComponentsDef.checkkbox
+          component: props => <CheckInput {...props} />
         }
       }
     }

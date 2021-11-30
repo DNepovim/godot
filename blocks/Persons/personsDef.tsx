@@ -1,9 +1,10 @@
+import * as yup from "yup"
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields } from "../../components/Block/Block"
+import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Persons } from "./Persons"
 import { Block } from "../blocks"
+import { TextInput } from "../../components/TextInput/TextInput"
 
 export interface PersonsBlock extends Block {
   template: BlockTemplates.Persons
@@ -21,18 +22,30 @@ export interface PersonsFields extends BlockFields {
   }[]
 }
 
+export const personsSchema = withBlockSchema(yup.object().shape({
+  title: yup.string().required(),
+  subtitle: yup.string().required(),
+  persons: yup.array().of(yup.object().shape({
+    nick: yup.string().required(),
+    name: yup.string().required(),
+    text: yup.string().required(),
+    image: yup.string().required(),
+  }))
+}))
+
 
 export const personsDef: BlockDef<PersonsFields> = {
   title: "Medailonky",
   template: BlockTemplates.Persons,
+  schema: personsSchema,
   adminFields: {
     title: {
       label: "Nadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     subtitle: {
       label: "Podnadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     persons: {
       label: "Lidé",
@@ -40,19 +53,19 @@ export const personsDef: BlockDef<PersonsFields> = {
       fields: {
         nick: {
           label: "Přezdívka",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         name: {
           label: "Jméno",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         text: {
           label: "Popis",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         image: {
           label: "Fotka",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
       }
     }

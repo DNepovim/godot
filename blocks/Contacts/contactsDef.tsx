@@ -1,9 +1,10 @@
+import * as yup from "yup"
 import { BlockDef } from "../../admin/adminFieldsDef"
-import { adminComponentsDef } from "../../admin/adminComponentsDef"
-import { BlockFields } from "../../components/Block/Block"
+import { BlockFields, withBlockSchema as withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Contacts } from "./Contacts"
 import { Block } from "../blocks"
+import { TextInput } from "../../components/TextInput/TextInput"
 
 export interface ContactsBlock extends Block {
   template: BlockTemplates.Contacts
@@ -20,17 +21,28 @@ export interface ContactsFields extends BlockFields {
   }[]
 }
 
+export const contactsSchema = withBlockSchema(yup.object().shape({
+  title: yup.string().required(),
+  subtitle: yup.string().required(),
+  contacts: yup.array().of(yup.object().shape({
+    type: yup.string().required(),
+    icon: yup.string().required(),
+    url: yup.string().url().required()
+  })).required()
+}))
+
 export const contactsDef: BlockDef<ContactsFields> = {
   title: "Kontakty",
   template: BlockTemplates.Contacts,
+  schema: contactsSchema,
   adminFields: {
     title: {
       label: "Nadpis",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     subtitle: {
       label: "Podtext",
-      input: adminComponentsDef.text
+      component: props => <TextInput {...props} />
     },
     contacts: {
       label: "Kontakty",
@@ -38,15 +50,15 @@ export const contactsDef: BlockDef<ContactsFields> = {
       fields: {
         type: {
           label: "Typ",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         icon: {
           label: "Ikona",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
         url: {
           label: "Odkaz",
-          input: adminComponentsDef.text
+          component: props => <TextInput {...props} />
         },
       }
     }

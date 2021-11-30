@@ -1,4 +1,5 @@
 /** @jsxImportSource @emotion/react */
+import * as yup from "yup"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { NextPage } from "next"
 import { Form, Formik } from "formik"
@@ -8,7 +9,7 @@ import { blockDefs, BlocksDefs } from "../../blocks/blocks"
 import { auth, logout, login } from "../../firebase/auth"
 import { Spinner } from '../../admin/components/Spinner/Spinner'
 import { Centered } from '../../admin/components/Centered/Centered'
-import { Avatar, Button, Collapse, Layout, message, PageHeader, Space } from 'antd'
+import { Avatar, Button, Layout, message, PageHeader } from 'antd'
 import 'antd/dist/antd.css'
 import { AppstoreAddOutlined, SaveOutlined, LogoutOutlined, LoginOutlined } from '@ant-design/icons'
 import { Header } from 'antd/lib/layout/layout'
@@ -17,20 +18,20 @@ import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSo
 import { useSensors, useSensor, PointerSensor, KeyboardSensor, closestCenter, DndContext } from '@dnd-kit/core'
 import { v4 as uuid } from 'uuid'
 import { Overwrite } from 'utility-types/dist/mapped-types'
-import { useState } from 'react'
+import { enumToSchemaOptions } from "../../admin/utils/enumToSchemaOptions"
+import { BlockTemplates } from "../../blocks/blockTemplates"
 
 type Blocks = Overwrite<Partial<BlocksDefs>, Pick<BlocksDefs, "id">>[]
 
 
 const Admin: NextPage<Props> = ({blocks}) => {
   const [user, loading] = useAuthState(auth)
-  const [adminBlocksOrder, setAdminBlocksOrder] = useState(blocks.map(b => b.id))
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     })
-  );
+  )
 
   if (loading) {
     return (
@@ -60,6 +61,10 @@ const Admin: NextPage<Props> = ({blocks}) => {
           }
           message.success("Stránka byla uložena.")
         }}
+        validationSchema={() => yup.lazy((values: Blocks) => yup.array().of(yup.object().shape({
+          template: yup.string().oneOf(enumToSchemaOptions(BlockTemplates)).required(),
+          fields: yup.mixed().when("template", (template: BlockTemplates) => template ? blockDefs[template].schema : yup.mixed())
+        })))}
         initialValues={blocks}
       >
         {props => (
@@ -84,28 +89,24 @@ const Admin: NextPage<Props> = ({blocks}) => {
                   const activeIndex = items.indexOf(active.id)
                   const newOrder = arrayMove(props.values, activeIndex, overIndex)
 
-                  setAdminBlocksOrder(newOrder.map(b => b.id))
                   props.setValues(newOrder)
-                }
-              }
+                }}
               >
-                  <SortableContext
-                    items={adminBlocksOrder}
-                    strategy={verticalListSortingStrategy}
-                  >
-                <Collapse>
-                    {props.values.map((block, index) => (
-                        <SortableAdminBlockFields
-                          key={block.id}
-                          index={index}
-                          id={block.id}
-                          {...(block.template ? blockDefs[block.template] : {})}
-                          onRemove={() => props.setValues(props.values.filter((_, i) => i !== index))}
-                          onTemplateChange={template => props.setFieldValue(`[${index}].template`, template)}
-                        />
-                    ))}
-                </Collapse>
-                  </SortableContext>
+                <SortableContext
+                  items={props.values.map(v => v.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {props.values.map((block, index) => (
+                    <SortableAdminBlockFields
+                      key={block.id}
+                      index={index}
+                      id={block.id}
+                      {...(block.template ? blockDefs[block.template] : {})}
+                      onRemove={() => props.setValues(props.values.filter((_, i) => i !== index))}
+                      onTemplateChange={template => props.setFieldValue(`[${index}].template`, template)}
+                    />
+                  ))}
+                </SortableContext>
               </DndContext>
             </Form>
           </PageHeader>
