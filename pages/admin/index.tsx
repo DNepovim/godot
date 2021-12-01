@@ -44,7 +44,7 @@ const Admin: NextPage<Props> = ({blocks}) => {
   }
 
   return (
-    <Layout>
+    <Layout css={css`min-height: 100vh`}>
       <Header css={css`display: flex; align-items: center; justify-content: flex-end; `}>
           <Button onClick={logout} icon={<LogoutOutlined />} type="link">Odhlásit</Button>
           <Avatar alt={user.displayName} src={user.photoURL}/>
