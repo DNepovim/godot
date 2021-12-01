@@ -1,8 +1,7 @@
-import { Field } from "formik"
-import React from "react"
+import { Select } from "antd"
 import { FieldProps, Fieldset } from "../Fieldset/Fieldset"
 
-export interface SelectInputProps extends FieldProps {
+export interface SelectInputProps extends FieldProps<string[]> {
   options: {
     label: string
     value: string
@@ -10,9 +9,11 @@ export interface SelectInputProps extends FieldProps {
 }
 
 export const SelectInput: React.FC<SelectInputProps> = (props) => (
-  <Fieldset {...props}>
-    <Field {...props} as="select">
-      {props.options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
-    </Field>
+  <Fieldset<string[]> {...props}>
+    {renderProps => (
+      <Select {...renderProps}>
+        {props.options.map(option => <Select.Option key={option.value} value={option.value}>{option.label}</Select.Option>)}
+      </Select>
+    )}
   </Fieldset>
 )
