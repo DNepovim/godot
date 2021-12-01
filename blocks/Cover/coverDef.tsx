@@ -4,8 +4,8 @@ import { BlockFields as BlockFields, withBlockSchema } from "../../components/Bl
 import { BlockTemplates } from "../blockTemplates"
 import { Cover } from "./Cover"
 import { Block } from "../blocks"
-import { TextInput } from "../../components/TextInput/TextInput"
-import { CheckInput } from "../../components/CheckInput/CheckInput"
+import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { CheckInput } from "../../admin/components/Inputs/CheckInput/CheckInput"
 
 export interface CoverBlock extends Block {
   template: BlockTemplates.Cover

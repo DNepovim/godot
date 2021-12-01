@@ -5,8 +5,8 @@ import { ResponsiveVideoProps } from "../../components/ResponsiveVideo/Responsiv
 import { BlockTemplates } from "../blockTemplates"
 import { Video } from "./Video"
 import { Block } from "../blocks"
-import { NumberInput } from "../../components/NumberInput/NumberInput"
-import { TextInput } from "../../components/TextInput/TextInput"
+import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { NumberInput } from "../../admin/components/Inputs/NumberInput/NumberInput"
 
 export interface VideoBlock extends Block {
   template: BlockTemplates.Video

@@ -4,7 +4,7 @@ import { BlockFields, withBlockSchema as withBlockSchema } from "../../component
 import { BlockTemplates } from "../blockTemplates"
 import { Contacts } from "./Contacts"
 import { Block } from "../blocks"
-import { TextInput } from "../../components/TextInput/TextInput"
+import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
 
 export interface ContactsBlock extends Block {
   template: BlockTemplates.Contacts

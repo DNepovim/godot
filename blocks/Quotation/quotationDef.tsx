@@ -4,8 +4,8 @@ import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Quotation } from "./Quotation"
 import { Block } from "../blocks"
-import { TextAreaInput } from "../../components/TextAreaInput/TextAreaInput"
-import { TextInput } from "../../components/TextInput/TextInput"
+import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { TextAreaInput } from "../../admin/components/Inputs/TextAreaInput/TextAreaInput"
 
 export interface QuotationBlock extends Block {
   template: BlockTemplates.Quotation

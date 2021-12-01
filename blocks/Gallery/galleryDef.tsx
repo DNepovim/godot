@@ -4,7 +4,7 @@ import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { BlockTemplates } from "../blockTemplates"
 import { Gallery } from "./Gallery"
 import { Block } from "../blocks"
-import { TextInput } from "../../components/TextInput/TextInput"
+import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
 
 export interface GalleryBlock extends Block {
   template: BlockTemplates.Gallery
