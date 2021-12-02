@@ -16,8 +16,11 @@ import { RichTextBlock, richTextDef } from "./RichText/richTextDef";
 import { Video } from "./Video/Video";
 import { VideoBlock, videoDef } from "./Video/videoDef";
 import { BlockTemplates } from "./blockTemplates";
+import { Overwrite } from "utility-types/dist/mapped-types";
 
 type Blocks = Record<BlockTemplates, React.FC<any>>
+
+export type BlocksFromValues = Overwrite<Partial<BlocksDefs>, Pick<BlocksDefs, "id">>[]
 
 export const blocks: Blocks = {
   columns: Columns,
