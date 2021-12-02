@@ -17,6 +17,9 @@ import ToolOutlined from "@ant-design/icons/lib/icons/ToolOutlined"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import { PageEditPage } from "./pages/PageEditPage/PageEditPage"
 import { PagesListPage } from "./pages/PagesListPage/PagesListPage"
+import { UsersListPage } from "./pages/UsersListPage/UsersListPage"
+import { NavigationPage } from "./pages/NavigationPage/NavigationPage"
+import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
 
 
 
@@ -44,9 +47,9 @@ export const Admin: NextPage = () => {
           <Layout.Sider width={200} css={css`background-color: white`}>
             <Menu>
               <Menu.Item icon={<FileOutlined />}><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
-              <Menu.Item icon={<MenuOutlined />}>Navigace</Menu.Item>
-              <Menu.Item icon={<TeamOutlined />}>Uživatelé</Menu.Item>
-              <Menu.Item icon={<ToolOutlined />}>Nastavení</Menu.Item>
+              <Menu.Item icon={<TeamOutlined />}><Link to="/admin/navigace">Navigace</Link></Menu.Item>
+              <Menu.Item icon={<TeamOutlined />}><Link to="/admin/uzivatele">Uživatelé</Link></Menu.Item>
+              <Menu.Item icon={<TeamOutlined />}><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>
             </Menu>
           </Layout.Sider>
           <Layout>
@@ -54,6 +57,9 @@ export const Admin: NextPage = () => {
                 <Routes>
                   <Route path="/admin/stranky" element={<PagesListPage/>} />
                   <Route path="/admin/stranky/:slug" element={<PageEditPage />} />
+                  <Route path="/admin/navigace" element={<NavigationPage />} />
+                  <Route path="/admin/uzivatele" element={<UsersListPage />} />
+                  <Route path="/admin/nastaveni" element={<SettingsPage />} />
                 </Routes>
             </Content>
           </Layout>
