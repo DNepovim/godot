@@ -4,17 +4,20 @@ import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined"
 import AppstoreAddOutlined from "@ant-design/icons/lib/icons/AppstoreAddOutlined"
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { PageHeader, Button, Form } from "antd"
+import { PageHeader, Button, Form, Spin, message } from "antd"
 import { Formik } from "formik"
-import { blockDefs, blocks, BlocksFromValues } from "../../../blocks/blocks"
+import { blockDefs } from "../../../blocks/blocks"
 import { BlockTemplates } from "../../../blocks/blockTemplates"
-import { getPage, updateBlock } from "../../../firebase/firebase"
+import { getPage, updatePage } from "../../../firebase/firebase"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
 import { enumToSchemaOptions } from "../../utils/enumToSchemaOptions"
 import { useParams } from 'react-router'
 import { useEffect, useState } from 'react'
+import { Page } from '../../../data'
+import { User } from '@firebase/auth'
+import { Centered } from '../../components/Centered/Centered'
 
-export const PageEditPage = () => {
+export const PageEditPage = ({ user }: {user: User}) => {
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -23,34 +26,57 @@ export const PageEditPage = () => {
   )
 
   const { slug } = useParams()
-  const [blocks, setBlocks] = useState<BlocksFromValues>([])
+  const [page, setPage] = useState<Page>()
+
+  if (slug) {
+    message.error({
+      message: "Nepodařilo se načíst stránku.",
+      description: "Slug není definován",
+    })
+  }
 
   useEffect(() => {
     void (async () => {
-      const page = (await getPage(slug)) ?? []
-      setBlocks(page as BlocksFromValues)
-    })()
-  }, [])
-
-  return (
-    <Formik<BlocksFromValues>
-      onSubmit={async (values: BlocksFromValues) =>
-        values.forEach(async (block, index) => {
-          await updateBlock("frontPage", index, block)
+      const pageData = await getPage(slug as string)
+      if (!pageData) {
+        message.error({ // TODO message not working
+          message: "Nepodařilo se načíst stránku.",
+          description: "Server nevrátil žádná data.",
         })
       }
-      validationSchema={() => yup.lazy((values: BlocksFromValues) => yup.array().of(yup.object().shape({
+      setPage(pageData)
+    })()
+  }, [slug])
+
+  if (!page) {
+    return <Centered><Spin /></Centered>
+  }
+
+  return (
+    <Formik<Page>
+      onSubmit={async (values: Page) => {
+        const today = new Date()
+        const pageValues: Page = {
+          title: page.title,
+          lastEditedBy: user.email ?? "",
+          lastEditedTime: today.toLocaleString("cs-CZ"),
+          blocks: values.blocks
+        }
+        await updatePage(slug as string, pageValues)
+      }}
+      validationSchema={() => yup.lazy(() => yup.array().of(yup.object().shape({
         template: yup.string().oneOf(enumToSchemaOptions(BlockTemplates)).required(),
         fields: yup.mixed().when("template", (template: BlockTemplates) => template ? blockDefs[template].schema : yup.mixed())
       })))}
-      initialValues={blocks}
+      initialValues={page}
     >
       {props => (
         <PageHeader
-          title="Hlavní stránka"
+          title={page.title}
+          subTitle={`${props.values.lastEditedTime} uživatelem ${props.values.lastEditedBy}`}
           breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}, {breadcrumbName: "Hlavní stránka", path: ""}]}}
           extra={<Button type="primary" icon={<SaveOutlined />} onClick={async () => props.submitForm()} disabled={props.isSubmitting} loading={props.isSubmitting}>Uložit</Button>}
-          footer={<Button icon={<AppstoreAddOutlined />} onClick={() => props.setValues([...props.values, {id: uuid()}])}>Přidat blok</Button>}
+          footer={<Button icon={<AppstoreAddOutlined />} onClick={() => props.setFieldValue("blocks", [...props.values.blocks, {id: uuid()}])}>Přidat blok</Button>}
         >
           <Form>
             <DndContext
@@ -63,26 +89,26 @@ export const PageEditPage = () => {
                   return
                 }
 
-                const items = props.values.map(v => v.id)
+                const items = props.values.blocks.map(v => v.id)
                 const overIndex = items.indexOf(over.id)
                 const activeIndex = items.indexOf(active.id)
-                const newOrder = arrayMove(props.values, activeIndex, overIndex)
+                const newOrder = arrayMove(props.values.blocks, activeIndex, overIndex)
 
-                props.setValues(newOrder)
+                props.setFieldValue("blocks", newOrder)
               }}
             >
               <SortableContext
-                items={props.values.map(v => v.id)}
+                items={props.values.blocks.map(v => v.id)}
                 strategy={verticalListSortingStrategy}
               >
-                {props.values.map((block, index) => (
+                {props.values.blocks.map((block, index) => (
                   <SortableAdminBlockFields
                     key={block.id}
                     index={index}
                     id={block.id}
                     {...(block.template ? blockDefs[block.template] : {})}
-                    onRemove={() => props.setValues(props.values.filter((_, i) => i !== index))}
-                    onTemplateChange={template => props.setFieldValue(`[${index}].template`, template)}
+                    onRemove={() => props.setFieldValue("blocks", props.values.blocks.filter((_, i) => i !== index))}
+                    onTemplateChange={template => props.setFieldValue(`blocks[${index}].template`, template)}
                   />
                 ))}
               </SortableContext>

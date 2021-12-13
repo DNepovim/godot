@@ -19,7 +19,7 @@ export interface CoverFields extends BlockFields {
   button: {
     label: string,
     link: string,
-    targetBlank: boolean
+    targetBlank?: boolean
   }
 }
 
@@ -30,7 +30,7 @@ export const coverSchema = withBlockSchema(yup.object().shape({
   button: yup.object().shape({
     label: yup.string().required(),
     link: yup.string().required(),
-    targetBlank: yup.bool().required()
+    targetBlank: yup.bool()
   })
 }))
 

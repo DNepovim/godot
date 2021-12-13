@@ -1,9 +1,9 @@
-import { message } from "antd";
+import { message } from "antd"
 import { initializeApp } from "firebase/app"
 import { child, get, set, getDatabase, ref } from  "firebase/database"
-import { Navigation, Page } from "../data";
+import { Navigation, Page } from "../data"
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
@@ -39,7 +39,7 @@ export const getData = async (path: string): Promise<any> => {
   }
 }
 
-export const updateBlock = async (page: string, block: number, values: any) => writeData(`pages/${page}/blocks/${block}`, values)
+export const updatePage = async (page: string, values: Page) => writeData(`pages/${page}`, values)
 
 export const writeData = async (path: string, values: any): Promise<void> => {
   try {
@@ -53,4 +53,5 @@ export const writeData = async (path: string, values: any): Promise<void> => {
     message.error(e.message)
     return
   }
+  message.success("Uloženo")
 }

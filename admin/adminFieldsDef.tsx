@@ -3,9 +3,8 @@ import { Button, Card, Col, Collapse, Dropdown, Menu, Row, Space } from "antd"
 import { FieldArray, useField } from "formik"
 import React, { useState } from "react"
 import * as yup from 'yup'
-import { Block, blockDefs } from "../blocks/blocks"
+import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
-import { FieldProps } from "../components/Fieldset/Fieldset"
 import { Unarray } from "./utilityTypes"
 import { DeleteOutlined } from '@ant-design/icons'
 import { useSortable } from "@dnd-kit/sortable"
@@ -16,8 +15,8 @@ import RightOutlined from "@ant-design/icons/lib/icons/RightOutlined"
 import Title from "antd/lib/typography/Title"
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
 import PlusSquareOutlined from "@ant-design/icons/lib/icons/PlusSquareOutlined"
-import Column from "antd/lib/table/Column"
 import styled from "@emotion/styled"
+import { FieldProps } from "./components/Inputs/Fieldset/Fieldset"
 
 
 const {Panel} = Collapse
@@ -42,7 +41,7 @@ interface GeneralDef {
 }
 
 interface FieldDef<T> extends GeneralDef {
-  component: React.FC<FieldProps>
+  component: React.FC<FieldProps<T>>
 }
 
 interface GroupDef<T> extends GeneralDef {
@@ -84,7 +83,7 @@ export const SortableAdminBlockFields: React.FC<AdminBlockFieldsProps> = ({id, i
                 <Menu>
                   {Object.values(blockDefs).map((block, index) => (
                     <Menu.Item key={index}>
-                      <Button onClick={() => onTemplateChange(block.template)}>{block.title}</Button>
+                      <Button block onClick={() => onTemplateChange(block.template)}>{block.title}</Button>
                     </Menu.Item>
                   ))}
                 </Menu>
@@ -96,7 +95,7 @@ export const SortableAdminBlockFields: React.FC<AdminBlockFieldsProps> = ({id, i
         }
         extra={<Button onClick={() => onRemove(index)} icon={<DeleteOutlined />} danger>Odebrat</Button>}
       >
-        {isOpened && (adminFields ? <AdminFieldset path={`[${index}].fields`} fields={adminFields} /> : <div>Vyberte šablonu</div>)}
+        {isOpened && (adminFields ? <AdminFieldset path={`blocks[${index}].fields`} fields={adminFields} /> : <div>Vyberte šablonu</div>)}
       </Card>
     </div>
   )
@@ -109,7 +108,7 @@ interface AdminFieldsetProps<T> {
   clonable?: true
 }
 
-const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}) => {
+const AdminFieldset: React.FC<AdminFieldsetProps<Record<string, any>>> = ({legend, fields, path}) => {
   return (
     <fieldset>
       {legend && <legend>{legend}</legend>}
@@ -118,12 +117,12 @@ const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}
           if (isGroupField(field)) {
             return <ClonableFields name={getPath(name, path)} fields={field.fields} />
           }
-          return <ClonableFields name={getPath(name, path)} component={field.component} />
+          return <ClonableFields name={getPath(name, path)} component={field.component as React.FC} /> // TODO resolve typescript
         }
         if (isGroupField(field)) {
           return <AdminFieldset legend={field.label} fields={field.fields} path={getPath(name, path)} />
         }
-        return React.createElement(field.component, { key: getPath(name, path), name: getPath(name, path), label: field.label })
+        return React.createElement(field.component as React.FC<{name: string, label: string}>, { key: getPath(name, path), name: getPath(name, path), label: field.label }) // TODO resolve typescript
       })}
     </fieldset>
   )
@@ -131,7 +130,7 @@ const AdminFieldset: React.FC<AdminFieldsetProps<any>> = ({legend, fields, path}
 
 const getPath = (name: string, path?: string): string => path ? `${path}[${name}]` : name
 
-const ClonableFields: React.FC<{name: string, fields?: AdminFields<any>, component?: React.FC<FieldProps>}> = ({name, fields, component}) => {
+const ClonableFields: React.FC<{name: string, fields?: AdminFields<any>, component?: React.FC<Omit<FieldProps<any>, "children">>}> = ({name, fields, component}) => {
   const [field] = useField(name)
   return (
     <FieldArray

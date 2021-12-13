@@ -20,8 +20,6 @@ import { Overwrite } from "utility-types/dist/mapped-types";
 
 type Blocks = Record<BlockTemplates, React.FC<any>>
 
-export type BlocksFromValues = Overwrite<Partial<BlocksDefs>, Pick<BlocksDefs, "id">>[]
-
 export const blocks: Blocks = {
   columns: Columns,
   contacts: Contacts,

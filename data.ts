@@ -1,6 +1,9 @@
-import { BlocksDefs, BlockTemplates } from "./blocks/blocks";
+import { BlocksDefs } from "./blocks/blocks";
 
 export interface Page {
+  title: string
+  lastEditedBy: string
+  lastEditedTime: string
   blocks: BlocksDefs[]
 }
 
