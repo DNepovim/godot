@@ -46,11 +46,11 @@ export const writeData = async (path: string, values: any): Promise<void> => {
     await set(child(dbRef, path), values)
   } catch (e) {
     console.error(e)
-    if (e.code === "PERMISSION_DENIED") {
+    if ((e as {code: string}).code === "PERMISSION_DENIED") { // TODO fix types
       message.error("K této operaci nemáte oprvánění.")
       return
     }
-    message.error(e.message)
+    message.error((e as {message: string}).message) // TODO fix types
     return
   }
   message.success("Uloženo")
