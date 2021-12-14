@@ -5,7 +5,7 @@ import AppstoreAddOutlined from "@ant-design/icons/lib/icons/AppstoreAddOutlined
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { PageHeader, Button, Form, Spin, message } from "antd"
-import { Formik } from "formik"
+import { Formik, FormikHelpers } from "formik"
 import { blockDefs } from "../../../blocks/blocks"
 import { BlockTemplates } from "../../../blocks/blockTemplates"
 import { getPage, updatePage } from "../../../firebase/firebase"
@@ -28,23 +28,16 @@ export const PageEditPage = ({ user }: {user: User}) => {
   const { slug } = useParams()
   const [page, setPage] = useState<Page>()
 
-  if (slug) {
-    message.error({
-      message: "Nepodařilo se načíst stránku.",
-      description: "Slug není definován",
-    })
+  if (!slug) {
+    console.error("Slug is not defined.")
   }
 
   useEffect(() => {
     void (async () => {
       const pageData = await getPage(slug as string)
-      if (!pageData) {
-        message.error({ // TODO message not working
-          message: "Nepodařilo se načíst stránku.",
-          description: "Server nevrátil žádná data.",
-        })
+      if (pageData) {
+        setPage(pageData)
       }
-      setPage(pageData)
     })()
   }, [slug])
 
@@ -54,7 +47,7 @@ export const PageEditPage = ({ user }: {user: User}) => {
 
   return (
     <Formik<Page>
-      onSubmit={async (values: Page) => {
+      onSubmit={async (values: Page, helpers: FormikHelpers<Page>) => {
         const today = new Date()
         const pageValues: Page = {
           title: page.title,
@@ -63,6 +56,7 @@ export const PageEditPage = ({ user }: {user: User}) => {
           blocks: values.blocks
         }
         await updatePage(slug as string, pageValues)
+        helpers.setValues(pageValues)
       }}
       validationSchema={() => yup.lazy(() => yup.array().of(yup.object().shape({
         template: yup.string().oneOf(enumToSchemaOptions(BlockTemplates)).required(),
@@ -73,7 +67,7 @@ export const PageEditPage = ({ user }: {user: User}) => {
       {props => (
         <PageHeader
           title={page.title}
-          subTitle={`${props.values.lastEditedTime} uživatelem ${props.values.lastEditedBy}`}
+          subTitle={`naposledny upraveno ${props.values.lastEditedTime} uživatelem ${props.values.lastEditedBy}`}
           breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}, {breadcrumbName: "Hlavní stránka", path: ""}]}}
           extra={<Button type="primary" icon={<SaveOutlined />} onClick={async () => props.submitForm()} disabled={props.isSubmitting} loading={props.isSubmitting}>Uložit</Button>}
           footer={<Button icon={<AppstoreAddOutlined />} onClick={() => props.setFieldValue("blocks", [...props.values.blocks, {id: uuid()}])}>Přidat blok</Button>}
