@@ -1,4 +1,4 @@
-import { Button, PageHeader, Spin, Table } from "antd"
+import { Button, PageHeader, Spin, Table, Typography } from "antd"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import { getPages } from "../../../firebase/firebase"
@@ -16,7 +16,7 @@ export const PagesListPage = () => {
 
   return (
     <PageHeader
-      title="Stránky"
+      title={<Typography.Title>Stránky</Typography.Title>}
       breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}]}}
     >
       <Table

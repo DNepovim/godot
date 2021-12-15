@@ -4,7 +4,7 @@ import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined"
 import AppstoreAddOutlined from "@ant-design/icons/lib/icons/AppstoreAddOutlined"
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from "@dnd-kit/core"
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import { PageHeader, Button, Form, Spin, message } from "antd"
+import { PageHeader, Button, Form, Spin, message, Typography } from "antd"
 import { Formik, FormikHelpers } from "formik"
 import { blockDefs } from "../../../blocks/blocks"
 import { BlockTemplates } from "../../../blocks/blockTemplates"
@@ -66,7 +66,7 @@ export const PageEditPage = ({ user }: {user: User}) => {
     >
       {props => (
         <PageHeader
-          title={page.title}
+          title={<Typography.Title>{page.title}</Typography.Title>}
           subTitle={`naposledny upraveno ${props.values.lastEditedTime} uživatelem ${props.values.lastEditedBy}`}
           breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}, {breadcrumbName: "Hlavní stránka", path: ""}]}}
           extra={<Button type="primary" icon={<SaveOutlined />} onClick={async () => props.submitForm()} disabled={props.isSubmitting} loading={props.isSubmitting}>Uložit</Button>}

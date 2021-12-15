@@ -1,6 +1,6 @@
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
 import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined"
-import { Avatar, Button, Dropdown, Menu, message, PageHeader, Spin, Table } from "antd"
+import { Avatar, Button, Dropdown, Menu, message, PageHeader, Spin, Table, Typography } from "antd"
 import { ListUsersResult, UserRecord } from "firebase-admin/auth"
 import { Link } from "react-router-dom"
 import useSwr from "swr"
@@ -35,7 +35,7 @@ export const UsersListPage = () => {
 
   return (
     <PageHeader
-      title="Uživatelé"
+      title={<Typography.Title>Uživatelé</Typography.Title>}
       breadcrumb={{routes:[{breadcrumbName: "Uživatelé", path: "/admin/uzivatele"}]}}
     >
       <Table<UserRecord>
