@@ -60,12 +60,28 @@ export const Admin: NextPage = () => {
     <Layout css={css`min-height: 100vh`}>
       <Layout>
         <BrowserRouter>
-          <Layout.Sider width={200} css={css`background-color: white; display: flex; flex-direction: column;`}>
-            <div css={css`
-              display: flex;
-              align-items: center;
-              padding: 16px 9px 4px;
-            `}>
+          <Layout.Sider
+            width={200}
+            css={css`
+              position: fixed;
+              left: 0;
+              height: 100vh;
+              overflow: auto;
+              background-color: white;
+              .ant-layout-sider-children {
+                display: flex;
+                flex-direction: column;
+              }
+            `}
+          >
+            <Link
+              to="/admin"
+              css={css`
+                display: flex;
+                align-items: center;
+                padding: 16px 9px 4px;
+              `}
+            >
               <figure css={css`
                 height: 50px;
                 margin-right: 8px;
@@ -73,7 +89,7 @@ export const Admin: NextPage = () => {
                 <img src={logo.src} alt="" css={css`max-height: 100%; width: auto;`} />
               </figure>
               <h1 css={css`font-size: 24px;`}>Insomnia</h1>
-            </div>
+            </Link>
             <Menu>
               <Menu.Item icon={<FileOutlined />} key="pages"><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
               <Menu.Item disabled={true} icon={<BarsOutlined />} key="navigation"><Link to="/admin/navigace">Navigace</Link></Menu.Item>
@@ -85,6 +101,7 @@ export const Admin: NextPage = () => {
               justify-content: space-between;
               align-items: center;
               padding: 0 16px 16px;
+              margin: auto 0 0;
             `}>
               <Avatar alt={user.displayName} src={user.photoURL}/>
               <div css={css`
@@ -97,7 +114,7 @@ export const Admin: NextPage = () => {
               </div>
             </div>
           </Layout.Sider>
-          <Layout>
+          <Layout css={css`margin-left: 200px;`}>
             <Content>
                 <Routes>
                   <Route path="/admin/stranky" element={<PagesListPage/>} />
