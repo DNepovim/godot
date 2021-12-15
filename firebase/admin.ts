@@ -24,3 +24,11 @@ export const setUserRole = async (uid: string, role: string) => {
 }
 
 export const getUserRole = async (uid: string) => (await getAuth().getUser(uid)).customClaims?.role
+
+export const deleteUser = async (uid: string) => {
+  try {
+    return await getAuth().deleteUser(uid)
+  } catch (e) {
+    throw e
+  }
+}

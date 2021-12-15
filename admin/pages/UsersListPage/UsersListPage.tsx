@@ -1,14 +1,21 @@
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
-import { Avatar, Button, Dropdown, Menu, notification, PageHeader, Popover, Spin, Table } from "antd"
+import DeleteOutlined from "@ant-design/icons/lib/icons/DeleteOutlined"
+import { Avatar, Button, Dropdown, Menu, message, PageHeader, Spin, Table } from "antd"
 import { ListUsersResult, UserRecord } from "firebase-admin/auth"
 import { Link } from "react-router-dom"
 import useSwr from "swr"
+import { useEffect, useState } from "react"
 
 export const UsersListPage = () => {
+  const [users, setUsers] = useState<UserRecord[]>([])
   const { data } = useSwr<ListUsersResult>('/api/users/list', async url => {
     const result = await fetch(url)
-    return result.json()
+    return await result.json()
   })
+
+  useEffect(() => {
+    setUsers(data?.users ?? [])
+  }, [data])
 
   if (!data) {
     return <Spin />
@@ -18,6 +25,17 @@ export const UsersListPage = () => {
     await fetch("/api/users/setRole", { method: "POST", body: JSON.stringify({ uid, role })})
   }
 
+  const deleteUser = async (uid: string) => {
+    try {
+      await fetch("/api/users/delete", { method: "POST", body: JSON.stringify({ uid })})
+      setUsers(users.filter(user => user.uid !== uid))
+      message.success("Uživatel byl úspěšně smazán.")
+    } catch (e) {
+      message.error("Nastala nějaká chyba při mazání uživatele.")
+      console.error(e)
+    }
+  }
+
 
   return (
     <PageHeader
@@ -25,7 +43,7 @@ export const UsersListPage = () => {
       breadcrumb={{routes:[{breadcrumbName: "Uživatelé", path: "/admin/uzivatele"}]}}
     >
       <Table<UserRecord>
-        dataSource={data.users}
+        dataSource={users}
         columns={[
           {
             title: "Jméno",
@@ -58,6 +76,10 @@ export const UsersListPage = () => {
               </>
             )
           },
+          {
+            key: "actions",
+            render: (_, record) => (<Button icon={<DeleteOutlined />} onClick={() => deleteUser(record.uid) }>Smazat</Button>)
+          }
         ]} />
     </PageHeader>
   )
