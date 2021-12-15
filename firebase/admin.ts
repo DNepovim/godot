@@ -1,11 +1,12 @@
 import admin from "firebase-admin"
-import { applicationDefault } from "firebase-admin/app"
 import { getAuth } from "firebase-admin/auth"
 
 
+
 if (!admin.apps.length) {
+  const serviceAccount = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS as string)
   admin.initializeApp({
-    credential: applicationDefault(),
+    credential: admin.credential.cert(serviceAccount),
     databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL
   })
 }
