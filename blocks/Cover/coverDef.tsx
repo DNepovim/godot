@@ -20,6 +20,7 @@ export interface CoverFields extends BlockFields {
     label: string
     link: string
     targetBlank?: boolean
+    showButton?: boolean
   }
   isSnowfall?: boolean
 }
@@ -31,9 +32,10 @@ export const coverSchema = withBlockSchema(yup.object().shape({
   button: yup.object().shape({
     label: yup.string().required(),
     link: yup.string().required(),
-    targetBlank: yup.bool()
+    targetBlank: yup.bool(),
+    showButton: yup.bool(),
   }),
-  isSnowfall: yup.bool()
+  isSnowfall: yup.bool(),
 }))
 
 export const coverDef: BlockDef<CoverFields> = {
@@ -67,13 +69,17 @@ export const coverDef: BlockDef<CoverFields> = {
         targetBlank: {
           label: "Otevřít v novém okně",
           component: props => <CheckInput {...props} />
-        }
+        },
+        showButton: {
+          label: "Zobrazit tlačítko",
+          component: props => <CheckInput {...props} />
+        },
       }
     },
     isSnowfall: {
       label: "Sněžení",
       component: props => <CheckInput {...props} />
-    }
+    },
   },
   component: Cover
 }
