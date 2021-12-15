@@ -21,6 +21,7 @@ import { NavigationPage } from "./pages/NavigationPage/NavigationPage"
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
 import { useEffect, useState } from "react"
 import { IdTokenResult, ParsedToken } from "@firebase/auth"
+import logo from "../images/logo.png"
 
 
 
@@ -57,19 +58,44 @@ export const Admin: NextPage = () => {
 
   return (
     <Layout css={css`min-height: 100vh`}>
-      <Header css={css`display: flex; align-items: center; justify-content: flex-end; `} >
-        <Button onClick={logout} icon={<LogoutOutlined />} type="link">Odhlásit</Button>
-        <Avatar alt={user.displayName} src={user.photoURL}/>
-      </Header>
       <Layout>
         <BrowserRouter>
-          <Layout.Sider width={200} css={css`background-color: white`}>
+          <Layout.Sider width={200} css={css`background-color: white; display: flex; flex-direction: column;`}>
+            <div css={css`
+              display: flex;
+              align-items: center;
+              padding: 16px 9px 4px;
+            `}>
+              <figure css={css`
+                height: 50px;
+                margin-right: 8px;
+              `}>
+                <img src={logo.src} alt="" css={css`max-height: 100%; width: auto;`} />
+              </figure>
+              <h1 css={css`font-size: 24px;`}>Insomnia</h1>
+            </div>
             <Menu>
               <Menu.Item icon={<FileOutlined />} key="pages"><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
               <Menu.Item disabled={true} icon={<BarsOutlined />} key="navigation"><Link to="/admin/navigace">Navigace</Link></Menu.Item>
               {userClaims.role === "admin" && <Menu.Item icon={<TeamOutlined />} key="users"><Link to="/admin/uzivatele">Uživatelé</Link></Menu.Item>}
               {userClaims.role === "admin" && <Menu.Item disabled={true} icon={<SettingOutlined />} key="settings"><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>}
             </Menu>
+            <div css={css`
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 0 16px 16px;
+            `}>
+              <Avatar alt={user.displayName} src={user.photoURL}/>
+              <div css={css`
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+              `}>
+                {user.displayName}
+                <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`}>Odhlásit<LogoutOutlined /></Button>
+              </div>
+            </div>
           </Layout.Sider>
           <Layout>
             <Content>
