@@ -5,6 +5,7 @@ import { BlockTemplates } from "../blockTemplates"
 import { Persons } from "./Persons"
 import { Block } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { TextAreaInput } from "../../admin/components/Inputs/TextAreaInput/TextAreaInput"
 
 export interface PersonsBlock extends Block {
   template: BlockTemplates.Persons
@@ -61,7 +62,7 @@ export const personsDef: BlockDef<PersonsFields> = {
         },
         text: {
           label: "Popis",
-          component: props => <TextInput {...props} />
+          component: props => <TextAreaInput {...props} />
         },
         image: {
           label: "Fotka",
