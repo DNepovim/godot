@@ -11,7 +11,7 @@ export const Quotation: React.FC<QuotationFields> = ({id, text, source, sourceUr
     <ParallaxBanner
       layers={[
         {
-          image: "/images/sky.webp",
+          image: "/images/sky.png",
           amount: 0.2,
         }
       ]}
