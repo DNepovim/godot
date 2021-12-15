@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
+import Snowfall from 'react-snowfall'
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import { ParallaxBanner } from "react-scroll-parallax"
@@ -7,7 +8,7 @@ import { Container } from "../../components/Container/Container"
 import { Block } from "../../components/Block/Block"
 import { CoverFields } from "./coverDef"
 
-export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button}) => (
+export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button, isSnowfall}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[
@@ -28,6 +29,7 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
         }
       `}
     >
+      {isSnowfall && <Snowfall />}
       <Container
         css={css`padding: 120px 16px;`}
       >
