@@ -36,7 +36,6 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
         <h1 css={css`
           font-family: skautbold;
           font-size: 2.2em;
-          font-weight: bold;
           color: white;
           margin: 0 0 4px;
         `}>
@@ -45,7 +44,6 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
         <p css={css`
           font-family: skautbold;
           font-size: 1.8em;
-          font-weight: bold;
           color: white;
           margin: 0 0 4px;
         `}>
@@ -53,9 +51,8 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
         </p>
         <p css={css`
           font-size: ${theme.font.sizes[2]};
-          font-weight: bold;
           color: white;
-          margin: 0 0 12px;
+          margin: 0 0 32px;
         `}
           dangerouslySetInnerHTML={{ __html: claim }}
         />
