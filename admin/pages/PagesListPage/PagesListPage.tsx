@@ -14,19 +14,14 @@ export const PagesListPage = () => {
     })()
   }, [])
 
-  if (!pages) {
-    return <Spin />
-  }
-
-  const serializedData = Object.entries(pages).map(([slug, data]) => ({ slug, ...data }))
-
   return (
     <PageHeader
       title="Stránky"
       breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}]}}
     >
       <Table
-        dataSource={serializedData}
+        loading={!pages}
+        dataSource={pages ? Object.entries(pages).map(([slug, data]) => ({ slug, ...data })) : []}
         columns={[
           {
             title: "Název",
@@ -43,7 +38,11 @@ export const PagesListPage = () => {
             key: "action",
             align: "right",
           }
-        ]} />
+        ]}
+        pagination={{
+          hideOnSinglePage: true
+        }}
+      />
     </PageHeader>
   )
 }

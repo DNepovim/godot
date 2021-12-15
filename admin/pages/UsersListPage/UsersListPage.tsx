@@ -17,10 +17,6 @@ export const UsersListPage = () => {
     setUsers(data?.users ?? [])
   }, [data])
 
-  if (!data) {
-    return <Spin />
-  }
-
   const setRole = async (uid: string, role: string) => {
     await fetch("/api/users/setRole", { method: "POST", body: JSON.stringify({ uid, role })})
   }
@@ -44,6 +40,7 @@ export const UsersListPage = () => {
     >
       <Table<UserRecord>
         dataSource={users}
+        loading={!data}
         columns={[
           {
             title: "Jméno",
@@ -80,7 +77,11 @@ export const UsersListPage = () => {
             key: "actions",
             render: (_, record) => (<Button icon={<DeleteOutlined />} onClick={() => deleteUser(record.uid) }>Smazat</Button>)
           }
-        ]} />
+        ]}
+        pagination={{
+          hideOnSinglePage: true
+        }}
+      />
     </PageHeader>
   )
 }
