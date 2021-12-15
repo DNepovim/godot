@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
+import { tp } from "../../admin/utils/tp"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import Image from "next/image"
@@ -10,8 +11,8 @@ import { PersonsFields } from "./personsDef"
 export const Persons: React.FC<PersonsFields> = ({id, title, subtitle, persons}) => (
   <Block id={id}>
     <Container>
-      <Heading level={2}>{title}</Heading>
-      <p css={css`text-align: center; margin-bottom: 64px;`}>{subtitle}</p>
+      <Heading level={2}>{tp(title)}</Heading>
+      <p css={css`text-align: center; margin-bottom: 64px;`}>{tp(subtitle)}</p>
     </Container>
       <div css={css`
         display: flex;
@@ -50,14 +51,14 @@ export const Persons: React.FC<PersonsFields> = ({id, title, subtitle, persons})
               font-size: 1.8rem;
               margin: 0;
             `}>
-              {person.nick}
+              {tp(person.nick)}
             </h3>
             <p css={css`
                 margin-top: 0;
             `}>
-              <strong>{person.name}</strong>
+              <strong>{tp(person.name)}</strong>
             </p>
-            <p dangerouslySetInnerHTML={{ __html: person.text }} />
+            <p dangerouslySetInnerHTML={{ __html: tp(person.text) }} />
           </article>
         ))}
       </div>

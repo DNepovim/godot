@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
+import { tp } from "../../admin/utils/tp"
 import { Block } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
@@ -13,8 +14,8 @@ export const RichText: React.FC<RichTextFields> = ({id, title, text, textAlign})
         text-align: ${textAlign};
       `}
     >
-      <Heading level={2}>{title}</Heading>
-      <div dangerouslySetInnerHTML={{__html: text}} />
+      <Heading level={2}>{tp(title)}</Heading>
+      <div dangerouslySetInnerHTML={{__html: tp(text)}} />
     </Container>
   </Block>
 

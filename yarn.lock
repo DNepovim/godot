@@ -1239,6 +1239,11 @@
     "@types/mime" "^1"
     "@types/node" "*"
 
+"@types/typopo@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@types/typopo/-/typopo-2.5.1.tgz#7ac2b4aefd6f03bf9c7e202694b6489f3e9b08b4"
+  integrity sha512-/L5o6z5uufpV7R9C3KwflHwAisxCAa7EDxoMj/conQDKp2coCJ3uUqOVXxmUEAk10CsqCDTudyspsQubQbS21A==
+
 "@types/uuid@^8.3.3":
   version "8.3.3"
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.3.tgz#c6a60686d953dbd1b1d45e66f4ecdbd5d471b4d0"
@@ -5541,6 +5546,11 @@ typescript@4.4.3:
   version "4.4.3"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.4.3.tgz#bdc5407caa2b109efd4f82fe130656f977a29324"
   integrity sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA==
+
+typopo@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/typopo/-/typopo-2.5.2.tgz#6bc119c34a210477b062c68f97ef25a4cae79ed4"
+  integrity sha512-n2n/C4Nf5Xe4cdAxeC3iNsNwL4LSqhGQ6L5yeuxUjhdHbpEMC5o/A23bJBvJ9ZDBOQzwyqiG7LVnItJXs1/IIA==
 
 unbox-primitive@^1.0.1:
   version "1.0.1"

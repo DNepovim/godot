@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
+import { tp } from "../../admin/utils/tp"
 import { theme } from "../../theme"
 import { Container } from "../../components/Container/Container"
 import { Column } from "../../components/Column/Column"
@@ -11,7 +12,7 @@ import { ColumnsFields } from "./columnsDef"
 export const Columns: React.FC<ColumnsFields> = ({id, title, columns}) => (
   <Block id={id} withBackground>
     <Container>
-      <Heading level={2}>{title}</Heading>
+      <Heading level={2}>{tp(title)}</Heading>
       <div css={css`
         margin: 0 -16px;
         display: flex;

@@ -1,8 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
+import { tp } from "../../admin/utils/tp"
 import React from "react"
 import { ParallaxBanner } from "react-scroll-parallax"
-import { Block, BlockFields } from "../../components/Block/Block"
+import { Block } from "../../components/Block/Block"
 import { theme } from "../../theme"
 import { QuotationFields } from "./quotationDef"
 
@@ -53,7 +54,7 @@ export const Quotation: React.FC<QuotationFields> = ({id, text, source, sourceUr
           target="_blank"
           rel="noreferrer noopener"
         >
-          {source}
+          {tp(source)}
         </a>
       </div>
     </ParallaxBanner>

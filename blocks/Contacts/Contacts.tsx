@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
+import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
 import { ParallaxBanner } from "react-scroll-parallax"
 import { theme } from "../../theme"
@@ -35,14 +36,14 @@ export const Contacts: React.FC<ContactsFields> = ({id, title, subtitle, contact
           color: ${theme.color.brand};
           margin-bottom: 4px
         `}>
-          {title}
+          {tp(title)}
         </h2>
         <p
           css={css`
             color: white;
             font-size: 0.8em;
           `}
-          dangerouslySetInnerHTML={{ __html: subtitle }}
+          dangerouslySetInnerHTML={{ __html: tp(subtitle) }}
         />
         <div css={css`
           display: flex;

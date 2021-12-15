@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
+import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
 
 export interface ColumnProps {
@@ -27,8 +28,8 @@ export const Column: React.FC<ColumnProps> = ({title, text, icon}) => (
         height={100}
         lazyBoundary="600px"
       />
-      <h3 css={css`margin: 0 0 20px`}>{title}</h3>
+      <h3 css={css`margin: 0 0 20px`}>{tp(title)}</h3>
     </header>
-    <p dangerouslySetInnerHTML={{__html: text}}/>
+    <p dangerouslySetInnerHTML={{__html: tp(text)}}/>
   </article>
 )

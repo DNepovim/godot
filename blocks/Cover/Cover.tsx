@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import Snowfall from 'react-snowfall'
+import { tp } from "../../admin/utils/tp"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import { ParallaxBanner } from "react-scroll-parallax"
@@ -40,7 +41,7 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
           color: white;
           margin: 0 0 4px;
         `}>
-          {title}
+          {tp(title)}
         </h1>}
         {subtitle && <p css={css`
           font-family: skautbold;
@@ -48,14 +49,14 @@ export const Cover: React.FC<CoverFields> = ({id, title, subtitle, claim, button
           color: white;
           margin: 0 0 4px;
         `}>
-          {subtitle}
+          {tp(subtitle)}
         </p>}
         {claim && <p css={css`
           font-size: ${theme.font.sizes[2]};
           color: white;
           margin: 0 0 32px;
         `}
-          dangerouslySetInnerHTML={{ __html: claim }}
+          dangerouslySetInnerHTML={{ __html: tp(claim) }}
         />}
         {button.showButton && <Button link={button.link} targetBlank>{button.label}</Button>}
       </Container>
