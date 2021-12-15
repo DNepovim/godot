@@ -24,11 +24,11 @@ export const Column: React.FC<ColumnProps> = ({title, text, icon}) => (
         `}
         src={`/icons/${icon}.svg`}
         alt=""
-        width={100}
-        height={100}
+        width={80}
+        height={80}
         lazyBoundary="600px"
       />
-      <h3 css={css`margin: 0 0 20px`}>{tp(title)}</h3>
+      <h3 css={css`margin: 0 0 10px`}>{tp(title)}</h3>
     </header>
     <p dangerouslySetInnerHTML={{__html: tp(text)}}/>
   </article>

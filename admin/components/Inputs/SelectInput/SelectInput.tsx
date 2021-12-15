@@ -1,15 +1,16 @@
 import { Select } from "antd"
+import { ReactElement } from "react"
 import { FieldProps, Fieldset } from "../Fieldset/Fieldset"
 
-export interface SelectInputProps extends FieldProps<string[]> {
+export interface SelectInputProps<T> extends FieldProps<T> {
   options: {
     label: string
-    value: string
+    value: T
   }[]
 }
 
-export const SelectInput: React.FC<SelectInputProps> = (props) => (
-  <Fieldset<string[]> {...props}>
+export const SelectInput = <T extends string | number>(props: SelectInputProps<T>): ReactElement => (
+  <Fieldset<string> {...props}>
     {renderProps => (
       <Select {...renderProps}>
         {props.options.map(option => <Select.Option key={option.value} value={option.value}>{option.label}</Select.Option>)}

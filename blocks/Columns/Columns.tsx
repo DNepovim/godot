@@ -26,6 +26,7 @@ export const Columns: React.FC<ColumnsFields> = ({id, title, columns}) => (
               width: ${theme.layout.width / 3 - 8}px;
               padding: 4px 16px;
               box-sizing: border-box;
+              margin-bottom: 16px;
             `}
           >
             <Column {...column} />
