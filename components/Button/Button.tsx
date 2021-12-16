@@ -17,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({children, link, targetBlank}) => 
       rel: "noreferrer noopener"
     } : {})}
     css={css`
+      position: relative;
       display: inline-block;
       font-family: themix;
       font-size: ${theme.font.sizes[2]};
@@ -25,8 +26,33 @@ export const Button: React.FC<ButtonProps> = ({children, link, targetBlank}) => 
       border-radius: 4px;
       text-decoration: none;
       background-color: ${theme.color.brand};
+      overflow: hidden;
+
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: ${theme.color.secondary};
+        transition: width 700ms ease-out;
+      }
+
+      span {
+        position: relative;
+        z-index: 10;
+      }
+
+      &:hover {
+        text-decoration: none;
+
+        &:before {
+          width: 100%
+        }
+      }
     `}
   >
-    {children}
+    <span>{children}</span>
   </a>
 )
