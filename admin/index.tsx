@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { NextPage } from "next"
 import 'antd/dist/antd.css'
-import { Avatar, Button, Layout, Menu, message, Result, Tooltip } from 'antd'
+import { Avatar, Button, Layout, Menu, message, Result, Space, Tooltip } from 'antd'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout, login } from "../firebase/auth"
 import { Spinner } from './components/Spinner/Spinner'
@@ -20,7 +20,7 @@ import { PagesListPage } from "./pages/PagesListPage/PagesListPage"
 import { UsersListPage } from "./pages/UsersListPage/UsersListPage"
 import { NavigationPage } from "./pages/NavigationPage/NavigationPage"
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { IdTokenResult, ParsedToken } from "@firebase/auth"
 import logo from "../images/logo.png"
 
@@ -30,6 +30,7 @@ export const Admin: NextPage = () => {
   const [user, loading] = useAuthState(auth)
   const [userClaims, setUserClaims] = useState<ParsedToken>()
   const [deployStatus, setDeployStatus] = useState<DeployStatus>("NOT")
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false)
 
   const deploy = async () => {
     setDeployStatus("STARTED")
@@ -103,6 +104,9 @@ export const Admin: NextPage = () => {
       <Layout>
         <BrowserRouter>
           <Layout.Sider
+            collapsible
+            collapsed={isSidebarCollapsed}
+            onCollapse={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
             width={200}
             css={css`
               position: fixed;
@@ -113,6 +117,13 @@ export const Admin: NextPage = () => {
               .ant-layout-sider-children {
                 display: flex;
                 flex-direction: column;
+              }
+              .ant-layout-sider-trigger {
+                background-color: white;
+
+                svg {
+                  color: black;
+                }
               }
             `}
           >
@@ -130,7 +141,7 @@ export const Admin: NextPage = () => {
               `}>
                 <img src={logo.src} alt="" css={css`max-height: 100%; width: auto;`} />
               </figure>
-              <h1 css={css`font-size: 24px;`}>Insomnia</h1>
+              {!isSidebarCollapsed && <h1 css={css`font-size: 24px;`}>Insomnia</h1>}
             </Link>
             <Menu>
               <Menu.Item icon={<FileOutlined />} key="pages"><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
@@ -138,7 +149,26 @@ export const Admin: NextPage = () => {
               {userClaims.role === "admin" && <Menu.Item icon={<TeamOutlined />} key="users"><Link to="/admin/uzivatele">Uživatelé</Link></Menu.Item>}
               {userClaims.role === "admin" && <Menu.Item disabled icon={<SettingOutlined />} key="settings"><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>}
             </Menu>
-            {userClaims.role === "admin" && <Tooltip placement="right" trigger={[]} overlay={deployStatus} visible={deployStatus !== "NOT"}><Button css={css`margin: 12px;`} onClick={deploy} loading={deployStatus !== "NOT"} type="primary" icon={<FireOutlined />}>Publikovat</Button></Tooltip>}
+            {userClaims.role === "admin" && (
+              <div css={css`padding: 12px;`}>
+                <Tooltip
+                  placement="right"
+                  trigger={[]}
+                  overlay={deployStatus}
+                  visible={deployStatus !== "NOT"}
+                >
+                  <Button
+                    onClick={deploy}
+                    loading={deployStatus !== "NOT"}
+                    type="primary"
+                    icon={<FireOutlined />}
+                    block
+                  >
+                    {!isSidebarCollapsed && "Publikovat"}
+                  </Button>
+                </Tooltip>
+              </div>
+            )}
             <div css={css`
               display: flex;
               justify-content: space-between;
@@ -146,18 +176,27 @@ export const Admin: NextPage = () => {
               padding: 0 16px 16px;
               margin: auto 0 0;
             `}>
-              <Avatar alt={user.displayName} src={user.photoURL}/>
-              <div css={css`
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
-              `}>
-                {user.displayName}
-                <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`}>Odhlásit<LogoutOutlined /></Button>
-              </div>
+              {isSidebarCollapsed ? (
+                <Space direction="vertical" css={css`margin: 0 auto`}>
+                  <Avatar alt={user.displayName} src={user.photoURL}/>
+                  <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`} icon={<LogoutOutlined />} />
+                </Space>
+              ) : (
+                <>
+                  <Avatar alt={user.displayName} src={user.photoURL}/>
+                  <div css={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-end;
+                  `}>
+                    {user.displayName}
+                    <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`}>Odhlásit<LogoutOutlined /></Button>
+                  </div>
+                </>
+              )}
             </div>
           </Layout.Sider>
-          <Layout css={css`margin-left: 200px;`}>
+          <Layout css={css`margin-left: ${isSidebarCollapsed ? 80 : 200}px;`}>
             <Content>
                 <Routes>
                   <Route path="/admin/stranky" element={<PagesListPage/>} />
