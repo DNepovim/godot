@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { NextPage } from "next"
 import 'antd/dist/antd.css'
-import { Avatar, Button, Layout, Menu, Result } from 'antd'
+import { Avatar, Button, Layout, Menu, message, Result, Tooltip } from 'antd'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth, logout, login } from "../firebase/auth"
 import { Spinner } from './components/Spinner/Spinner'
@@ -13,6 +13,7 @@ import FileOutlined from "@ant-design/icons/lib/icons/FileOutlined"
 import TeamOutlined from "@ant-design/icons/lib/icons/TeamOutlined"
 import BarsOutlined from "@ant-design/icons/lib/icons/BarsOutlined"
 import SettingOutlined from "@ant-design/icons/lib/icons/SettingOutlined"
+import FireOutlined from "@ant-design/icons/lib/icons/FireOutlined"
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import { PageEditPage } from "./pages/PageEditPage/PageEditPage"
 import { PagesListPage } from "./pages/PagesListPage/PagesListPage"
@@ -23,11 +24,52 @@ import { useEffect, useState } from "react"
 import { IdTokenResult, ParsedToken } from "@firebase/auth"
 import logo from "../images/logo.png"
 
-
+type DeployStatus = string
 
 export const Admin: NextPage = () => {
   const [user, loading] = useAuthState(auth)
   const [userClaims, setUserClaims] = useState<ParsedToken>()
+  const [deployStatus, setDeployStatus] = useState<DeployStatus>("NOT")
+
+  const deploy = async () => {
+    setDeployStatus("STARTED")
+    try {
+      const createResult = await fetch("/api/deployment/create")
+      const createResultJson = await createResult.json()
+      if (createResultJson.error) {
+        message.error("Něco se pokazilo.")
+        console.error(createResultJson.error)
+      }
+
+      const interval = setInterval(async () => {
+        const result = await fetch(`/api/deployment/${createResultJson.id}`)
+        const resultJson = await result.json()
+        if (resultJson.status === "READY" && resultJson.checksState === "completed") {
+          clearInterval(interval)
+          setDeployStatus("NOT")
+          if (resultJson.checksConclusion !== "succeeded") {
+            message.success("Něco se pokazilo.")
+          } else {
+            message.success("Změny byly úspěšně publikovány.")
+          }
+        } else {
+          setDeployStatus(`${resultJson.status !== "READY" ? resultJson.status : `Checks: ${resultJson.checksState}`} (${Math.floor((+ new Date() - resultJson.createdAt) / 1000)} s)`)
+        }
+      }, 1000)
+
+      setTimeout(() => {
+        clearInterval(interval)
+        setDeployStatus("NOT")
+        message.error("Publikování selhalo (timeout).")
+        console.error("Deploy failed (timeout).")
+      }, 1000 * 60 *5)
+
+    } catch(e) {
+      message.error("Něco se pokazilo.")
+      console.error(e)
+    }
+
+  }
 
   useEffect(() => {
     if (user) {
@@ -92,10 +134,11 @@ export const Admin: NextPage = () => {
             </Link>
             <Menu>
               <Menu.Item icon={<FileOutlined />} key="pages"><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
-              <Menu.Item disabled={true} icon={<BarsOutlined />} key="navigation"><Link to="/admin/navigace">Navigace</Link></Menu.Item>
+              <Menu.Item disabled icon={<BarsOutlined />} key="navigation"><Link to="/admin/navigace">Navigace</Link></Menu.Item>
               {userClaims.role === "admin" && <Menu.Item icon={<TeamOutlined />} key="users"><Link to="/admin/uzivatele">Uživatelé</Link></Menu.Item>}
-              {userClaims.role === "admin" && <Menu.Item disabled={true} icon={<SettingOutlined />} key="settings"><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>}
+              {userClaims.role === "admin" && <Menu.Item disabled icon={<SettingOutlined />} key="settings"><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>}
             </Menu>
+            {userClaims.role === "admin" && <Tooltip placement="right" trigger={[]} overlay={deployStatus} visible={deployStatus !== "NOT"}><Button css={css`margin: 12px;`} onClick={deploy} loading={deployStatus !== "NOT"} type="primary" icon={<FireOutlined />}>Publikovat</Button></Tooltip>}
             <div css={css`
               display: flex;
               justify-content: space-between;
