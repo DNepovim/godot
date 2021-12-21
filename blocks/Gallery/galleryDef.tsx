@@ -1,10 +1,9 @@
 import * as yup from "yup"
-import { BlockDef } from "../../admin/adminFieldsDef"
 import { BlockFields, withBlockSchema } from "../../components/Block/Block"
-import { BlockTemplates } from "../blockTemplates"
 import { Gallery } from "./Gallery"
-import { Block } from "../blocks"
+import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { BlockTemplates } from "../blockTemplates"
 
 export interface GalleryBlock extends Block {
   template: BlockTemplates.Gallery

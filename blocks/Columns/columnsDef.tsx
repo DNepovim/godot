@@ -1,13 +1,12 @@
 import * as yup from "yup"
-import { BlockDef } from "../../admin/adminFieldsDef"
 import { BlockFields, withBlockSchema } from "../../components/Block/Block"
-import { BlockTemplates } from "../blockTemplates"
 import { Columns } from "./Columns"
-import { Block } from "../blocks"
+import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
 import { enumToSchemaOptions } from "../../admin/utils/enumToSchemaOptions"
 import { SelectInput } from "../../admin/components/Inputs/SelectInput/SelectInput"
 import { TextAreaInput } from "../../admin/components/Inputs/TextAreaInput/TextAreaInput"
+import { BlockTemplates } from "../blockTemplates"
 
 export interface ColumnsBlock extends Block {
   template: BlockTemplates.Columns

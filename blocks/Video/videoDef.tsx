@@ -1,12 +1,11 @@
 import * as yup from "yup"
-import { BlockDef } from "../../admin/adminFieldsDef"
 import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { ResponsiveVideoProps } from "../../components/ResponsiveVideo/ResponsiveVideo"
-import { BlockTemplates } from "../blockTemplates"
 import { Video } from "./Video"
-import { Block } from "../blocks"
+import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
 import { NumberInput } from "../../admin/components/Inputs/NumberInput/NumberInput"
+import { BlockTemplates } from "../blockTemplates"
 
 export interface VideoBlock extends Block {
   template: BlockTemplates.Video

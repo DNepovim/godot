@@ -6,9 +6,9 @@ import { Navigation as NavigationType, Page } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
 import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
-import { blocks } from "../blocks/blocks"
 import { getNavigation, getPage } from "../firebase/firebase"
 import { globalStyles } from "../globalStyles"
+import { blockDefs, BlockTemplates } from "../blocks/blocks"
 
 const Home: NextPage<Props> = ({navigation, page}) => (
   <div>
@@ -35,7 +35,7 @@ const Home: NextPage<Props> = ({navigation, page}) => (
       padding-top: 96px;
     `}>
       <Navigation logo={logo} items={navigation} />
-      {page.blocks.map(block => React.createElement(blocks[block.template], block.fields))}
+      {page.blocks.map(({template, fields}) => React.createElement(blockDefs[template as BlockTemplates].component, fields))}
     </main>
   </div>
 )

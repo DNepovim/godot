@@ -1,11 +1,10 @@
 import * as yup from "yup"
-import { BlockDef } from "../../admin/adminFieldsDef"
 import { BlockFields as BlockFields, withBlockSchema } from "../../components/Block/Block"
-import { BlockTemplates } from "../blockTemplates"
 import { Cover } from "./Cover"
-import { Block } from "../blocks"
+import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
 import { CheckInput } from "../../admin/components/Inputs/CheckInput/CheckInput"
+import { BlockTemplates } from "../blockTemplates"
 
 export interface CoverBlock extends Block {
   template: BlockTemplates.Cover
@@ -83,5 +82,3 @@ export const coverDef: BlockDef<CoverFields> = {
   },
   component: Cover
 }
-
-export default coverDef

@@ -6,8 +6,7 @@ import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, us
 import { arrayMove, SortableContext, sortableKeyboardCoordinates, verticalListSortingStrategy } from "@dnd-kit/sortable"
 import { PageHeader, Button, Form, Spin, message, Typography } from "antd"
 import { Formik, FormikHelpers } from "formik"
-import { blockDefs } from "../../../blocks/blocks"
-import { BlockTemplates } from "../../../blocks/blockTemplates"
+import { blockDefs, BlockTemplates } from "../../../blocks/blocks"
 import { getPage, updatePage } from "../../../firebase/firebase"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
 import { enumToSchemaOptions } from "../../utils/enumToSchemaOptions"
@@ -100,7 +99,7 @@ export const PageEditPage = ({ user }: {user: User}) => {
                     key={block.id}
                     index={index}
                     id={block.id}
-                    {...(block.template ? blockDefs[block.template] : {})}
+                    {...(block.template ? blockDefs[block.template as BlockTemplates] : {})}
                     onRemove={() => props.setFieldValue("blocks", props.values.blocks.filter((_, i) => i !== index))}
                     onTemplateChange={template => props.setFieldValue(`blocks[${index}].template`, template)}
                   />
