@@ -1,4 +1,4 @@
-import { BlocksDefs } from "./blocks/blocks";
+import { BlocksDefs } from "./blocks/blocks"
 
 export interface Page {
   title: string
@@ -15,6 +15,6 @@ export type Navigation = Array<{
 export interface Data {
   config: {
     navigation: Navigation
-  },
+  }
   pages: Record<string, Page>
 }

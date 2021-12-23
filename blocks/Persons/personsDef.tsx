@@ -22,17 +22,20 @@ export interface PersonsFields extends BlockFields {
   }[]
 }
 
-export const personsSchema = withBlockSchema(yup.object().shape({
-  title: yup.string().required(),
-  subtitle: yup.string().required(),
-  persons: yup.array().of(yup.object().shape({
-    nick: yup.string().required(),
-    name: yup.string().required(),
-    text: yup.string().required(),
-    image: yup.string().required(),
-  }))
-}))
-
+export const personsSchema = withBlockSchema(
+  yup.object().shape({
+    title: yup.string().required(),
+    subtitle: yup.string().required(),
+    persons: yup.array().of(
+      yup.object().shape({
+        nick: yup.string().required(),
+        name: yup.string().required(),
+        text: yup.string().required(),
+        image: yup.string().required(),
+      })
+    ),
+  })
+)
 
 export const personsDef: BlockDef<PersonsFields> = {
   title: "Medailonky",
@@ -41,11 +44,11 @@ export const personsDef: BlockDef<PersonsFields> = {
   adminFields: {
     title: {
       label: "Nadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     subtitle: {
       label: "Podnadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     persons: {
       label: "Lidé",
@@ -53,23 +56,22 @@ export const personsDef: BlockDef<PersonsFields> = {
       fields: {
         nick: {
           label: "Přezdívka",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         name: {
           label: "Jméno",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         text: {
           label: "Popis",
-          component: props => <TextAreaInput {...props} />
+          component: (props) => <TextAreaInput {...props} />,
         },
         image: {
           label: "Fotka",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
-      }
-    }
-
+      },
+    },
   },
-  component: Persons
+  component: Persons,
 }

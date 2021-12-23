@@ -12,7 +12,11 @@ export interface FieldProps<T> {
 export const Fieldset = <T extends any>(props: FieldProps<T>): ReactElement => {
   const [field, meta] = useField(props.name)
   return (
-    <Form.Item label={props.label} validateStatus={meta.touched && meta.error ? "error" : undefined} help={meta.touched && meta.error}>
+    <Form.Item
+      label={props.label}
+      validateStatus={meta.touched && meta.error ? "error" : undefined}
+      help={meta.touched && meta.error}
+    >
       {props.children(field)}
     </Form.Item>
   )

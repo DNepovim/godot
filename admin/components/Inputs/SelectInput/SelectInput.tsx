@@ -9,11 +9,17 @@ export interface SelectInputProps<T> extends FieldProps<T> {
   }[]
 }
 
-export const SelectInput = <T extends string | number>(props: SelectInputProps<T>): ReactElement => (
+export const SelectInput = <T extends string | number>(
+  props: SelectInputProps<T>
+): ReactElement => (
   <Fieldset<string> {...props}>
-    {renderProps => (
+    {(renderProps) => (
       <Select {...renderProps}>
-        {props.options.map(option => <Select.Option key={option.value} value={option.value}>{option.label}</Select.Option>)}
+        {props.options.map((option) => (
+          <Select.Option key={option.value} value={option.value}>
+            {option.label}
+          </Select.Option>
+        ))}
       </Select>
     )}
   </Fieldset>

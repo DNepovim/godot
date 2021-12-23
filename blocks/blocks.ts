@@ -1,7 +1,7 @@
-import * as yup from 'yup'
-import { FieldProps } from '../admin/components/Inputs/Fieldset/Fieldset'
+import * as yup from "yup"
+import { FieldProps } from "../admin/components/Inputs/Fieldset/Fieldset"
 import { Unarray } from "../admin/utilityTypes"
-import { BlockTemplates } from './blockTemplates'
+import { BlockTemplates } from "./blockTemplates"
 import { ColumnsBlock, columnsDef } from "./Columns/columnsDef"
 import { ContactsBlock, contactsDef } from "./Contacts/contactsDef"
 import { coverDef, CoverBlock } from "./Cover/coverDef"
@@ -15,7 +15,15 @@ export interface Block {
   id: string
 }
 
-export type BlocksDefs = ColumnsBlock | ContactsBlock | CoverBlock | GalleryBlock | PersonsBlock | QuotationBlock | RichTextBlock | VideoBlock
+export type BlocksDefs =
+  | ColumnsBlock
+  | ContactsBlock
+  | CoverBlock
+  | GalleryBlock
+  | PersonsBlock
+  | QuotationBlock
+  | RichTextBlock
+  | VideoBlock
 
 export const blockDefs: Record<BlockTemplates, BlockDef<any>> = {
   columns: columnsDef,
@@ -55,8 +63,8 @@ interface GroupDef<T> extends GeneralDef {
   fields: AdminFields<T>
 }
 
-export const isGroupField = <T extends {}>(component: AdminField<T>): component is GroupDef<T> => "fields" in component
+export const isGroupField = <T extends {}>(
+  component: AdminField<T>
+): component is GroupDef<T> => "fields" in component
 
-export const checkBlockType = (block: BlocksDefs) => {
-
-}
+export const checkBlockType = (block: BlocksDefs) => {}

@@ -7,7 +7,12 @@ import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import { RichTextFields } from "./richTextDef"
 
-export const RichText: React.FC<RichTextFields> = ({id, title, text, textAlign}) => (
+export const RichText: React.FC<RichTextFields> = ({
+  id,
+  title,
+  text,
+  textAlign,
+}) => (
   <Block id={id}>
     <Container
       css={css`
@@ -15,8 +20,7 @@ export const RichText: React.FC<RichTextFields> = ({id, title, text, textAlign})
       `}
     >
       <Heading level={2}>{tp(title)}</Heading>
-      <div dangerouslySetInnerHTML={{__html: tp(text)}} />
+      <div dangerouslySetInnerHTML={{ __html: tp(text) }} />
     </Container>
   </Block>
-
 )

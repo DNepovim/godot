@@ -1,6 +1,6 @@
 import { message } from "antd"
 import { initializeApp } from "firebase/app"
-import { child, get, set, getDatabase, ref } from  "firebase/database"
+import { child, get, set, getDatabase, ref } from "firebase/database"
 import { Navigation, Page } from "../data"
 
 export const firebaseConfig = {
@@ -16,11 +16,11 @@ export const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig)
 const dbRef = ref(getDatabase(firebaseApp))
 
+export const getNavigation = async (): Promise<Navigation | undefined> =>
+  getData(`config/navigation/`)
 
-
-export const getNavigation = async (): Promise<Navigation | undefined> => getData(`config/navigation/`)
-
-export const getPage = async (page: string): Promise<Page | undefined> => getData(`pages/${page}/`)
+export const getPage = async (page: string): Promise<Page | undefined> =>
+  getData(`pages/${page}/`)
 
 export const getPages = async (): Promise<Page | undefined> => getData(`pages/`)
 
@@ -39,18 +39,20 @@ export const getData = async (path: string): Promise<any> => {
   }
 }
 
-export const updatePage = async (page: string, values: Page) => writeData(`pages/${page}`, values)
+export const updatePage = async (page: string, values: Page) =>
+  writeData(`pages/${page}`, values)
 
 export const writeData = async (path: string, values: any): Promise<void> => {
   try {
     await set(child(dbRef, path), values)
   } catch (e) {
     console.error(e)
-    if ((e as {code: string}).code === "PERMISSION_DENIED") { // TODO fix types
+    if ((e as { code: string }).code === "PERMISSION_DENIED") {
+      // TODO fix types
       message.error("K této operaci nemáte oprvánění.")
       return
     }
-    message.error((e as {message: string}).message) // TODO fix types
+    message.error((e as { message: string }).message) // TODO fix types
     return
   }
   message.success("Uloženo")

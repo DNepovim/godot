@@ -1,14 +1,23 @@
 /** @jsxImportSource @emotion/react */
 import { NextPage } from "next"
-import 'antd/dist/antd.css'
-import { Avatar, Button, Layout, Menu, message, Result, Space, Tooltip } from 'antd'
-import { useAuthState } from 'react-firebase-hooks/auth'
+import "antd/dist/antd.css"
+import {
+  Avatar,
+  Button,
+  Layout,
+  Menu,
+  message,
+  Result,
+  Space,
+  Tooltip,
+} from "antd"
+import { useAuthState } from "react-firebase-hooks/auth"
 import { auth, logout, login } from "../firebase/auth"
-import { Spinner } from './components/Spinner/Spinner'
-import { Centered } from './components/Centered/Centered'
-import { LogoutOutlined, LoginOutlined } from '@ant-design/icons'
-import { Content, Header } from 'antd/lib/layout/layout'
-import { css } from '@emotion/react'
+import { Spinner } from "./components/Spinner/Spinner"
+import { Centered } from "./components/Centered/Centered"
+import { LogoutOutlined, LoginOutlined } from "@ant-design/icons"
+import { Content, Header } from "antd/lib/layout/layout"
+import { css } from "@emotion/react"
 import FileOutlined from "@ant-design/icons/lib/icons/FileOutlined"
 import TeamOutlined from "@ant-design/icons/lib/icons/TeamOutlined"
 import BarsOutlined from "@ant-design/icons/lib/icons/BarsOutlined"
@@ -45,7 +54,10 @@ export const Admin: NextPage = () => {
       const interval = setInterval(async () => {
         const result = await fetch(`/api/deployment/${createResultJson.id}`)
         const resultJson = await result.json()
-        if (resultJson.status === "READY" && resultJson.checksState === "completed") {
+        if (
+          resultJson.status === "READY" &&
+          resultJson.checksState === "completed"
+        ) {
           clearInterval(interval)
           setDeployStatus("NOT")
           if (resultJson.checksConclusion !== "succeeded") {
@@ -54,7 +66,13 @@ export const Admin: NextPage = () => {
             message.success("Změny byly úspěšně publikovány.")
           }
         } else {
-          setDeployStatus(`${resultJson.status !== "READY" ? resultJson.status : `Checks: ${resultJson.checksState}`} (${Math.floor((+ new Date() - resultJson.createdAt) / 1000)} s)`)
+          setDeployStatus(
+            `${
+              resultJson.status !== "READY"
+                ? resultJson.status
+                : `Checks: ${resultJson.checksState}`
+            } (${Math.floor((+new Date() - resultJson.createdAt) / 1000)} s)`
+          )
         }
       }, 1000)
 
@@ -63,44 +81,54 @@ export const Admin: NextPage = () => {
         setDeployStatus("NOT")
         message.error("Publikování selhalo (timeout).")
         console.error("Deploy failed (timeout).")
-      }, 1000 * 60 *5)
-
-    } catch(e) {
+      }, 1000 * 60 * 5)
+    } catch (e) {
       message.error("Něco se pokazilo.")
       console.error(e)
     }
-
   }
 
   useEffect(() => {
     if (user) {
-      user.getIdTokenResult(true).then((result: IdTokenResult) => setUserClaims(result.claims))
+      user
+        .getIdTokenResult(true)
+        .then((result: IdTokenResult) => setUserClaims(result.claims))
     }
   }, [user])
 
   if (loading) {
-    return (
-      <Spinner />
-    )
+    return <Spinner />
   }
 
   if (!user) {
-    return <Centered><Button onClick={login} icon={<LoginOutlined />}>Přihlásit se</Button></Centered>
+    return (
+      <Centered>
+        <Button onClick={login} icon={<LoginOutlined />}>
+          Přihlásit se
+        </Button>
+      </Centered>
+    )
   }
 
-
-  if (!(userClaims && ["admin", "editor"].includes(userClaims.role as string))) {
+  if (
+    !(userClaims && ["admin", "editor"].includes(userClaims.role as string))
+  ) {
     return (
       <Centered>
         Nemáte oprávnění
-        <Button onClick={login} icon={<LogoutOutlined />}>Odhlásit se</Button>
+        <Button onClick={login} icon={<LogoutOutlined />}>
+          Odhlásit se
+        </Button>
       </Centered>
     )
-
   }
 
   return (
-    <Layout css={css`min-height: 100vh`}>
+    <Layout
+      css={css`
+        min-height: 100vh;
+      `}
+    >
       <Layout>
         <BrowserRouter>
           <Layout.Sider
@@ -135,22 +163,55 @@ export const Admin: NextPage = () => {
                 padding: 16px 9px 4px;
               `}
             >
-              <figure css={css`
-                height: 50px;
-                margin-right: 8px;
-              `}>
-                <img src={logo.src} alt="" css={css`max-height: 100%; width: auto;`} />
+              <figure
+                css={css`
+                  height: 50px;
+                  margin-right: 8px;
+                `}
+              >
+                <img
+                  src={logo.src}
+                  alt=""
+                  css={css`
+                    max-height: 100%;
+                    width: auto;
+                  `}
+                />
               </figure>
-              {!isSidebarCollapsed && <h1 css={css`font-size: 24px;`}>Insomnia</h1>}
+              {!isSidebarCollapsed && (
+                <h1
+                  css={css`
+                    font-size: 24px;
+                  `}
+                >
+                  Insomnia
+                </h1>
+              )}
             </Link>
             <Menu>
-              <Menu.Item icon={<FileOutlined />} key="pages"><Link to="/admin/stranky/">Stránky</Link></Menu.Item>
-              <Menu.Item disabled icon={<BarsOutlined />} key="navigation"><Link to="/admin/navigace">Navigace</Link></Menu.Item>
-              {userClaims.role === "admin" && <Menu.Item icon={<TeamOutlined />} key="users"><Link to="/admin/uzivatele">Uživatelé</Link></Menu.Item>}
-              {userClaims.role === "admin" && <Menu.Item disabled icon={<SettingOutlined />} key="settings"><Link to="/admin/nastaveni">Nastavení</Link></Menu.Item>}
+              <Menu.Item icon={<FileOutlined />} key="pages">
+                <Link to="/admin/stranky/">Stránky</Link>
+              </Menu.Item>
+              <Menu.Item disabled icon={<BarsOutlined />} key="navigation">
+                <Link to="/admin/navigace">Navigace</Link>
+              </Menu.Item>
+              {userClaims.role === "admin" && (
+                <Menu.Item icon={<TeamOutlined />} key="users">
+                  <Link to="/admin/uzivatele">Uživatelé</Link>
+                </Menu.Item>
+              )}
+              {userClaims.role === "admin" && (
+                <Menu.Item disabled icon={<SettingOutlined />} key="settings">
+                  <Link to="/admin/nastaveni">Nastavení</Link>
+                </Menu.Item>
+              )}
             </Menu>
             {userClaims.role === "admin" && (
-              <div css={css`padding: 12px;`}>
+              <div
+                css={css`
+                  padding: 12px;
+                `}
+              >
                 <Tooltip
                   placement="right"
                   trigger={[]}
@@ -169,42 +230,80 @@ export const Admin: NextPage = () => {
                 </Tooltip>
               </div>
             )}
-            <div css={css`
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 0 16px 16px;
-              margin: auto 0 0;
-            `}>
+            <div
+              css={css`
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 16px 16px;
+                margin: auto 0 0;
+              `}
+            >
               {isSidebarCollapsed ? (
-                <Space direction="vertical" css={css`margin: 0 auto`}>
-                  <Avatar alt={user.displayName} src={user.photoURL}/>
-                  <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`} icon={<LogoutOutlined />} />
+                <Space
+                  direction="vertical"
+                  css={css`
+                    margin: 0 auto;
+                  `}
+                >
+                  <Avatar alt={user.displayName} src={user.photoURL} />
+                  <Button
+                    onClick={logout}
+                    type="link"
+                    css={css`
+                      height: 24px;
+                      padding: 0;
+                      text-align: right;
+                      margin-right: -2px;
+                    `}
+                    icon={<LogoutOutlined />}
+                  />
                 </Space>
               ) : (
                 <>
-                  <Avatar alt={user.displayName} src={user.photoURL}/>
-                  <div css={css`
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: flex-end;
-                  `}>
+                  <Avatar alt={user.displayName} src={user.photoURL} />
+                  <div
+                    css={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: flex-end;
+                    `}
+                  >
                     {user.displayName}
-                    <Button onClick={logout} type="link" css={css`height: 24px; padding: 0; text-align: right; margin-right: -2px;`}>Odhlásit<LogoutOutlined /></Button>
+                    <Button
+                      onClick={logout}
+                      type="link"
+                      css={css`
+                        height: 24px;
+                        padding: 0;
+                        text-align: right;
+                        margin-right: -2px;
+                      `}
+                    >
+                      Odhlásit
+                      <LogoutOutlined />
+                    </Button>
                   </div>
                 </>
               )}
             </div>
           </Layout.Sider>
-          <Layout css={css`margin-left: ${isSidebarCollapsed ? 80 : 200}px;`}>
+          <Layout
+            css={css`
+              margin-left: ${isSidebarCollapsed ? 80 : 200}px;
+            `}
+          >
             <Content>
-                <Routes>
-                  <Route path="/admin/stranky" element={<PagesListPage/>} />
-                  <Route path="/admin/stranky/:slug" element={<PageEditPage user={user} />} />
-                  <Route path="/admin/navigace" element={<NavigationPage />} />
-                  <Route path="/admin/uzivatele" element={<UsersListPage />} />
-                  <Route path="/admin/nastaveni" element={<SettingsPage />} />
-                </Routes>
+              <Routes>
+                <Route path="/admin/stranky" element={<PagesListPage />} />
+                <Route
+                  path="/admin/stranky/:slug"
+                  element={<PageEditPage user={user} />}
+                />
+                <Route path="/admin/navigace" element={<NavigationPage />} />
+                <Route path="/admin/uzivatele" element={<UsersListPage />} />
+                <Route path="/admin/nastaveni" element={<SettingsPage />} />
+              </Routes>
             </Content>
           </Layout>
         </BrowserRouter>

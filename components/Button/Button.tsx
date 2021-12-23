@@ -8,14 +8,19 @@ export interface ButtonProps {
   targetBlank: boolean
 }
 
-
-export const Button: React.FC<ButtonProps> = ({children, link, targetBlank}) => (
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  link,
+  targetBlank,
+}) => (
   <a
     href={link}
-    {...(targetBlank ? {
-      target: "_blank",
-      rel: "noreferrer noopener"
-    } : {})}
+    {...(targetBlank
+      ? {
+          target: "_blank",
+          rel: "noreferrer noopener",
+        }
+      : {})}
     css={css`
       position: relative;
       display: inline-block;
@@ -48,7 +53,7 @@ export const Button: React.FC<ButtonProps> = ({children, link, targetBlank}) => 
         text-decoration: none;
 
         &:before {
-          width: 100%
+          width: 100%;
         }
       }
     `}

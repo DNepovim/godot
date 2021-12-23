@@ -16,13 +16,15 @@ export interface VideoFields extends BlockFields {
   video: ResponsiveVideoProps
 }
 
-export const videoSchema = withBlockSchema(yup.object().shape({
-  video: yup.object().shape({
-    src: yup.string().required(),
-    width: yup.number().required(),
-    height: yup.number().required(),
+export const videoSchema = withBlockSchema(
+  yup.object().shape({
+    video: yup.object().shape({
+      src: yup.string().required(),
+      width: yup.number().required(),
+      height: yup.number().required(),
+    }),
   })
-}))
+)
 
 export const videoDef: BlockDef<VideoFields> = {
   title: "Video",
@@ -34,18 +36,18 @@ export const videoDef: BlockDef<VideoFields> = {
       fields: {
         src: {
           label: "Zdroj",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         width: {
           label: "Šířka",
-          component: props => <NumberInput {...props} />
+          component: (props) => <NumberInput {...props} />,
         },
         height: {
           label: "Výška",
-          component: props => <NumberInput {...props} />
-        }
-      }
-    }
+          component: (props) => <NumberInput {...props} />,
+        },
+      },
+    },
   },
-  component: Video
+  component: Video,
 }

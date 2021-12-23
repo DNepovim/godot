@@ -6,5 +6,5 @@ export enum BlockTemplates {
   Persons = "persons",
   Quotation = "quotation",
   RichText = "richText",
-  Video = "video"
+  Video = "video",
 }

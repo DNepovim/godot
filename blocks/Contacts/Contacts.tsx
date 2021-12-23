@@ -8,34 +8,43 @@ import { theme } from "../../theme"
 import { Block } from "../../components/Block/Block"
 import { ContactsFields } from "./contactsDef"
 
-export const Contacts: React.FC<ContactsFields> = ({id, title, subtitle, contacts}) => (
+export const Contacts: React.FC<ContactsFields> = ({
+  id,
+  title,
+  subtitle,
+  contacts,
+}) => (
   <Block id={id}>
     <ParallaxBanner
       layers={[
         {
           image: "/images/sky_footer.webp",
           amount: 0.2,
-        }
+        },
       ]}
     >
-      <div css={css`
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        text-align: center;
-        max-width: 800px;
-        height: 100%;
-        margin: 0 auto;
-        padding: 0 16px
-      `}>
-        <h2 css={css`
-          font-size: ${theme.font.sizes[2]};
-          font-family: skautbold;
+      <div
+        css={css`
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           text-align: center;
-          color: ${theme.color.brand};
-          margin-bottom: 4px
-        `}>
+          max-width: 800px;
+          height: 100%;
+          margin: 0 auto;
+          padding: 0 16px;
+        `}
+      >
+        <h2
+          css={css`
+            font-size: ${theme.font.sizes[2]};
+            font-family: skautbold;
+            text-align: center;
+            color: ${theme.color.brand};
+            margin-bottom: 4px;
+          `}
+        >
           {tp(title)}
         </h2>
         <p
@@ -45,11 +54,13 @@ export const Contacts: React.FC<ContactsFields> = ({id, title, subtitle, contact
           `}
           dangerouslySetInnerHTML={{ __html: tp(subtitle) }}
         />
-        <div css={css`
-          display: flex;
-          justify-content: center;
-        `}>
-          {contacts.map(contact => (
+        <div
+          css={css`
+            display: flex;
+            justify-content: center;
+          `}
+        >
+          {contacts.map((contact) => (
             <a
               key={contact.type}
               href={getHref(contact.url)}
@@ -75,4 +86,5 @@ export const Contacts: React.FC<ContactsFields> = ({id, title, subtitle, contact
   </Block>
 )
 
-const getHref = (url: string): string => url.includes("@") ? `mailto:${url}` : url
+const getHref = (url: string): string =>
+  url.includes("@") ? `mailto:${url}` : url

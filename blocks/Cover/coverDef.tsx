@@ -1,5 +1,8 @@
 import * as yup from "yup"
-import { BlockFields as BlockFields, withBlockSchema } from "../../components/Block/Block"
+import {
+  BlockFields as BlockFields,
+  withBlockSchema,
+} from "../../components/Block/Block"
 import { Cover } from "./Cover"
 import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
@@ -24,18 +27,20 @@ export interface CoverFields extends BlockFields {
   isSnowfall?: boolean
 }
 
-export const coverSchema = withBlockSchema(yup.object().shape({
-  title: yup.string().required(),
-  subtitle: yup.string().required(),
-  claim: yup.string().required(),
-  button: yup.object().shape({
-    label: yup.string().required(),
-    link: yup.string().required(),
-    targetBlank: yup.bool(),
-    showButton: yup.bool(),
-  }),
-  isSnowfall: yup.bool(),
-}))
+export const coverSchema = withBlockSchema(
+  yup.object().shape({
+    title: yup.string().required(),
+    subtitle: yup.string().required(),
+    claim: yup.string().required(),
+    button: yup.object().shape({
+      label: yup.string().required(),
+      link: yup.string().required(),
+      targetBlank: yup.bool(),
+      showButton: yup.bool(),
+    }),
+    isSnowfall: yup.bool(),
+  })
+)
 
 export const coverDef: BlockDef<CoverFields> = {
   title: "Plakát",
@@ -44,41 +49,41 @@ export const coverDef: BlockDef<CoverFields> = {
   adminFields: {
     title: {
       label: "Nadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     subtitle: {
       label: "Podnadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     claim: {
       label: "Podpodnadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     button: {
       label: "Tlačítko",
       fields: {
         label: {
           label: "Nápis",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         link: {
           label: "Odkaz",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         targetBlank: {
           label: "Otevřít v novém okně",
-          component: props => <CheckInput {...props} />
+          component: (props) => <CheckInput {...props} />,
         },
         showButton: {
           label: "Zobrazit tlačítko",
-          component: props => <CheckInput {...props} />
+          component: (props) => <CheckInput {...props} />,
         },
-      }
+      },
     },
     isSnowfall: {
       label: "Sněžení",
-      component: props => <CheckInput {...props} />
+      component: (props) => <CheckInput {...props} />,
     },
   },
-  component: Cover
+  component: Cover,
 }

@@ -10,15 +10,29 @@ import { getNavigation, getPage } from "../firebase/firebase"
 import { globalStyles } from "../globalStyles"
 import { blockDefs, BlockTemplates } from "../blocks/blocks"
 
-const Home: NextPage<Props> = ({navigation, page}) => (
+const Home: NextPage<Props> = ({ navigation, page }) => (
   <div>
     <Head>
       <title>ČLK Insomnia</title>
 
       <link rel="icon" href="favicons/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="/apple-touch-icon.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+      />
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+      />
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9dcfc3" />
       <meta name="msapplication-TileColor" content="#ffffff" />
@@ -30,21 +44,28 @@ const Home: NextPage<Props> = ({navigation, page}) => (
 
     <Global styles={globalStyles} />
 
-    <main css={css`
-      min-height: 300vh;
-      padding-top: 96px;
-    `}>
+    <main
+      css={css`
+        min-height: 300vh;
+        padding-top: 96px;
+      `}
+    >
       <Navigation logo={logo} items={navigation} />
-      {page.blocks.map(({template, fields}) => React.createElement(blockDefs[template as BlockTemplates].component, fields))}
+      {page.blocks.map(({ template, fields }) =>
+        React.createElement(
+          blockDefs[template as BlockTemplates].component,
+          fields
+        )
+      )}
     </main>
   </div>
 )
 
 export const getStaticProps = async () => ({
   props: {
-    navigation: await getNavigation() ?? [],
-    page: await getPage("frontPage") ?? []
-  }
+    navigation: (await getNavigation()) ?? [],
+    page: (await getPage("frontPage")) ?? [],
+  },
 })
 
 interface Props {

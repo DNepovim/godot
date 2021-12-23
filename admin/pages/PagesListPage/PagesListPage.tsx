@@ -17,11 +17,15 @@ export const PagesListPage = () => {
   return (
     <PageHeader
       title={<Typography.Title>Stránky</Typography.Title>}
-      breadcrumb={{routes:[{breadcrumbName: "Stránky", path: ""}]}}
+      breadcrumb={{ routes: [{ breadcrumbName: "Stránky", path: "" }] }}
     >
       <Table
         loading={!pages}
-        dataSource={pages ? Object.entries(pages).map(([slug, data]) => ({ slug, ...data })) : []}
+        dataSource={
+          pages
+            ? Object.entries(pages).map(([slug, data]) => ({ slug, ...data }))
+            : []
+        }
         columns={[
           {
             title: "Název",
@@ -30,17 +34,22 @@ export const PagesListPage = () => {
           },
           {
             title: "Naposledy upraveno",
-            render: record => `${record.lastEditedBy} (${record.lastEditedTime})`,
+            render: (record) =>
+              `${record.lastEditedBy} (${record.lastEditedTime})`,
             key: "lastEdited",
           },
           {
-            render: record => <Link to={`/admin/stranky/${record.slug}`}><Button icon={<EditOutlined />}>Upravit</Button></Link>,
+            render: (record) => (
+              <Link to={`/admin/stranky/${record.slug}`}>
+                <Button icon={<EditOutlined />}>Upravit</Button>
+              </Link>
+            ),
             key: "action",
             align: "right",
-          }
+          },
         ]}
         pagination={{
-          hideOnSinglePage: true
+          hideOnSinglePage: true,
         }}
       />
     </PageHeader>

@@ -9,16 +9,21 @@ interface VercelApiGetCallConfig {
   endpoint: string
 }
 
-export type VercelApiCallConfig = VercelApiGetCallConfig | VercelApiPostCallConfig
+export type VercelApiCallConfig =
+  | VercelApiGetCallConfig
+  | VercelApiPostCallConfig
 
-export const vercelApiCall = async (config: VercelApiCallConfig, parseBody: boolean = true) => {
+export const vercelApiCall = async (
+  config: VercelApiCallConfig,
+  parseBody: boolean = true
+) => {
   const result = await fetch(`https://api.vercel.com/${config.endpoint}`, {
     method: config.method,
     headers: {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${process.env.VERCEL_API_TOKEN}`,
+      Authorization: `Bearer ${process.env.VERCEL_API_TOKEN}`,
     },
-    ...("body" in config ? { body: JSON.stringify(config.body)} : {})
+    ...("body" in config ? { body: JSON.stringify(config.body) } : {}),
   })
   if (parseBody) {
     return await result.json()

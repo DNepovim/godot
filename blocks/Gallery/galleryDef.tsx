@@ -14,9 +14,11 @@ export interface GalleryFields extends BlockFields {
   images: string[]
 }
 
-export const gallerySchema = withBlockSchema(yup.object().shape({
-  images: yup.array().of(yup.string().required()).required()
-}))
+export const gallerySchema = withBlockSchema(
+  yup.object().shape({
+    images: yup.array().of(yup.string().required()).required(),
+  })
+)
 
 export const galleryDef: BlockDef<GalleryFields> = {
   title: "Galerie",
@@ -26,8 +28,8 @@ export const galleryDef: BlockDef<GalleryFields> = {
     images: {
       label: "Obrázky",
       clonable: true,
-      component: props => <TextInput {...props} />
-    }
+      component: (props) => <TextInput {...props} />,
+    },
   },
-  component: Gallery
+  component: Gallery,
 }

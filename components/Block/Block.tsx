@@ -9,9 +9,30 @@ export interface BlockFields {
   withBackground?: boolean
 }
 
-export const withBlockSchema = <T extends {}>(schema: yup.ObjectSchema<T>) => yup.object().shape({
-  id: yup.string(),
-  withBackground: yup.bool(),
-}).concat(schema)
+export const withBlockSchema = <T extends {}>(schema: yup.ObjectSchema<T>) =>
+  yup
+    .object()
+    .shape({
+      id: yup.string(),
+      withBackground: yup.bool(),
+    })
+    .concat(schema)
 
-export const Block: React.FC<BlockFields> = ({id, withBackground, children}) => <section id={id}  css={withBackground ? css`background-color: ${theme.color.beige};` : {}}>{children}</section>
+export const Block: React.FC<BlockFields> = ({
+  id,
+  withBackground,
+  children,
+}) => (
+  <section
+    id={id}
+    css={
+      withBackground
+        ? css`
+            background-color: ${theme.color.beige};
+          `
+        : {}
+    }
+  >
+    {children}
+  </section>
+)

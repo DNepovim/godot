@@ -16,11 +16,13 @@ export interface RichTextFields extends BlockFields {
   textAlign: string
 }
 
-export const richTextSchema = withBlockSchema(yup.object().shape({
-  title: yup.string().required(),
-  text: yup.string().required(),
-  textAlign: yup.string().required()
-}))
+export const richTextSchema = withBlockSchema(
+  yup.object().shape({
+    title: yup.string().required(),
+    text: yup.string().required(),
+    textAlign: yup.string().required(),
+  })
+)
 
 export const richTextDef: BlockDef<RichTextFields> = {
   title: "Text",
@@ -29,16 +31,16 @@ export const richTextDef: BlockDef<RichTextFields> = {
   adminFields: {
     title: {
       label: "Nadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     text: {
       label: "Text",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     textAlign: {
       label: "Zarovnání",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
   },
-  component: RichText
+  component: RichText,
 }

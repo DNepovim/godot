@@ -4,8 +4,9 @@ export const SettingsPage = () => {
   return (
     <PageHeader
       title="Nastavení"
-      breadcrumb={{routes:[{breadcrumbName: "Nastavení", path: "/admin/nastaveni"}]}}
-    >
-    </PageHeader>
+      breadcrumb={{
+        routes: [{ breadcrumbName: "Nastavení", path: "/admin/nastaveni" }],
+      }}
+    ></PageHeader>
   )
 }

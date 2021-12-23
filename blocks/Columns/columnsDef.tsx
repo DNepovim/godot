@@ -19,7 +19,7 @@ export enum Icons {
   Hand = "hand",
   Stars = "stars",
   Arrow = "arrow",
-  Moon =  "moon",
+  Moon = "moon",
   Mark = "mark",
   Star = "star",
   Check = "check",
@@ -34,14 +34,18 @@ export interface ColumnsFields extends BlockFields {
   }[]
 }
 
-export const columnsSchema = withBlockSchema(yup.object().shape({
-  title: yup.string().required("Musíš vyplnit nadpis").max(80),
-  columns: yup.array().of(yup.object().shape({
-    title: yup.string().required(),
-    text: yup.string().required(),
-    icon: yup.mixed().oneOf(enumToSchemaOptions(Icons)).required()
-  }))
-}))
+export const columnsSchema = withBlockSchema(
+  yup.object().shape({
+    title: yup.string().required("Musíš vyplnit nadpis").max(80),
+    columns: yup.array().of(
+      yup.object().shape({
+        title: yup.string().required(),
+        text: yup.string().required(),
+        icon: yup.mixed().oneOf(enumToSchemaOptions(Icons)).required(),
+      })
+    ),
+  })
+)
 
 export const columnsDef: BlockDef<ColumnsFields> = {
   title: "Sloupce",
@@ -50,7 +54,7 @@ export const columnsDef: BlockDef<ColumnsFields> = {
   adminFields: {
     title: {
       label: "Nadpis",
-      component: props => <TextInput {...props} />
+      component: (props) => <TextInput {...props} />,
     },
     columns: {
       label: "Sloupce",
@@ -58,55 +62,60 @@ export const columnsDef: BlockDef<ColumnsFields> = {
       fields: {
         title: {
           label: "Nadpis",
-          component: props => <TextInput {...props} />
+          component: (props) => <TextInput {...props} />,
         },
         text: {
           label: "Text",
-          component: props => <TextAreaInput {...props} />
+          component: (props) => <TextAreaInput {...props} />,
         },
         icon: {
           label: "Ikona",
-          component: props => <SelectInput<Icons> {...props} options={[
-            {
-              label: "nebe",
-              value: Icons.Sky,
-            },
-            {
-              label: "člověk",
-              value: Icons.Person,
-            },
-            {
-              label: "ruka",
-              value: Icons.Hand,
-            },
-            {
-              label: "hvězdy",
-              value: Icons.Stars,
-            },
-            {
-              label: "šipka",
-              value: Icons.Arrow,
-            },
-            {
-              label: "měsíc",
-              value: Icons.Moon,
-            },
-            {
-              label: "značka",
-              value: Icons.Mark,
-            },
-            {
-              label: "hvězda",
-              value: Icons.Star,
-            },
-            {
-              label: "fajfka",
-              value: Icons.Check,
-            },
-          ]} />
-        }
-      }
-    }
+          component: (props) => (
+            <SelectInput<Icons>
+              {...props}
+              options={[
+                {
+                  label: "nebe",
+                  value: Icons.Sky,
+                },
+                {
+                  label: "člověk",
+                  value: Icons.Person,
+                },
+                {
+                  label: "ruka",
+                  value: Icons.Hand,
+                },
+                {
+                  label: "hvězdy",
+                  value: Icons.Stars,
+                },
+                {
+                  label: "šipka",
+                  value: Icons.Arrow,
+                },
+                {
+                  label: "měsíc",
+                  value: Icons.Moon,
+                },
+                {
+                  label: "značka",
+                  value: Icons.Mark,
+                },
+                {
+                  label: "hvězda",
+                  value: Icons.Star,
+                },
+                {
+                  label: "fajfka",
+                  value: Icons.Check,
+                },
+              ]}
+            />
+          ),
+        },
+      },
+    },
   },
-  component: Columns
+  component: Columns,
 }
