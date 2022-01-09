@@ -40,7 +40,10 @@ export const Persons: React.FC<PersonsFields> = ({
           key={i}
           css={css`
             max-width: 900px;
-            margin: 0 32px 32px;
+            margin: 0 0 32px;
+            @media (min-width: 500px) {
+              margin: 0 32px 32px;
+            }
             @media (min-width: 1000px) {
               width: 390px;
             }
@@ -48,9 +51,11 @@ export const Persons: React.FC<PersonsFields> = ({
         >
           <figure
             css={css`
-              float: left;
               margin: 0 1em 0 0;
               shape-outside: circle(50%);
+              @media (min-width: 500px) {
+                float: left;
+              }
             `}
           >
             <Image
