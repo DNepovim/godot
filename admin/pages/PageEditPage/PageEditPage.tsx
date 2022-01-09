@@ -16,9 +16,9 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
-import { PageHeader, Button, Form, Spin, message, Typography } from "antd"
+import { PageHeader, Button, Form, Spin, Typography } from "antd"
 import { Formik, FormikHelpers } from "formik"
-import { blockDefs, BlockTemplates } from "../../../blocks/blocks"
+import { blockDefs } from "../../../blocks/blocks"
 import { getPage, updatePage } from "../../../firebase/firebase"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
 import { enumToSchemaOptions } from "../../utils/enumToSchemaOptions"
@@ -27,6 +27,7 @@ import { useEffect, useState } from "react"
 import { Page } from "../../../data"
 import { User } from "@firebase/auth"
 import { Centered } from "../../components/Centered/Centered"
+import { BlockTemplates } from "../../../blocks/blockTemplates"
 
 export const PageEditPage = ({ user }: { user: User }) => {
   const sensors = useSensors(

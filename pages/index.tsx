@@ -8,7 +8,8 @@ import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
 import { getNavigation, getPage } from "../firebase/firebase"
 import { globalStyles } from "../globalStyles"
-import { blockDefs, BlockTemplates } from "../blocks/blocks"
+import { blockDefs } from "../blocks/blocks"
+import { BlockTemplates } from "../blocks/blockTemplates"
 
 const Home: NextPage<Props> = ({ navigation, page }) => (
   <div>
