@@ -1,22 +1,14 @@
 /** @jsxImportSource @emotion/react */
+import { useEffect, useState } from "react"
 import { NextPage } from "next"
 import "antd/dist/antd.css"
-import {
-  Avatar,
-  Button,
-  Layout,
-  Menu,
-  message,
-  Result,
-  Space,
-  Tooltip,
-} from "antd"
+import { Avatar, Button, Layout, Menu, message, Space, Tooltip } from "antd"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { auth, logout, login } from "../firebase/auth"
 import { Spinner } from "./components/Spinner/Spinner"
 import { Centered } from "./components/Centered/Centered"
 import { LogoutOutlined, LoginOutlined } from "@ant-design/icons"
-import { Content, Header } from "antd/lib/layout/layout"
+import { Content } from "antd/lib/layout/layout"
 import { css } from "@emotion/react"
 import FileOutlined from "@ant-design/icons/lib/icons/FileOutlined"
 import TeamOutlined from "@ant-design/icons/lib/icons/TeamOutlined"
@@ -29,7 +21,6 @@ import { PagesListPage } from "./pages/PagesListPage/PagesListPage"
 import { UsersListPage } from "./pages/UsersListPage/UsersListPage"
 import { NavigationPage } from "./pages/NavigationPage/NavigationPage"
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
-import React, { useEffect, useState } from "react"
 import { IdTokenResult, ParsedToken } from "@firebase/auth"
 import logo from "../images/logo.png"
 

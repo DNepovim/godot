@@ -1,18 +1,14 @@
-import { Button, PageHeader, Spin, Table, Typography } from "antd"
-import { useEffect, useState } from "react"
+import { Button, PageHeader, Table, Typography } from "antd"
 import { Link } from "react-router-dom"
-import { getPages } from "../../../firebase/firebase"
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
 import { Page } from "../../../data"
+import useSwr from "swr"
 
 export const PagesListPage = () => {
-  const [pages, setPages] = useState<Page>()
-  useEffect(() => {
-    void (async () => {
-      const data = await getPages()
-      setPages(data)
-    })()
-  }, [])
+  const { data: pages } = useSwr<Page>("/api/page/list", async (url) => {
+    const result = await fetch(url)
+    return await result.json()
+  })
 
   return (
     <PageHeader

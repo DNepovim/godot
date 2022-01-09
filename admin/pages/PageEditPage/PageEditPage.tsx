@@ -19,7 +19,6 @@ import {
 import { PageHeader, Button, Form, Spin, Typography } from "antd"
 import { Formik, FormikHelpers } from "formik"
 import { blockDefs } from "../../../blocks/blocks"
-import { getPage, updatePage } from "../../../firebase/firebase"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
 import { enumToSchemaOptions } from "../../utils/enumToSchemaOptions"
 import { useParams } from "react-router"
@@ -28,6 +27,7 @@ import { Page } from "../../../data"
 import { User } from "@firebase/auth"
 import { Centered } from "../../components/Centered/Centered"
 import { BlockTemplates } from "../../../blocks/blockTemplates"
+import useSwr from "swr"
 
 export const PageEditPage = ({ user }: { user: User }) => {
   const sensors = useSensors(
@@ -38,20 +38,17 @@ export const PageEditPage = ({ user }: { user: User }) => {
   )
 
   const { slug } = useParams()
-  const [page, setPage] = useState<Page>()
+  const { data: page } = useSwr<Page>("/api/page/get", async (url) => {
+    const result = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ slug }),
+    })
+    return await result.json()
+  })
 
   if (!slug) {
     console.error("Slug is not defined.")
   }
-
-  useEffect(() => {
-    void (async () => {
-      const pageData = await getPage(slug as string)
-      if (pageData) {
-        setPage(pageData)
-      }
-    })()
-  }, [slug])
 
   if (!page) {
     return (
@@ -71,7 +68,10 @@ export const PageEditPage = ({ user }: { user: User }) => {
           lastEditedTime: today.toLocaleString("cs-CZ"),
           blocks: values.blocks,
         }
-        await updatePage(slug as string, pageValues)
+        await fetch("/api/page/edit", {
+          method: "POST",
+          body: JSON.stringify({ slug, pageValues }),
+        })
         helpers.setValues(pageValues)
       }}
       validationSchema={() =>

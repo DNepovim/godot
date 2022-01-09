@@ -6,10 +6,10 @@ import { Navigation as NavigationType, Page } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
 import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
-import { getNavigation, getPage } from "../firebase/firebase"
 import { globalStyles } from "../globalStyles"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
+import { getNavigation, getPage } from "../firebase/database"
 
 const Home: NextPage<Props> = ({ navigation, page }) => (
   <div>
