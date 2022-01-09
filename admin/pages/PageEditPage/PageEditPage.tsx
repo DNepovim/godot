@@ -2,6 +2,7 @@ import { v4 as uuid } from "uuid"
 import * as yup from "yup"
 import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined"
 import AppstoreAddOutlined from "@ant-design/icons/lib/icons/AppstoreAddOutlined"
+import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined"
 import {
   closestCenter,
   DndContext,
@@ -22,7 +23,6 @@ import { blockDefs } from "../../../blocks/blocks"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
 import { enumToSchemaOptions } from "../../utils/enumToSchemaOptions"
 import { useParams } from "react-router"
-import { useEffect, useState } from "react"
 import { Page } from "../../../data"
 import { User } from "@firebase/auth"
 import { Centered } from "../../components/Centered/Centered"
@@ -103,8 +103,17 @@ export const PageEditPage = ({ user }: { user: User }) => {
               { breadcrumbName: "Hlavní stránka", path: "" },
             ],
           }}
-          extra={
+          extra={[
             <Button
+              key="preview"
+              icon={<EyeOutlined />}
+              href={`/api/preview?secret=${process.env.NEXT_PUBLIC_PREVIEW_TOKEN}&slug=/`} // TODO dynamic path
+              target="_blank"
+            >
+              Náhled
+            </Button>,
+            <Button
+              key="save"
               type="primary"
               icon={<SaveOutlined />}
               onClick={async () => props.submitForm()}
@@ -112,8 +121,8 @@ export const PageEditPage = ({ user }: { user: User }) => {
               loading={props.isSubmitting}
             >
               Uložit
-            </Button>
-          }
+            </Button>,
+          ]}
           footer={
             <Button
               icon={<AppstoreAddOutlined />}
