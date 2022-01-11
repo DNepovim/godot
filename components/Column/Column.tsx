@@ -38,6 +38,13 @@ export const Column: React.FC<ColumnProps> = ({ title, text, icon }) => (
         {tp(title)}
       </h3>
     </header>
-    <div dangerouslySetInnerHTML={{ __html: tp(text) }} />
+    <div
+      css={css`
+        ul {
+          margin: 0;
+        }
+      `}
+      dangerouslySetInnerHTML={{ __html: tp(text) }}
+    />
   </article>
 )
