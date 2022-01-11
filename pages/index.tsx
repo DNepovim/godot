@@ -14,7 +14,7 @@ import { getNavigation, getPage } from "../firebase/database"
 const Home: NextPage<Props> = ({ navigation, page }) => (
   <div>
     <Head>
-      <title>ČLK Insomnia</title>
+      <title>ČK Insomnia</title>
 
       <link rel="icon" href="favicons/favicon.ico" />
       <link
