@@ -3,6 +3,7 @@ import React from "react"
 import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
+import { PROJECT } from "../../projects"
 
 export interface ColumnProps {
   title: string
@@ -24,7 +25,7 @@ export const Column: React.FC<ColumnProps> = ({ title, text, icon }) => (
           height: 3em;
           margin-right: 8px !important;
         `}
-        src={`/icons/${icon}.svg`}
+        src={`/${PROJECT}/icons/${icon}.svg`}
         alt=""
         width={80}
         height={80}

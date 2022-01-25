@@ -9,6 +9,7 @@ import { Container } from "../../components/Container/Container"
 import { Block } from "../../components/Block/Block"
 import { CoverFields } from "./coverDef"
 import { Button } from "../../components/Button/Button"
+import { PROJECT } from "../../projects"
 
 export const Cover: React.FC<CoverFields> = ({
   id,
@@ -22,7 +23,7 @@ export const Cover: React.FC<CoverFields> = ({
     <ParallaxBanner
       layers={[
         {
-          image: "/images/cover.webp",
+          image: `/${PROJECT}/images/cover.webp`,
           amount: 0.2,
         },
       ]}

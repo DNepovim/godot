@@ -7,6 +7,7 @@ import { Heading } from "../../components/Heading/Heading"
 import Image from "next/image"
 import { Block } from "../../components/Block/Block"
 import { PersonsFields } from "./personsDef"
+import { PROJECT } from "../../projects"
 
 export const Persons: React.FC<PersonsFields> = ({
   id,
@@ -65,7 +66,7 @@ export const Persons: React.FC<PersonsFields> = ({
                 border-radius: 50%;
                 margin: 1em auto;
               `}
-              src={person.image}
+              src={`/${PROJECT}/images/${person.image}.webp`}
               alt={person.nick}
               width={170}
               height={170}

@@ -1,13 +1,29 @@
+import { Projects, PROJECT } from "./projects"
+
+const projectTheme = {
+  [Projects.Insomnia]: {
+    color: {
+      background: "#ffffff",
+      brand: "#9dcfc3",
+      secondary: "#77cbb5",
+      gray: "#787671",
+      beige: "#f3f2eb",
+    },
+  },
+  [Projects.Godot]: {
+    color: {
+      background: "#ffffff",
+      brand: "#5779c5",
+      secondary: "#3e67c1",
+      gray: "#787671",
+      beige: "#f3f2eb",
+    },
+  },
+}
+
 export const theme = {
   layout: {
     width: 1000,
-  },
-  color: {
-    background: "#ffffff",
-    brand: "#9dcfc3",
-    secondary: "#77cbb5",
-    gray: "#787671",
-    beige: "#f3f2eb",
   },
   font: {
     sizes: {
@@ -17,4 +33,5 @@ export const theme = {
       4: "2.2rem",
     },
   },
+  ...projectTheme[PROJECT],
 }

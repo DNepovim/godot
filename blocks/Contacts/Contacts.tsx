@@ -7,6 +7,7 @@ import { ParallaxBanner } from "react-scroll-parallax"
 import { theme } from "../../theme"
 import { Block } from "../../components/Block/Block"
 import { ContactsFields } from "./contactsDef"
+import { PROJECT } from "../../projects"
 
 export const Contacts: React.FC<ContactsFields> = ({
   id,
@@ -18,7 +19,7 @@ export const Contacts: React.FC<ContactsFields> = ({
     <ParallaxBanner
       layers={[
         {
-          image: "/images/sky_footer.webp",
+          image: `/${PROJECT}/images/sky_footer.webp`,
           amount: 0.2,
         },
       ]}

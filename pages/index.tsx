@@ -10,6 +10,7 @@ import { globalStyles } from "../globalStyles"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
 import { getNavigation, getPage } from "../firebase/database"
+import { PROJECT } from "../projects"
 
 const Home: NextPage<Props> = ({ navigation, page }) => (
   <div>
@@ -20,22 +21,26 @@ const Home: NextPage<Props> = ({ navigation, page }) => (
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href="/apple-touch-icon.png"
+        href={`${PROJECT}/apple-touch-icon.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href="/favicon-32x32.png"
+        href={`${PROJECT}/favicon-32x32.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href="/favicon-16x16.png"
+        href={`${PROJECT}/favicon-16x16.png`}
       />
-      <link rel="manifest" href="/site.webmanifest" />
-      <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#9dcfc3" />
+      <link rel="manifest" href={`${PROJECT}/site.webmanifest`} />
+      <link
+        rel="mask-icon"
+        href={`${PROJECT}/safari-pinned-tab.svg`}
+        color="#9dcfc3"
+      />
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta name="theme-color" content="#ffffff" />
 

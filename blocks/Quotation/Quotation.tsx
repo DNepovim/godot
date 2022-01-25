@@ -6,6 +6,7 @@ import { ParallaxBanner } from "react-scroll-parallax"
 import { Block } from "../../components/Block/Block"
 import { theme } from "../../theme"
 import { QuotationFields } from "./quotationDef"
+import { PROJECT } from "../../projects"
 
 export const Quotation: React.FC<QuotationFields> = ({
   id,
@@ -17,7 +18,7 @@ export const Quotation: React.FC<QuotationFields> = ({
     <ParallaxBanner
       layers={[
         {
-          image: "/images/sky.png",
+          image: `/${PROJECT}/images/sky.webp`,
           amount: 0.2,
         },
       ]}
