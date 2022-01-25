@@ -10,12 +10,13 @@ import { globalStyles } from "../globalStyles"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
 import { getNavigation, getPage } from "../firebase/database"
+import { getMeta, getNavigation, getPage } from "../firebase/database"
 import { PROJECT } from "../projects"
 
-const Home: NextPage<Props> = ({ navigation, page }) => (
+const Home: NextPage<Props> = ({ meta, navigation, page }) => (
   <div>
     <Head>
-      <title>ČK Insomnia</title>
+      <title>{meta.title}</title>
 
       <link rel="icon" href="favicons/favicon.ico" />
       <link
@@ -69,12 +70,14 @@ const Home: NextPage<Props> = ({ navigation, page }) => (
 
 export const getStaticProps = async () => ({
   props: {
+    meta: (await getMeta()) ?? {},
     navigation: (await getNavigation()) ?? [],
     page: (await getPage("frontPage")) ?? [],
   },
 })
 
 interface Props {
+  meta: SiteMeta
   navigation: NavigationType
   page: Page
 }

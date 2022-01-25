@@ -1,11 +1,14 @@
 import { get, child, set, ref, getDatabase } from "firebase/database"
-import { Navigation, Page } from "../data"
+import { Navigation, Page, SiteMeta } from "../data"
 import { firebaseApp } from "./firebase"
 
 const dbRef = ref(getDatabase(firebaseApp))
 
 export const getNavigation = async (): Promise<Navigation | undefined> =>
   getData(`config/navigation/`)
+
+export const getMeta = async (): Promise<SiteMeta | undefined> =>
+  getData(`config/meta/`)
 
 export const getPage = async (page: string): Promise<Page | undefined> =>
   getData(`pages/${page}/`)
