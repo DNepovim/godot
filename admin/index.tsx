@@ -22,7 +22,8 @@ import { UsersListPage } from "./pages/UsersListPage/UsersListPage"
 import { NavigationPage } from "./pages/NavigationPage/NavigationPage"
 import { SettingsPage } from "./pages/SettingsPage/SettingsPage"
 import { IdTokenResult, ParsedToken } from "@firebase/auth"
-import logo from "../images/logo.png"
+import { PROJECT } from "../projects"
+import Image from "next/image"
 
 type DeployStatus = string
 
@@ -160,8 +161,8 @@ export const Admin: NextPage = () => {
                   margin-right: 8px;
                 `}
               >
-                <img
-                  src={logo.src}
+                <Image
+                  src={`/${PROJECT}/images/logo.webp`}
                   alt=""
                   css={css`
                     max-height: 100%;
