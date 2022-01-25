@@ -2,49 +2,47 @@
 import React from "react"
 import type { NextPage } from "next"
 import Head from "next/head"
-import { Navigation as NavigationType, Page } from "../data"
 import { Navigation as NavigationType, Page, SiteMeta } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
-import logo from "../images/logo.png"
 import { css, Global } from "@emotion/react"
 import { globalStyles } from "../globalStyles"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
-import { getNavigation, getPage } from "../firebase/database"
 import { getMeta, getNavigation, getPage } from "../firebase/database"
 import { PROJECT } from "../projects"
+import { theme } from "../theme"
 
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
   <div>
     <Head>
       <title>{meta.title}</title>
 
-      <link rel="icon" href="favicons/favicon.ico" />
+      <link rel="icon" href={`/${PROJECT}/favicons/favicon.ico`} />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href={`${PROJECT}/apple-touch-icon.png`}
+        href={`/${PROJECT}/apple-touch-icon.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href={`${PROJECT}/favicon-32x32.png`}
+        href={`/${PROJECT}/favicon-32x32.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href={`${PROJECT}/favicon-16x16.png`}
+        href={`/${PROJECT}/favicon-16x16.png`}
       />
       <link rel="manifest" href={`${PROJECT}/site.webmanifest`} />
       <link
         rel="mask-icon"
-        href={`${PROJECT}/safari-pinned-tab.svg`}
-        color="#9dcfc3"
+        href={`/${PROJECT}/safari-pinned-tab.svg`}
+        color={theme.color.brand}
       />
-      <meta name="msapplication-TileColor" content="#ffffff" />
-      <meta name="theme-color" content="#ffffff" />
+      <meta name="msapplication-TileColor" content={theme.color.background} />
+      <meta name="theme-color" content={theme.color.background} />
 
       <link rel="preconnect" href="https://cdn.skauting.cz" />
       <link href="https://cdn.skauting.cz/fonts/fonts.css" rel="stylesheet" />

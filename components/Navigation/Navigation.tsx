@@ -19,7 +19,7 @@ interface NavigationItem {
 const BREAKPOINT = 600
 
 export const Navigation: React.FC<{
-  logo: ImageProps["src"]
+  logo: string
   items: NavigationItem[]
 }> = ({ logo, items }) => {
   const [isOpened, setIsOpened] = useState(false)
