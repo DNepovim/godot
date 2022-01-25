@@ -1,7 +1,7 @@
 import { Projects, PROJECT } from "./projects"
 
 const projectTheme = {
-  [Projects.Insomnia]: {
+  [Projects.insomnia]: {
     color: {
       background: "#ffffff",
       brand: "#9dcfc3",
@@ -10,13 +10,13 @@ const projectTheme = {
       beige: "#f3f2eb",
     },
   },
-  [Projects.Godot]: {
+  [Projects.godot]: {
     color: {
       background: "#ffffff",
       brand: "#5779c5",
       secondary: "#3e67c1",
       gray: "#787671",
-      beige: "#f3f2eb",
+      beige: "#b7d5ed",
     },
   },
 }
