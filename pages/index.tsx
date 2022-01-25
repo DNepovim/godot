@@ -57,13 +57,15 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
         padding-top: 96px;
       `}
     >
-      <Navigation logo={logo} items={navigation} />
-      {page.blocks.map(({ template, fields }) =>
-        React.createElement(
-          blockDefs[template as BlockTemplates].component,
-          fields
-        )
-      )}
+      <Navigation logo={`/${PROJECT}/images/logo.webp`} items={navigation} />
+      {page.blocks
+        .filter((block) => !!block)
+        .map(({ template, fields }) =>
+          React.createElement(
+            blockDefs[template as BlockTemplates].component,
+            fields
+          )
+        )}
     </main>
   </div>
 )
