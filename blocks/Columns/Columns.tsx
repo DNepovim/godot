@@ -21,7 +21,7 @@ export const Columns: React.FC<ColumnsFields> = ({ id, title, columns }) => (
           justify-content: space-around;
         `}
       >
-        {columns.map((column, i) => (
+        {columns?.map((column, i) => (
           <div
             key={i}
             css={css`

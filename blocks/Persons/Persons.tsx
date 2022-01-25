@@ -17,15 +17,17 @@ export const Persons: React.FC<PersonsFields> = ({
 }) => (
   <Block id={id}>
     <Container>
-      <Heading level={2}>{tp(title)}</Heading>
-      <p
-        css={css`
-          text-align: center;
-          margin-bottom: 64px;
-        `}
-      >
-        {tp(subtitle)}
-      </p>
+      {title && <Heading level={2}>{tp(title)}</Heading>}
+      {subtitle && (
+        <p
+          css={css`
+            text-align: center;
+            margin-bottom: 64px;
+          `}
+        >
+          {tp(subtitle)}
+        </p>
+      )}
     </Container>
     <div
       css={css`
