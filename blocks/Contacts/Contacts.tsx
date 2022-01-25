@@ -17,6 +17,9 @@ export const Contacts: React.FC<ContactsFields> = ({
 }) => (
   <Block id={id}>
     <ParallaxBanner
+      css={css`
+        background-color: ${theme.color.brand};
+      `}
       layers={[
         {
           image: `/${PROJECT}/images/sky_footer.webp`,

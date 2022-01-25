@@ -16,6 +16,9 @@ export const Quotation: React.FC<QuotationFields> = ({
 }) => (
   <Block id={id}>
     <ParallaxBanner
+      css={css`
+        background-color: ${theme.color.brand};
+      `}
       layers={[
         {
           image: `/${PROJECT}/images/sky.webp`,
