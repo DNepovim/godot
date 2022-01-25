@@ -12,6 +12,10 @@ export type Navigation = Array<{
   link: string
 }>
 
+export interface SiteMeta {
+  title: string
+}
+
 export interface Data {
   config: {
     navigation: Navigation
