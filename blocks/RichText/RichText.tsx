@@ -5,6 +5,7 @@ import { tp } from "../../admin/utils/tp"
 import { Block } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
+import { theme } from "../../theme"
 import { RichTextFields } from "./richTextDef"
 
 export const RichText: React.FC<RichTextFields> = ({
@@ -13,13 +14,19 @@ export const RichText: React.FC<RichTextFields> = ({
   text,
   textAlign,
 }) => (
-  <Block id={id}>
+  <Block backgroundColor={theme.color.brown} id={id}>
     <Container
       css={css`
         text-align: ${textAlign};
+        color: ${theme.color.beige};
+        *::selection {
+          background-color: ${theme.color.yellow};
+        }
       `}
     >
-      <Heading level={2}>{tp(title)}</Heading>
+      <Heading color={theme.color.beige} level={2}>
+        {tp(title)}
+      </Heading>
       <div dangerouslySetInnerHTML={{ __html: tp(text) }} />
     </Container>
   </Block>

@@ -29,8 +29,6 @@
     "react-firebase-hooks": "^3.0.4",
     "react-loader-spinner": "^4.0.0",
     "react-router-dom": "6",
-    "react-scroll-parallax": "^2.4.0",
-    "react-snowfall": "^1.1.1",
     "swr": "^1.1.1",
     "typopo": "^2.5.2",
     "use-onclickoutside": "^0.4.0",

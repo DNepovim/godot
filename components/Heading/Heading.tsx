@@ -5,15 +5,18 @@ import { theme } from "../../theme"
 
 type TitleLevel = 1 | 2 | 3
 
-export const Heading: React.FC<{ children: string; level: TitleLevel }> = ({
-  children,
-  level,
-}) => {
+export const Heading: React.FC<{
+  children: string
+  level: TitleLevel
+  color?: string
+}> = ({ children, level, color }) => {
   const props = {
     css: css`
       font-size: ${theme.font.sizes[3]};
       font-family: skautbold;
       text-align: center;
+      color: ${color ?? theme.color.brown};
+      margin-top: 0;
     `,
     children,
   }

@@ -6,7 +6,6 @@ import Image from "next/image"
 import { theme } from "../../theme"
 import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
-import { PROJECT } from "../../projects"
 
 const gap = 4
 
@@ -38,13 +37,13 @@ export const Gallery: React.FC<GalleryFields> = ({ id, images }) => (
           `}
         >
           <Image
-            src={`/${PROJECT}/images/${image}.webp`}
+            src={`/images/${image}.webp`}
             alt={`Fotka ${i}`}
             width={theme.layout.width / 3}
             height={(theme.layout.width / 3) * 0.7}
             lazyBoundary="600px"
             css={css`
-              background-color: ${theme.color.brand};
+              background-color: ${theme.color.lightBlue};
             `}
           />
         </figure>

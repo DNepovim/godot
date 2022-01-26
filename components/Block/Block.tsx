@@ -1,12 +1,11 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
-import { theme } from "../../theme"
 import * as yup from "yup"
 
 export interface BlockFields {
   id?: string
-  withBackground?: boolean
+  backgroundColor?: string
 }
 
 export const withBlockSchema = <T extends {}>(schema: yup.ObjectSchema<T>) =>
@@ -14,24 +13,21 @@ export const withBlockSchema = <T extends {}>(schema: yup.ObjectSchema<T>) =>
     .object()
     .shape({
       id: yup.string(),
-      withBackground: yup.bool(),
+      backgroundColor: yup.string(),
     })
     .concat(schema)
 
 export const Block: React.FC<BlockFields> = ({
   id,
-  withBackground,
+  backgroundColor,
   children,
 }) => (
   <section
     id={id}
-    css={
-      withBackground
-        ? css`
-            background-color: ${theme.color.beige};
-          `
-        : {}
-    }
+    css={css`
+      position: relative;
+      ${backgroundColor ? `background-color: ${backgroundColor};` : ""}
+    `}
   >
     {children}
   </section>

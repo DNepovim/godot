@@ -10,12 +10,12 @@ import { Block } from "../../components/Block/Block"
 import { ColumnsFields } from "./columnsDef"
 
 export const Columns: React.FC<ColumnsFields> = ({ id, title, columns }) => (
-  <Block id={id} withBackground>
+  <Block id={id} backgroundColor={theme.color.beige}>
     <Container>
       <Heading level={2}>{tp(title)}</Heading>
       <div
         css={css`
-          margin: 0 -16px;
+          margin: 70px -16px 0;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;

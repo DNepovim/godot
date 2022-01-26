@@ -2,11 +2,10 @@
 import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import React from "react"
-import { ParallaxBanner } from "react-scroll-parallax"
 import { Block } from "../../components/Block/Block"
 import { theme } from "../../theme"
 import { QuotationFields } from "./quotationDef"
-import { PROJECT } from "../../projects"
+import { Container } from "../../components/Container/Container"
 
 export const Quotation: React.FC<QuotationFields> = ({
   id,
@@ -14,58 +13,55 @@ export const Quotation: React.FC<QuotationFields> = ({
   source,
   sourceUrl,
 }) => (
-  <Block id={id}>
-    <ParallaxBanner
+  <Block id={id} backgroundColor={theme.color.lightBlue}>
+    <Container
       css={css`
-        background-color: ${theme.color.brand};
+        position: relative;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        max-width: 800px;
+        height: 100%;
+        margin: 0 auto;
+        *::selection {
+          background-color: ${theme.color.darkBlue};
+        }
       `}
-      layers={[
-        {
-          image: `/${PROJECT}/images/sky.webp`,
-          amount: 0.2,
-        },
-      ]}
     >
-      <div
+      <blockquote
         css={css`
-          position: relative;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          text-align: center;
-          max-width: 800px;
-          height: 100%;
-          margin: 0 auto;
+          color: ${theme.color.beige};
+          font-style: italic;
+          font-weight: 700;
+          font-size: ${theme.font.sizes[2]};
+          font-family: themix;
+
+          &:before,
+          &:after {
+            color: ${theme.color.yellow};
+          }
+
+          &:before {
+            content: "„";
+          }
+
+          &:after {
+            content: "“";
+          }
         `}
       >
-        <blockquote
-          css={css`
-            color: white;
-            font-style: italic;
-            font-weight: 700;
-            font-size: ${theme.font.sizes[2]};
-            font-family: themix;
-
-            &:before,
-            &:after {
-              color: ${theme.color.brand};
-            }
-
-            &:before {
-              content: "„";
-            }
-
-            &:after {
-              content: "“";
-            }
-          `}
-        >
-          {text}
-        </blockquote>
-        <a href={sourceUrl} target="_blank" rel="noreferrer noopener">
-          {tp(source)}
-        </a>
-      </div>
-    </ParallaxBanner>
+        {tp(text)}
+      </blockquote>
+      <a
+        css={css`
+          color: ${theme.color.yellow};
+        `}
+        href={sourceUrl}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        {tp(source)}
+      </a>
+    </Container>
   </Block>
 )

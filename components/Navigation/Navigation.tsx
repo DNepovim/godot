@@ -72,6 +72,9 @@ export const Navigation: React.FC<{
       >
         <Nav ref={navRef}>
           <AnchorLink
+            css={css`
+              display: flex;
+            `}
             href={`#${items[0].link}`}
             onClick={() => setIsOpened(false)}
           >
@@ -82,7 +85,7 @@ export const Navigation: React.FC<{
                 height: 100%;
               `}
               src={logo}
-              alt="Insomnia – logo"
+              alt="logo"
               width={scrollPosition > 50 ? 50 : 90}
               height={scrollPosition > 50 ? 50 : 90}
             />
@@ -117,7 +120,7 @@ export const Navigation: React.FC<{
           )}
           {isMobile && (
             <Hamburger
-              color={theme.color.brand}
+              color={theme.color.lightBlue}
               toggled={isOpened}
               onToggle={() => setIsOpened(!isOpened)}
             />
@@ -136,6 +139,7 @@ const NavBar = styled("div")`
   right: 0;
   background-color: ${theme.color.background};
   width: 100vw;
+  border-bottom: 2px solid ${theme.color.brown};
 `
 
 const Nav = styled("nav")`
@@ -157,7 +161,7 @@ const NavItem = styled("li")`
 
 const activeNavLink = css`
   text-decoration: none;
-  color: ${theme.color.brand};
+  color: ${theme.color.lightBlue};
 
   &:after {
     transform-origin: left top;
@@ -185,7 +189,7 @@ const NavLink = styled(AnchorLink)(
       transform-origin: right top;
       transform: scale(0, 1);
       transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      background-color: ${theme.color.brand};
+      background-color: ${theme.color.lightBlue};
     }
 
     ${props.active ? activeNavLink : ""}

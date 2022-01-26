@@ -14,15 +14,9 @@ export interface ColumnsBlock extends Block {
 }
 
 export enum Icons {
-  Sky = "sky",
-  Person = "person",
+  Lile = "lile",
+  Scout = "scout",
   Hand = "hand",
-  Stars = "stars",
-  Arrow = "arrow",
-  Moon = "moon",
-  Mark = "mark",
-  Star = "star",
-  Check = "check",
 }
 
 export interface ColumnsFields extends BlockFields {
@@ -75,40 +69,16 @@ export const columnsDef: BlockDef<ColumnsFields> = {
               {...props}
               options={[
                 {
-                  label: "nebe",
-                  value: Icons.Sky,
+                  label: "Lilie",
+                  value: Icons.Lile,
                 },
                 {
-                  label: "člověk",
-                  value: Icons.Person,
+                  label: "Skaut",
+                  value: Icons.Scout,
                 },
                 {
-                  label: "ruka",
+                  label: "Ruka",
                   value: Icons.Hand,
-                },
-                {
-                  label: "hvězdy",
-                  value: Icons.Stars,
-                },
-                {
-                  label: "šipka",
-                  value: Icons.Arrow,
-                },
-                {
-                  label: "měsíc",
-                  value: Icons.Moon,
-                },
-                {
-                  label: "značka",
-                  value: Icons.Mark,
-                },
-                {
-                  label: "hvězda",
-                  value: Icons.Star,
-                },
-                {
-                  label: "fajfka",
-                  value: Icons.Check,
                 },
               ]}
             />

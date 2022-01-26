@@ -9,7 +9,6 @@ import { globalStyles } from "../globalStyles"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
 import { getMeta, getNavigation, getPage } from "../firebase/database"
-import { PROJECT } from "../projects"
 import { theme } from "../theme"
 
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
@@ -17,29 +16,29 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
     <Head>
       <title>{meta.title}</title>
 
-      <link rel="icon" href={`/${PROJECT}/favicons/favicon.ico`} />
+      <link rel="icon" href={`/favicons/favicon.ico`} />
       <link
         rel="apple-touch-icon"
         sizes="180x180"
-        href={`/${PROJECT}/apple-touch-icon.png`}
+        href={`/apple-touch-icon.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="32x32"
-        href={`/${PROJECT}/favicon-32x32.png`}
+        href={`/favicon-32x32.png`}
       />
       <link
         rel="icon"
         type="image/png"
         sizes="16x16"
-        href={`/${PROJECT}/favicon-16x16.png`}
+        href={`/favicon-16x16.png`}
       />
-      <link rel="manifest" href={`${PROJECT}/site.webmanifest`} />
+      <link rel="manifest" href={`/site.webmanifest`} />
       <link
         rel="mask-icon"
-        href={`/${PROJECT}/safari-pinned-tab.svg`}
-        color={theme.color.brand}
+        href={`/safari-pinned-tab.svg`}
+        color={theme.color.lightBlue}
       />
       <meta name="msapplication-TileColor" content={theme.color.background} />
       <meta name="theme-color" content={theme.color.background} />
@@ -53,10 +52,10 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
     <main
       css={css`
         min-height: 300vh;
-        padding-top: 96px;
+        padding-top: 90px;
       `}
     >
-      <Navigation logo={`/${PROJECT}/images/logo.webp`} items={navigation} />
+      <Navigation logo={`/images/logo.svg`} items={navigation} />
       {page.blocks
         .filter((block) => !!block)
         .map(({ template, fields }) =>

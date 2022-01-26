@@ -30,7 +30,7 @@ export const Button: React.FC<ButtonProps> = ({
       padding: 0.6em 1em;
       border-radius: 4px;
       text-decoration: none;
-      background-color: ${theme.color.brand};
+      background-color: ${theme.color.lightBlue};
       overflow: hidden;
 
       &:before {
@@ -40,7 +40,7 @@ export const Button: React.FC<ButtonProps> = ({
         left: 0;
         width: 0;
         height: 100%;
-        background-color: ${theme.color.secondary};
+        background-color: ${theme.color.darkBlue};
         transition: width 700ms ease-out;
       }
 
