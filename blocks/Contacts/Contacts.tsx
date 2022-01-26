@@ -31,7 +31,7 @@ export const Contacts: React.FC<ContactsFields> = ({
     >
       <h2
         css={css`
-          font-size: ${theme.font.sizes[2]};
+          font-size: 1.4rem;
           font-family: skautbold;
           text-align: center;
           margin-bottom: 4px;

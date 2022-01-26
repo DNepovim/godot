@@ -25,7 +25,7 @@ export const Button: React.FC<ButtonProps> = ({
       position: relative;
       display: inline-block;
       font-family: themix;
-      font-size: ${theme.font.sizes[2]};
+      font-size: 1.4rem;
       color: white;
       padding: 0.6em 1em;
       border-radius: 4px;

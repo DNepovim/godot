@@ -198,7 +198,7 @@ export const Cover: React.FC<CoverFields> = ({
         {claim && (
           <p
             css={css`
-              font-size: ${theme.font.sizes[2]};
+              font-size: 1.4rem;
               margin: 0 0 32px;
             `}
             dangerouslySetInnerHTML={{ __html: tp(claim) }}

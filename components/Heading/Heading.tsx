@@ -12,7 +12,7 @@ export const Heading: React.FC<{
 }> = ({ children, level, color }) => {
   const props = {
     css: css`
-      font-size: ${theme.font.sizes[3]};
+      font-size: 2.6rem;
       font-family: skautbold;
       text-align: center;
       color: ${color ?? theme.color.brown};

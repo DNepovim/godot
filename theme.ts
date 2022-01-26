@@ -2,14 +2,6 @@ export const theme = {
   layout: {
     width: 1000,
   },
-  font: {
-    sizes: {
-      1: "1rem",
-      2: "1.4rem",
-      3: "2.6rem",
-      4: "2.6rem",
-    },
-  },
   color: {
     background: "#ffffff",
     lightBlue: "#007d94",

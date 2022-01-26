@@ -95,6 +95,7 @@ export const Persons: React.FC<PersonsFields> = ({
                 left: 0;
                 top: 0;
                 margin: -4px;
+                max-height: calc(100% + 4px);
               `}
               src={`/images/frame.svg`}
               alt=""
