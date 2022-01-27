@@ -4,11 +4,13 @@ import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
 import { theme } from "../../theme"
+import { Icon } from "../Icon/Icon"
+import { Icons } from "../../blocks/Columns/columnsDef"
 
 export interface ColumnProps {
   title: string
   text: string
-  icon: string
+  icon: Icons
 }
 
 export const Column: React.FC<ColumnProps> = ({ title, text, icon }) => (
@@ -25,16 +27,12 @@ export const Column: React.FC<ColumnProps> = ({ title, text, icon }) => (
             margin: -20px;
             z-index: -5;
             transform: scale(1.2, 1.2);
-            user-select: none; ;
+            user-select: none;
+            width: 80px;
+            height: 80px;
           `}
         >
-          <Image
-            src={`/images/${icon}.svg`}
-            alt=""
-            width={80}
-            height={80}
-            lazyBoundary="600px"
-          />
+          <Icon icon={icon} />
         </figure>
       )}
       <h3
