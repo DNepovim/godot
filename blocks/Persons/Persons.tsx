@@ -71,6 +71,8 @@ export const Persons: React.FC<PersonsFields> = ({
               position: relative;
               margin: 0 1em 0 0;
               shape-outside: circle(50%);
+              width: 174px;
+              height: 174px;
               @media (min-width: 500px) {
                 float: left;
               }
