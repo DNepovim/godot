@@ -26,7 +26,7 @@ export const Button: React.FC<ButtonProps> = ({
       display: inline-block;
       font-family: themix;
       font-size: 1.4rem;
-      color: white;
+      color: ${theme.color.background};
       padding: 0.6em 1em;
       border-radius: 4px;
       text-decoration: none;

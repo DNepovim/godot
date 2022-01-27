@@ -24,7 +24,7 @@ export const RichText: React.FC<RichTextFields> = ({
         }
       `}
     >
-      <Heading color={theme.color.beige} level={2}>
+      <Heading color={theme.color.beige}>
         {tp(title)}
       </Heading>
       <div dangerouslySetInnerHTML={{ __html: tp(text) }} />

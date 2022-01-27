@@ -18,13 +18,14 @@ export const Persons: React.FC<PersonsFields> = ({
   <Block id={id} backgroundColor={theme.color.sky}>
     <Container
       css={css`
+        text-align: center;
         *::selection {
           background-color: ${theme.color.darkBlue};
         }
       `}
     >
       {title && (
-        <Heading level={2} color={theme.color.darkBlue}>
+        <Heading color={theme.color.darkBlue}>
           {tp(title)}
         </Heading>
       )}

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import Image, { ImageProps } from "next/image"
+import Image from "next/image"
 import { theme } from "../../theme"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
@@ -161,7 +161,7 @@ const NavItem = styled("li")`
 
 const activeNavLink = css`
   text-decoration: none;
-  color: ${theme.color.lightBlue};
+  color: ${theme.color.brown};
 
   &:after {
     transform-origin: left top;
@@ -177,6 +177,7 @@ const NavLink = styled(AnchorLink)(
     transition: color 300ms;
     color: black;
     cursor: pointer;
+    font-weight: bold;
 
     &:after {
       content: "";
@@ -185,11 +186,11 @@ const NavLink = styled(AnchorLink)(
       right: 0.4rem;
       bottom: 0;
       left: 0.4rem;
-      height: 2px;
+      height: 4px;
       transform-origin: right top;
       transform: scale(0, 1);
       transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      background-color: ${theme.color.lightBlue};
+      background-color: ${theme.color.brown};
     }
 
     ${props.active ? activeNavLink : ""}

@@ -11,14 +11,19 @@ import { ColumnsFields } from "./columnsDef"
 
 export const Columns: React.FC<ColumnsFields> = ({ id, title, columns }) => (
   <Block id={id} backgroundColor={theme.color.beige}>
-    <Container>
-      <Heading level={2}>{tp(title)}</Heading>
+    <Container
+      css={css`
+        text-align: center;
+      `}
+    >
+      <Heading>{tp(title)}</Heading>
       <div
         css={css`
           margin: 70px -16px 0;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-around;
+          text-align: left;
         `}
       >
         {columns?.map((column, i) => (

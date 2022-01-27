@@ -104,7 +104,7 @@ export const Cover: React.FC<CoverFields> = ({
     <Block id={id} backgroundColor={theme.color.sky}>
       <Container
         css={css`
-          height: calc(80vh - 92px);
+          height: calc(85vh - 92px);
           *::selection {
             background-color: ${theme.color.darkBlue};
           }
@@ -175,10 +175,35 @@ export const Cover: React.FC<CoverFields> = ({
         {title && (
           <h1
             css={css`
+              position: relative;
+              display: inline-block;
               font-family: skautbold;
-              font-size: 2.6em;
-              margin: 0 0 4px;
+              font-size: 3.4em;
+              margin: 0 0 16px;
               color: ${theme.color.darkBlue};
+              &:after {
+                position: absolute;
+                content: "";
+                left: 0;
+                bottom: 0;
+                width: 0;
+                height: 8px;
+                background-color: ${theme.color.yellow};
+                animation-name: underline;
+                animation-fill-mode: forwards;
+                animation-duration: 1s;
+                animation-delay: 500ms;
+                animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+              }
+
+              @keyframes underline {
+                from {
+                  width: 0;
+                }
+                to {
+                  width: 100%;
+                }
+              }
             `}
           >
             {tp(title)}
@@ -199,6 +224,7 @@ export const Cover: React.FC<CoverFields> = ({
           <p
             css={css`
               font-size: 1.4rem;
+              color: ${theme.color.brown};
               margin: 0 0 32px;
             `}
             dangerouslySetInnerHTML={{ __html: tp(claim) }}
