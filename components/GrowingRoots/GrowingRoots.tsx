@@ -3,6 +3,7 @@ import styled from "@emotion/styled"
 import React, { ElementRef, useRef } from "react"
 import { SerializedStyles } from "@emotion/utils"
 import { useWindowHeight } from "@react-hook/window-size"
+import { theme } from "../../theme"
 
 const paths = [
   {
@@ -133,7 +134,7 @@ const Path = styled.path(
   (props: { strokeDashOffset: number }) => `
   stroke-dashoffset: ${props.strokeDashOffset};
   stroke-dasharray: ${defaultStrokeDashOffset};
-  stroke: #ccc15a;
+  stroke: ${theme.color.yellow};
   fill: none;
   opacity: 0.7;
 `
@@ -143,6 +144,6 @@ const FilledPath = styled.path(
   (props: { opacity: number }) => `
     display: none;
     opacity: ${props.opacity};
-    fill: #70330b;
+    fill: ${theme.color.lightBrown};
   `
 )
