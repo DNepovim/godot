@@ -10,13 +10,10 @@ import useScrollPosition from "@react-hook/window-scroll"
 import AnchorLink from "react-anchor-link-smooth-scroll"
 import useOnClickOutside from "use-onclickoutside"
 import { Container } from "../Container/Container"
+import { Button } from "../Button/Button"
+import { NavigationItem, NavigationItemType } from "../../data"
 
-interface NavigationItem {
-  title: string
-  link: string
-}
-
-const BREAKPOINT = 600
+const BREAKPOINT = 700
 
 export const Navigation: React.FC<{
   logo: string
@@ -35,31 +32,29 @@ export const Navigation: React.FC<{
 
   useOnClickOutside(navRef, () => setIsOpened(false))
 
-  const onScrollHandler = useCallback(
-    (scrollPossition: number) => {
-      if (
-        document.body.scrollHeight - (scrollPosition + window.innerHeight) <
-        100
-      ) {
-        setActiveItem(items[items.length - 1].link)
-        return
-      }
-      setActiveItem(
-        items.reduce<string | undefined>((acc, item) => {
-          const block = document.getElementById(item.link)
-          if (!block) {
-            return
-          }
-          const { top } = block.getBoundingClientRect()
-          return top < 100 ? item.link : acc
-        }, undefined)
-      )
-    },
-    [items, scrollPosition]
-  )
+  const onScrollHandler = useCallback(() => {
+    const intItems = items.filter((item) => !item.link.startsWith("http"))
+    if (
+      document.body.scrollHeight - (scrollPosition + window.innerHeight) <
+      100
+    ) {
+      setActiveItem(intItems[intItems.length - 1].link)
+      return
+    }
+    setActiveItem(
+      intItems.reduce<string | undefined>((acc, item) => {
+        const block = document.querySelector(item.link)
+        if (!block) {
+          return
+        }
+        const { top } = block.getBoundingClientRect()
+        return top < 100 ? item.link : acc
+      }, undefined)
+    )
+  }, [items, scrollPosition])
 
   useEffect(() => {
-    onScrollHandler(scrollPosition)
+    onScrollHandler()
   }, [onScrollHandler, scrollPosition])
 
   return (
@@ -75,7 +70,7 @@ export const Navigation: React.FC<{
             css={css`
               display: flex;
             `}
-            href={`#${items[0].link}`}
+            href={items[0].link}
             onClick={() => setIsOpened(false)}
           >
             <Image
@@ -92,31 +87,61 @@ export const Navigation: React.FC<{
           </AnchorLink>
           {!isMobile && (
             <NavList>
-              {items.map((item) => (
-                <NavItem key={item.link} onClick={() => setIsOpened(false)}>
-                  <NavLink
-                    active={item.link === activeItem}
-                    href={`#${item.link}`}
-                  >
-                    {item.title}
-                  </NavLink>
-                </NavItem>
-              ))}
+              {items
+                .filter((item) =>
+                  activeItem === items[0].link ? !item.showAfterScroll : true
+                )
+                .map((item) => (
+                  <NavItem key={item.link} onClick={() => setIsOpened(false)}>
+                    {item?.type === NavigationItemType.Button ? (
+                      <Button link={item.link} isSmall>
+                        {item.title}
+                      </Button>
+                    ) : (
+                      <NavLink
+                        active={item.link === activeItem}
+                        href={item.link}
+                      >
+                        {item.title}
+                      </NavLink>
+                    )}
+                  </NavItem>
+                ))}
             </NavList>
           )}
           {isMobile && (
-            <NavListMobile
-              isOpened={isOpened}
-              onClick={() => setIsOpened(false)}
-            >
-              {items.map((item) => (
-                <NavItem key={item.link}>
-                  <NavLinkMobile href={`#${item.link}`}>
-                    {item.title}
-                  </NavLinkMobile>
-                </NavItem>
-              ))}
-            </NavListMobile>
+            <>
+              {items.filter((item) => item.showAlways) && (
+                <div
+                  css={css`
+                    display: flex;
+                    margin: 0 16px 0 auto;
+                  `}
+                >
+                  {items
+                    .filter((item) => item.showAlways)
+                    .map((item) => (
+                      <Button key={item.link} link={item.link} isSmall>
+                        {item.title}
+                      </Button>
+                    ))}
+                </div>
+              )}
+              <NavListMobile
+                isOpened={isOpened}
+                onClick={() => setIsOpened(false)}
+              >
+                {items
+                  .filter((item) => !item.showAlways)
+                  .map((item) => (
+                    <NavItem key={item.link}>
+                      <NavLinkMobile href={`#${item.link}`}>
+                        {item.title}
+                      </NavLinkMobile>
+                    </NavItem>
+                  ))}
+              </NavListMobile>
+            </>
           )}
           {isMobile && (
             <Hamburger
@@ -150,12 +175,14 @@ const Nav = styled("nav")`
 
 const NavList = styled("ul")`
   display: flex;
+  align-items: center;
   list-style: none;
   margin: 0;
   padding: 0;
 `
 
 const NavItem = styled("li")`
+  display: flex;
   margin-left: 4px;
 `
 

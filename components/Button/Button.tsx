@@ -5,13 +5,15 @@ import { theme } from "../../theme"
 
 export interface ButtonProps {
   link: string
-  targetBlank: boolean
+  targetBlank?: boolean
+  isSmall?: boolean
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   link,
   targetBlank,
+  isSmall,
 }) => (
   <a
     href={link}
@@ -25,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
       position: relative;
       display: inline-block;
       font-family: themix;
-      font-size: 1.4rem;
+      font-size: ${isSmall ? 1 : 1.4}rem;
       color: ${theme.color.background};
       padding: 0.6em 1em;
       border-radius: 4px;
@@ -41,7 +43,7 @@ export const Button: React.FC<ButtonProps> = ({
         width: 0;
         height: 100%;
         background-color: ${theme.color.darkBlue};
-        transition: width 700ms ease-out;
+        transition: width 700ms cubic-bezier(0.1, 0.15, 0, 0.97);
       }
 
       span {

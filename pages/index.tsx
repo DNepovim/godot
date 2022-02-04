@@ -2,7 +2,7 @@
 import React from "react"
 import type { NextPage } from "next"
 import Head from "next/head"
-import { Navigation as NavigationType, Page, SiteMeta } from "../data"
+import { NavigationItem, Page, SiteMeta } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
 import { css, Global } from "@emotion/react"
 import { globalStyles } from "../globalStyles"
@@ -58,11 +58,11 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       <Navigation logo={`/images/logo.svg`} items={navigation} />
       {page.blocks
         .filter((block) => !!block)
-        .map(({ template, fields }) =>
-          React.createElement(
-            blockDefs[template as BlockTemplates].component,
-            fields
-          )
+        .map(({ template, fields }, i) =>
+          React.createElement(blockDefs[template as BlockTemplates].component, {
+            ...fields,
+            key: i,
+          })
         )}
     </main>
   </div>
@@ -78,7 +78,7 @@ export const getStaticProps = async () => ({
 
 interface Props {
   meta: SiteMeta
-  navigation: NavigationType
+  navigation: NavigationItem[]
   page: Page
 }
 

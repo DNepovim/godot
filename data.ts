@@ -7,18 +7,24 @@ export interface Page {
   blocks: BlocksDefs[]
 }
 
-export type Navigation = Array<{
+export enum NavigationItemType {
+  Button = "button",
+}
+
+export interface NavigationItem {
   title: string
   link: string
-}>
-
+  type?: NavigationItemType.Button
+  showAlways?: boolean
+  showAfterScroll?: boolean
+}
 export interface SiteMeta {
   title: string
 }
 
 export interface Data {
   config: {
-    navigation: Navigation
+    navigation: NavigationItem[]
   }
   pages: Record<string, Page>
 }
