@@ -3,7 +3,7 @@ import { css } from "@emotion/react"
 import React from "react"
 import { Container } from "../../components/Container/Container"
 import Image from "next/image"
-import { theme } from "../../theme"
+import { min, theme } from "../../theme"
 import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
 
@@ -27,11 +27,11 @@ export const Gallery: React.FC<GalleryFields> = ({ id, images }) => (
             width: calc(100% - ${gap * 2}px);
             margin: ${gap}px 0;
 
-            @media (min-width: 500px) {
+            @media ${min("s")} {
               width: calc(100% / 2 - ${gap * 2}px);
             }
 
-            @media (min-width: 700px) {
+            @media ${min("m")} {
               width: calc(100% / 3 - ${gap * 2}px);
             }
           `}
