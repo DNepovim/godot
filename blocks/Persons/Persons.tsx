@@ -7,7 +7,7 @@ import { Heading } from "../../components/Heading/Heading"
 import Image from "next/image"
 import { Block } from "../../components/Block/Block"
 import { PersonsFields } from "./personsDef"
-import { theme } from "../../theme"
+import { min, theme } from "../../theme"
 
 export const Persons: React.FC<PersonsFields> = ({
   id,
@@ -24,11 +24,7 @@ export const Persons: React.FC<PersonsFields> = ({
         }
       `}
     >
-      {title && (
-        <Heading color={theme.color.darkBlue}>
-          {tp(title)}
-        </Heading>
-      )}
+      {title && <Heading color={theme.color.darkBlue}>{tp(title)}</Heading>}
       {subtitle && (
         <p
           css={css`
@@ -47,6 +43,7 @@ export const Persons: React.FC<PersonsFields> = ({
         max-width: 1600px;
         padding: 0 32px;
         justify-content: center;
+        margin: 0 auto;
         *::selection {
           background-color: ${theme.color.darkBlue};
         }
@@ -58,10 +55,10 @@ export const Persons: React.FC<PersonsFields> = ({
           css={css`
             max-width: 900px;
             margin: 0 0 32px;
-            @media (min-width: 500px) {
+            @media ${min("s")} {
               margin: 0 32px 32px;
             }
-            @media (min-width: 1000px) {
+            @media ${min("l")} {
               width: 390px;
             }
           `}
@@ -73,7 +70,7 @@ export const Persons: React.FC<PersonsFields> = ({
               shape-outside: circle(50%);
               width: 174px;
               height: 174px;
-              @media (min-width: 500px) {
+              @media ${min("s")} {
                 float: left;
               }
             `}

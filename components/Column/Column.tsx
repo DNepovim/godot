@@ -46,11 +46,19 @@ export const Column: React.FC<ColumnProps> = ({ title, text, icon }) => (
     </header>
     <div
       css={css`
+        h4 {
+          color: ${theme.color.brown};
+          margin: 0.6em 0 0;
+          &:first-of-type {
+            margin: 0;
+          }
+        }
         ul {
+          padding-left: 1.4em;
           margin: 0;
         }
       `}
-      dangerouslySetInnerHTML={{ __html: tp(text) }}
+      dangerouslySetInnerHTML={{ __html: text }}
     />
   </article>
 )

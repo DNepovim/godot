@@ -4,6 +4,7 @@ import React, { ElementRef, useRef } from "react"
 import { SerializedStyles } from "@emotion/utils"
 import { useWindowHeight } from "@react-hook/window-size"
 import { theme } from "../../theme"
+import { css } from "@emotion/react"
 
 const paths = [
   {
@@ -98,7 +99,13 @@ export const GrowingRoots: React.FC<{
     : defaultStrokeDashOffset
 
   return (
-    <div ref={containerRef} className={props.className}>
+    <div
+      ref={containerRef}
+      className={props.className}
+      css={css`
+        text-align: center;
+      `}
+    >
       <Svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 993.41 647">
         {paths.map((path, i) => (
           <Path
