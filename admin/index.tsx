@@ -175,7 +175,7 @@ export const Admin: NextPage = () => {
                     font-size: 24px;
                   `}
                 >
-                  Insomnia
+                  Godot
                 </h1>
               )}
             </Link>
