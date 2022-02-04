@@ -1,11 +1,9 @@
 import * as yup from "yup"
-import {
-  BlockFields as BlockFields,
-  withBlockSchema,
-} from "../../components/Block/Block"
+import { BlockFields, withBlockSchema } from "../../components/Block/Block"
 import { Cover } from "./Cover"
 import { Block, BlockDef } from "../blocks"
 import { TextInput } from "../../admin/components/Inputs/TextInput/TextInput"
+import { TextAreaInput } from "../../admin/components/Inputs/TextAreaInput/TextAreaInput"
 import { CheckInput } from "../../admin/components/Inputs/CheckInput/CheckInput"
 import { BlockTemplates } from "../blockTemplates"
 
@@ -57,7 +55,7 @@ export const coverDef: BlockDef<CoverFields> = {
     },
     claim: {
       label: "Podpodnadpis",
-      component: (props) => <TextInput {...props} />,
+      component: (props) => <TextAreaInput {...props} />,
     },
     button: {
       label: "Tlačítko",
