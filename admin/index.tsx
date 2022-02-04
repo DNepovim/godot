@@ -154,21 +154,6 @@ export const Admin: NextPage = () => {
                 padding: 16px 9px 4px;
               `}
             >
-              <figure
-                css={css`
-                  height: 50px;
-                  margin-right: 8px;
-                `}
-              >
-                <Image
-                  src={`/images/logo.webp`}
-                  alt=""
-                  css={css`
-                    max-height: 100%;
-                    width: auto;
-                  `}
-                />
-              </figure>
               {!isSidebarCollapsed && (
                 <h1
                   css={css`
