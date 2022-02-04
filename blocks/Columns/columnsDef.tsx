@@ -7,6 +7,7 @@ import { enumToSchemaOptions } from "../../admin/utils/enumToSchemaOptions"
 import { SelectInput } from "../../admin/components/Inputs/SelectInput/SelectInput"
 import { TextAreaInput } from "../../admin/components/Inputs/TextAreaInput/TextAreaInput"
 import { BlockTemplates } from "../blockTemplates"
+import { CheckInput } from "../../admin/components/Inputs/CheckInput/CheckInput"
 
 export interface ColumnsBlock extends Block {
   template: BlockTemplates.Columns
@@ -21,6 +22,7 @@ export enum Icons {
 
 export interface ColumnsFields extends BlockFields {
   title: string
+  gridView?: boolean
   columns: {
     title: string
     text: string
@@ -31,6 +33,7 @@ export interface ColumnsFields extends BlockFields {
 export const columnsSchema = withBlockSchema(
   yup.object().shape({
     title: yup.string().required("Musíš vyplnit nadpis").max(80),
+    gridView: yup.bool(),
     columns: yup.array().of(
       yup.object().shape({
         title: yup.string().required(),
@@ -49,6 +52,10 @@ export const columnsDef: BlockDef<ColumnsFields> = {
     title: {
       label: "Nadpis",
       component: (props) => <TextInput {...props} />,
+    },
+    gridView: {
+      label: "Zobrazit v mřížce",
+      component: (props) => <CheckInput {...props} />,
     },
     columns: {
       label: "Sloupce",
