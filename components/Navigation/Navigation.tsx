@@ -12,6 +12,7 @@ import useOnClickOutside from "use-onclickoutside"
 import { Container } from "../Container/Container"
 import { Button } from "../Button/Button"
 import { NavigationItem, NavigationItemType } from "../../data"
+import { isLinkExternal } from "../../admin/utils/isLinkExternal"
 
 const BREAKPOINT = 700
 
@@ -33,7 +34,7 @@ export const Navigation: React.FC<{
   useOnClickOutside(navRef, () => setIsOpened(false))
 
   const onScrollHandler = useCallback(() => {
-    const intItems = items.filter((item) => !item.link.startsWith("http"))
+    const intItems = items.filter((item) => !isLinkExternal(item.link))
     if (
       document.body.scrollHeight - (scrollPosition + window.innerHeight) <
       100
@@ -94,7 +95,11 @@ export const Navigation: React.FC<{
                 .map((item) => (
                   <NavItem key={item.link} onClick={() => setIsOpened(false)}>
                     {item?.type === NavigationItemType.Button ? (
-                      <Button link={item.link} isSmall>
+                      <Button
+                        link={item.link}
+                        isSmall
+                        targetBlank={isLinkExternal(item.link)}
+                      >
                         {item.title}
                       </Button>
                     ) : (
@@ -121,7 +126,12 @@ export const Navigation: React.FC<{
                   {items
                     .filter((item) => item.showAlways)
                     .map((item) => (
-                      <Button key={item.link} link={item.link} isSmall>
+                      <Button
+                        key={item.link}
+                        link={item.link}
+                        isSmall
+                        targetBlank={isLinkExternal(item.link)}
+                      >
                         {item.title}
                       </Button>
                     ))}
