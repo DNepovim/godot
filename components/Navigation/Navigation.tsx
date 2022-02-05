@@ -116,7 +116,11 @@ export const Navigation: React.FC<{
           )}
           {isMobile && (
             <>
-              {items.filter((item) => item.showAlways) && (
+              {items
+                .filter((item) => item.showAlways)
+                .filter((item) =>
+                  activeItem === items[0].link ? !item.showAfterScroll : true
+                ) && (
                 <div
                   css={css`
                     display: flex;
@@ -125,6 +129,11 @@ export const Navigation: React.FC<{
                 >
                   {items
                     .filter((item) => item.showAlways)
+                    .filter((item) =>
+                      activeItem === items[0].link
+                        ? !item.showAfterScroll
+                        : true
+                    )
                     .map((item) => (
                       <Button
                         key={item.link}
