@@ -14,7 +14,10 @@ import { theme } from "../theme"
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
   <div>
     <Head>
-      <title>{meta.title}</title>
+      {meta?.title && <title>{meta.title}</title>}
+      {meta?.description && (
+        <meta name="description" content={meta.description} />
+      )}
 
       <link
         rel="apple-touch-icon"
@@ -41,6 +44,22 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       />
       <meta name="msapplication-TileColor" content={theme.color.lighterBlue} />
       <meta name="theme-color" content={theme.color.lighterBlue} />
+
+      <meta property="og:type" content="website" />
+      {meta?.url && <meta property="og:url" content={meta.url} />}
+      {meta?.title && <meta property="og:title" content={meta.title} />}
+      {meta?.description && (
+        <meta property="og:description" content={meta.description} />
+      )}
+      <meta property="og:image" content="/images/cover.png" />
+
+      <meta property="twitter:card" content="summary_large_image" />
+      {meta?.url && <meta property="twitter:url" content={meta.url} />}
+      {meta?.title && <meta property="twitter:title" content={meta.title} />}
+      {meta?.description && (
+        <meta property="twitter:description" content={meta.description} />
+      )}
+      <meta property="twitter:image" content="/images/cover.png" />
 
       <link rel="preconnect" href="https://cdn.skauting.cz" />
       <link href="https://cdn.skauting.cz/fonts/fonts.css" rel="stylesheet" />

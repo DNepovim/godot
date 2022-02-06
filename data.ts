@@ -19,7 +19,9 @@ export interface NavigationItem {
   showAfterScroll?: boolean
 }
 export interface SiteMeta {
-  title: string
+  title?: string
+  description?: string
+  url?: string
 }
 
 export interface Data {
