@@ -39,7 +39,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
     <main
       css={css`
         min-height: 300vh;
-        padding-top: 90px;
+        padding-top: 3.2em;
       `}
     >
       <Navigation title={meta?.title} items={navigation} />
