@@ -1,8 +1,9 @@
-import { Button, PageHeader, Table, Typography } from "antd"
+import { Button, Table, Typography } from "antd"
 import { Link } from "react-router-dom"
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
 import { Page } from "../../../data"
 import useSwr from "swr"
+import { PageHeader } from "../../components/PageHeader/PageHeader"
 
 export const PagesListPage = () => {
   const { data: pages } = useSwr<Page>("/api/page/list", async (url) => {
