@@ -154,7 +154,7 @@ export const Navigation: React.FC<{
                   .filter((item) => !item.showAlways)
                   .map((item) => (
                     <NavItem key={item.link}>
-                      <NavLinkMobile href={`#${item.link}`}>
+                      <NavLinkMobile href={item.link}>
                         {item.title}
                       </NavLinkMobile>
                     </NavItem>
