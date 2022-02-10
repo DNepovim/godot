@@ -20,7 +20,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
         description={meta?.description ?? ""}
         brandColor={theme.color.yellow}
         themeColor={theme.color.lighterBlue}
-        url={meta?.url ?? window?.origin ?? ""}
+        url={meta?.url ?? (typeof window !== "undefined" ? window.origin : "")}
         image="/images/cover.png"
         manifest="/favicons/site.webmanifest"
         font="https://cdn.skauting.cz/fonts/fonts.css"

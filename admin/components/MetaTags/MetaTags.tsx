@@ -157,17 +157,17 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
       href: getUrlPart(font, "origin"),
     },
     {
-      href: font,
       rel: "stylesheet",
+      href: font,
     },
   ]
   return (
     <>
-      {metas.map((props, index) => (
-        <meta key={index} {...props} />
-      ))}
       {links.map((props, index) => (
-        <link key={index} {...props} />
+        <link key={`link-${index}`} {...props} />
+      ))}
+      {metas.map((props, index) => (
+        <meta key={`meta-${index}`} {...props} />
       ))}
     </>
   )
