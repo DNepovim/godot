@@ -7,7 +7,7 @@ import { Heading } from "../../components/Heading/Heading"
 import Image from "next/image"
 import { Block } from "../../components/Block/Block"
 import { PersonsFields } from "./personsDef"
-import { min, theme } from "../../theme"
+import { min, theme } from "../../styles/theme"
 
 export const Persons: React.FC<PersonsFields> = ({
   id,

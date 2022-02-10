@@ -1,5 +1,5 @@
 import styled from "@emotion/styled"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 
 export const Container = styled("div")`
   position: relative;

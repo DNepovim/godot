@@ -5,7 +5,7 @@ import { tp } from "../../admin/utils/tp"
 import { Block } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { RichTextFields } from "./richTextDef"
 
 export const RichText: React.FC<RichTextFields> = ({
@@ -24,9 +24,7 @@ export const RichText: React.FC<RichTextFields> = ({
         }
       `}
     >
-      <Heading color={theme.color.beige}>
-        {tp(title)}
-      </Heading>
+      <Heading color={theme.color.beige}>{tp(title)}</Heading>
       <div dangerouslySetInnerHTML={{ __html: tp(text) }} />
     </Container>
   </Block>

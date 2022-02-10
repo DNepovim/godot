@@ -19,6 +19,10 @@ export const theme = {
     beige: "#ffeecb",
     sky: "#d7ecef",
   },
+  fonts: {
+    text: "themix, verdana, sans-serif",
+    headings: "skautbold, verdana, sans-serif",
+  },
 }
 
 export const min = (breakpoint: "s" | "m" | "l") =>

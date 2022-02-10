@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"

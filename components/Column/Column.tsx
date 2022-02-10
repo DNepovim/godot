@@ -3,7 +3,7 @@ import React from "react"
 import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { Icon } from "../Icon/Icon"
 import { Icons } from "../../blocks/Columns/columnsDef"
 

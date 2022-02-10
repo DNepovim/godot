@@ -2,7 +2,7 @@
 import React from "react"
 import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
-import { min, theme } from "../../theme"
+import { min, theme } from "../../styles/theme"
 import { Container } from "../../components/Container/Container"
 import { Column } from "../../components/Column/Column"
 import { Heading } from "../../components/Heading/Heading"

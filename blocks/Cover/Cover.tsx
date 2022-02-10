@@ -2,7 +2,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { tp } from "../../admin/utils/tp"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { css } from "@emotion/react"
 import { Block } from "../../components/Block/Block"
 import { CoverFields } from "./coverDef"
@@ -177,7 +177,7 @@ export const Cover: React.FC<CoverFields> = ({
             css={css`
               position: relative;
               display: inline-block;
-              font-family: skautbold;
+              font-family: ${theme.fonts.headings};
               font-size: 3.4em;
               margin: 0 0 16px;
               color: ${theme.color.darkBlue};
@@ -212,7 +212,7 @@ export const Cover: React.FC<CoverFields> = ({
         {subtitle && (
           <p
             css={css`
-              font-family: skautbold;
+              font-family: ${theme.fonts.headings};
               font-size: 1.8em;
               margin: 0 0 4px;
             `}

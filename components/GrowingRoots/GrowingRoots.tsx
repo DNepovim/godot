@@ -3,7 +3,7 @@ import styled from "@emotion/styled"
 import React, { ElementRef, useRef } from "react"
 import { SerializedStyles } from "@emotion/utils"
 import { useWindowHeight } from "@react-hook/window-size"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { css } from "@emotion/react"
 
 const paths = [

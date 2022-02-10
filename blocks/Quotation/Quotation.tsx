@@ -3,7 +3,7 @@ import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import React from "react"
 import { Block } from "../../components/Block/Block"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { QuotationFields } from "./quotationDef"
 import { Container } from "../../components/Container/Container"
 

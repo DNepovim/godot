@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React, { ElementRef, useRef } from "react"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { useWindowHeight } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll"
 
@@ -30,7 +30,7 @@ export const Heading: React.FC<{
         position: relative;
         display: inline-block;
         font-size: 2.6rem;
-        font-family: skautbold;
+        font-family: ${theme.fonts.headings};
         text-align: center;
         color: ${color ?? theme.color.brown};
         margin: 0 auto 1em;

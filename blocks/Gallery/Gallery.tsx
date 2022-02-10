@@ -3,7 +3,7 @@ import { css } from "@emotion/react"
 import React from "react"
 import { Container } from "../../components/Container/Container"
 import Image from "next/image"
-import { min, theme } from "../../theme"
+import { min, theme } from "../../styles/theme"
 import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
 

@@ -5,12 +5,13 @@ import Head from "next/head"
 import { NavigationItem, Page, SiteMeta } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
 import { css, Global } from "@emotion/react"
-import { globalStyles } from "../globalStyles"
+import { globalStyles } from "../styles/global"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
 import { getMeta, getNavigation, getPage } from "../firebase/database"
-import { theme } from "../theme"
+import { theme } from "../styles/theme"
 import { MetaTags } from "../admin/components/MetaTags/MetaTags"
+import { fonts } from "../styles/fonts"
 
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
   <div>
@@ -33,6 +34,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       />
     </Head>
 
+    <Global styles={fonts} />
     <Global styles={globalStyles} />
 
     <main

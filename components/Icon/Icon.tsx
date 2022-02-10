@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 import React, { ElementRef, useRef } from "react"
 import { Icons } from "../../blocks/Columns/columnsDef"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { useWindowHeight } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll"
 

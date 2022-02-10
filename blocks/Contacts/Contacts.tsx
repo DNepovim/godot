@@ -3,7 +3,7 @@ import React from "react"
 import { css } from "@emotion/react"
 import { tp } from "../../admin/utils/tp"
 import Image from "next/image"
-import { theme } from "../../theme"
+import { theme } from "../../styles/theme"
 import { Block } from "../../components/Block/Block"
 import { ContactsFields } from "./contactsDef"
 import { Container } from "../../components/Container/Container"
@@ -32,7 +32,7 @@ export const Contacts: React.FC<ContactsFields> = ({
       <h2
         css={css`
           font-size: 1.8rem;
-          font-family: skautbold;
+          font-family: ${theme.fonts.headings};
           text-align: center;
           margin-bottom: 4px;
         `}
