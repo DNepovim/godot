@@ -1,6 +1,4 @@
 import React from "react"
-import { theme } from "../../../styles/theme"
-import { getUrlPart } from "../../utils/getUrlPart"
 
 export interface MetaTagsProps {
   title: string
@@ -16,7 +14,6 @@ export interface MetaTagsProps {
     smallIcon: string
     maskIcon: string
   }
-  font: string
 }
 
 interface NameMeta {
@@ -64,14 +61,9 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
   url,
   image,
   icons,
-  font,
   manifest,
 }) => {
   const metas: Meta[] = [
-    {
-      name: "title",
-      content: title,
-    },
     {
       name: "description",
       content: description,
@@ -152,17 +144,10 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
       href: icons.maskIcon,
       color: brandColor,
     },
-    {
-      rel: "preconnect",
-      href: getUrlPart(font, "origin"),
-    },
-    {
-      rel: "stylesheet",
-      href: font,
-    },
   ]
   return (
     <>
+      {title && <title>{title}</title>}
       {links.map((props, index) => (
         <link key={`link-${index}`} {...props} />
       ))}
