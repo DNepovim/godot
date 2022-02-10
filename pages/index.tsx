@@ -42,7 +42,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
         padding-top: 90px;
       `}
     >
-      <Navigation logo={`/images/logo.svg`} items={navigation} />
+      <Navigation title={meta?.title} items={navigation} />
       {page.blocks
         .filter((block) => !!block)
         .map(({ template, fields }, i) =>

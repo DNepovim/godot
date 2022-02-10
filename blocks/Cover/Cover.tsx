@@ -11,6 +11,7 @@ import { GrowingRoots } from "../../components/GrowingRoots/GrowingRoots"
 import { Container } from "../../components/Container/Container"
 import styled from "@emotion/styled"
 import useScrollPosition from "@react-hook/window-scroll"
+import { underline } from "../../styles/utils"
 
 const leaves = [
   {
@@ -175,35 +176,12 @@ export const Cover: React.FC<CoverFields> = ({
         {title && (
           <h1
             css={css`
-              position: relative;
               display: inline-block;
               font-family: ${theme.fonts.headings};
               font-size: 3.4em;
               margin: 0 0 16px;
               color: ${theme.color.darkBlue};
-              &:after {
-                position: absolute;
-                content: "";
-                left: 0;
-                bottom: 0;
-                width: 0;
-                height: 8px;
-                background-color: ${theme.color.yellow};
-                animation-name: underline;
-                animation-fill-mode: forwards;
-                animation-duration: 1s;
-                animation-delay: 500ms;
-                animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
-              }
-
-              @keyframes underline {
-                from {
-                  width: 0;
-                }
-                to {
-                  width: 100%;
-                }
-              }
+              ${underline(theme.color.yellow, 8)}
             `}
           >
             {tp(title)}

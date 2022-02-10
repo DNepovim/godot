@@ -13,13 +13,14 @@ import { Container } from "../Container/Container"
 import { Button } from "../Button/Button"
 import { NavigationItem, NavigationItemType } from "../../data"
 import { isLinkExternal } from "../../admin/utils/isLinkExternal"
+import { underline } from "../../styles/utils"
 
-const BREAKPOINT = 700
+const BREAKPOINT = 740
 
 export const Navigation: React.FC<{
-  logo: string
+  title?: string
   items: NavigationItem[]
-}> = ({ logo, items }) => {
+}> = ({ title, items }) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [activeItem, setActiveItem] = useState<string | undefined>()
@@ -67,25 +68,11 @@ export const Navigation: React.FC<{
         `}
       >
         <Nav ref={navRef}>
-          <AnchorLink
-            css={css`
-              display: flex;
-            `}
-            href={items[0].link}
-            onClick={() => setIsOpened(false)}
-          >
-            <Image
-              css={css`
-                padding: 8px;
-                width: auto;
-                height: 100%;
-              `}
-              src={logo}
-              alt="logo"
-              width={scrollPosition > 50 ? 50 : 90}
-              height={scrollPosition > 50 ? 50 : 90}
-            />
-          </AnchorLink>
+          {title && activeItem !== items[0].link && (
+            <Title href={items[0].link} onClick={() => setIsOpened(false)}>
+              {title}
+            </Title>
+          )}
           {!isMobile && (
             <NavList>
               {items
@@ -188,8 +175,19 @@ const NavBar = styled("div")`
 
 const Nav = styled("nav")`
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
+  width: 100%;
+  height: 3.2em;
+`
+
+const Title = styled(AnchorLink)`
+  display: flex;
+  margin: 0 auto 0 0;
+  font-size: 1.4em;
+  font-family: ${theme.fonts.headings};
+  color: ${theme.color.darkBlue};
+  ${underline(theme.color.yellow, 4)}
 `
 
 const NavList = styled("ul")`
