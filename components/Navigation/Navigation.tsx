@@ -184,10 +184,14 @@ const Nav = styled("nav")`
 const Title = styled(AnchorLink)`
   display: flex;
   margin: 0 auto 0 0;
-  font-size: 1.4em;
+  font-size: 1em;
   font-family: ${theme.fonts.headings};
   color: ${theme.color.darkBlue};
   ${underline(theme.color.yellow, 4)}
+
+  @media (min-width: 400px) {
+    font-size: 1.4em;
+  }
 `
 
 const NavList = styled("ul")`

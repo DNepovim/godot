@@ -27,7 +27,7 @@ export const Button: React.FC<ButtonProps> = ({
       position: relative;
       display: inline-block;
       font-family: themix;
-      font-size: ${isSmall ? 1 : 1.4}rem;
+      font-size: ${isSmall ? 0.8 : 1.4}rem;
       color: ${theme.color.background};
       padding: 0.6em 1em;
       border-radius: 4px;
@@ -57,6 +57,9 @@ export const Button: React.FC<ButtonProps> = ({
         &:before {
           width: 100%;
         }
+      }
+      @media (min-width: 400px) {
+        font-size: ${isSmall ? 1 : 1.4}rem;
       }
     `}
   >
