@@ -166,7 +166,7 @@ export const Admin: NextPage = () => {
             </Link>
             <Menu>
               <Menu.Item icon={<FileOutlined />} key="pages">
-                <Link to="/admin/stranky/">Stránky</Link>
+                <Link to="/admin">Stránky</Link>
               </Menu.Item>
               <Menu.Item disabled icon={<BarsOutlined />} key="navigation">
                 <Link to="/admin/navigace">Navigace</Link>
@@ -271,7 +271,7 @@ export const Admin: NextPage = () => {
           >
             <Content>
               <Routes>
-                <Route path="/admin/stranky" element={<PagesListPage />} />
+                <Route path="/admin" element={<PagesListPage />} />
                 <Route
                   path="/admin/stranky/:slug"
                   element={<PageEditPage user={user} />}
