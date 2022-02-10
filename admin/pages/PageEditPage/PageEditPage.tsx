@@ -1,8 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import { v4 as uuid } from "uuid"
 import * as yup from "yup"
 import SaveOutlined from "@ant-design/icons/lib/icons/SaveOutlined"
 import AppstoreAddOutlined from "@ant-design/icons/lib/icons/AppstoreAddOutlined"
 import EyeOutlined from "@ant-design/icons/lib/icons/EyeOutlined"
+import DesktopOutlined from "@ant-design/icons/lib/icons/DesktopOutlined"
 import {
   closestCenter,
   DndContext,
@@ -17,7 +19,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
-import { Button, Form, Spin, Typography } from "antd"
+import { Button, Form, Spin, Typography, Row, Col, Space } from "antd"
 import { Formik, FormikHelpers } from "formik"
 import { blockDefs } from "../../../blocks/blocks"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
@@ -28,6 +30,13 @@ import { User } from "@firebase/auth"
 import { Centered } from "../../components/Centered/Centered"
 import { BlockTemplates } from "../../../blocks/blockTemplates"
 import useSwr from "swr"
+import { useState } from "react"
+import { css, Global } from "@emotion/react"
+import { fonts } from "../../../styles/fonts"
+import { globalStyles } from "../../../styles/global"
+import { RenderBlocks } from "../../../components/RenderBlocks/RenderBlocks"
+import { Preview } from "../../components/Preview/Preview"
+import { PageHeader } from "../../components/PageHeader/PageHeader"
 
 export const PageEditPage = ({ user }: { user: User }) => {
   const sensors = useSensors(
@@ -36,6 +45,7 @@ export const PageEditPage = ({ user }: { user: User }) => {
       coordinateGetter: sortableKeyboardCoordinates,
     })
   )
+  const [isPreviewVisible, setIsPreviewVisible] = useState(false)
 
   const { slug } = useParams()
   const { data: page } = useSwr<Page>("/api/page/get", async (url) => {
@@ -123,69 +133,100 @@ export const PageEditPage = ({ user }: { user: User }) => {
               Uložit
             </Button>,
           ]}
-          footer={
-            <Button
-              icon={<AppstoreAddOutlined />}
-              onClick={() =>
-                props.setFieldValue("blocks", [
-                  ...props.values.blocks,
-                  { id: uuid() },
-                ])
-              }
-            >
-              Přidat blok
-            </Button>
-          }
         >
-          <Form>
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={(event) => {
-                const { active, over } = event
-
-                if (!over || active.id === over.id) {
-                  return
-                }
-
-                const items = props.values.blocks.map((v) => v.id)
-                const overIndex = items.indexOf(over.id)
-                const activeIndex = items.indexOf(active.id)
-                const newOrder = arrayMove(
-                  props.values.blocks,
-                  activeIndex,
-                  overIndex
-                )
-
-                props.setFieldValue("blocks", newOrder)
-              }}
+          <Space
+            css={css`
+              margin: 0 0 16px;
+            `}
+          >
+            <Button
+              icon={<DesktopOutlined />}
+              onClick={() => setIsPreviewVisible(!isPreviewVisible)}
             >
-              <SortableContext
-                items={props.values.blocks.map((v) => v.id)}
-                strategy={verticalListSortingStrategy}
-              >
-                {props.values.blocks.map((block, index) => (
-                  <SortableAdminBlockFields
-                    key={block.id}
-                    index={index}
-                    id={block.id}
-                    {...(block.template
-                      ? blockDefs[block.template as BlockTemplates]
-                      : {})}
-                    onRemove={() =>
-                      props.setFieldValue(
-                        "blocks",
-                        props.values.blocks.filter((_, i) => i !== index)
-                      )
+              {isPreviewVisible ? "Skrýt náhled" : "Zobrazit náhled"}
+            </Button>
+          </Space>
+          <Row
+            gutter={16}
+            css={css`
+              display: flex;
+            `}
+          >
+            {isPreviewVisible && (
+              <Col span={12}>
+                <Preview zoom={0.4}>
+                  <Global styles={fonts} />
+                  <Global styles={globalStyles} />
+                  <RenderBlocks blocks={page.blocks} />
+                </Preview>
+              </Col>
+            )}
+            <Col span={isPreviewVisible ? 12 : 24}>
+              <Form>
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={(event) => {
+                    const { active, over } = event
+
+                    if (!over || active.id === over.id) {
+                      return
                     }
-                    onTemplateChange={(template) =>
-                      props.setFieldValue(`blocks[${index}].template`, template)
-                    }
-                  />
-                ))}
-              </SortableContext>
-            </DndContext>
-          </Form>
+
+                    const items = props.values.blocks.map((v) => v.id)
+                    const overIndex = items.indexOf(over.id)
+                    const activeIndex = items.indexOf(active.id)
+                    const newOrder = arrayMove(
+                      props.values.blocks,
+                      activeIndex,
+                      overIndex
+                    )
+
+                    props.setFieldValue("blocks", newOrder)
+                  }}
+                >
+                  <SortableContext
+                    items={props.values.blocks.map((v) => v.id)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    {props.values.blocks.map((block, index) => (
+                      <SortableAdminBlockFields
+                        key={block.id}
+                        index={index}
+                        id={block.id}
+                        {...(block.template
+                          ? blockDefs[block.template as BlockTemplates]
+                          : {})}
+                        onRemove={() =>
+                          props.setFieldValue(
+                            "blocks",
+                            props.values.blocks.filter((_, i) => i !== index)
+                          )
+                        }
+                        onTemplateChange={(template) =>
+                          props.setFieldValue(
+                            `blocks[${index}].template`,
+                            template
+                          )
+                        }
+                      />
+                    ))}
+                  </SortableContext>
+                </DndContext>
+                <Button
+                  icon={<AppstoreAddOutlined />}
+                  onClick={() =>
+                    props.setFieldValue("blocks", [
+                      ...props.values.blocks,
+                      { id: uuid() },
+                    ])
+                  }
+                >
+                  Přidat blok
+                </Button>
+              </Form>
+            </Col>
+          </Row>
         </PageHeader>
       )}
     </Formik>
