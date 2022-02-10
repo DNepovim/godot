@@ -7,7 +7,7 @@ import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"
 import { useWindowWidth } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll"
-import AnchorLink from "react-anchor-link-smooth-scroll"
+import AnchorLink, { AnchorLinkProps } from "react-anchor-link-smooth-scroll"
 import useOnClickOutside from "use-onclickoutside"
 import { Container } from "../Container/Container"
 import { Button } from "../Button/Button"
@@ -91,7 +91,7 @@ export const Navigation: React.FC<{
                       </Button>
                     ) : (
                       <NavLink
-                        active={item.link === activeItem}
+                        isActive={item.link === activeItem}
                         href={item.link}
                       >
                         {item.title}
@@ -213,37 +213,39 @@ const activeNavLink = css`
   }
 `
 
-const NavLink = styled(AnchorLink)(
-  (props: { active: boolean }) => css`
-    position: relative;
+const NavLink = styled(
+  ({ isActive, ...props }: { isActive: boolean } & any) => (
+    <AnchorLink {...props} />
+  )
+)`
+  position: relative;
+  display: block;
+  padding: 0.4rem;
+  transition: color 300ms;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+
+  &:after {
+    content: "";
     display: block;
-    padding: 0.4rem;
-    transition: color 300ms;
-    color: black;
-    cursor: pointer;
-    font-weight: bold;
+    position: absolute;
+    right: 0.4rem;
+    bottom: 0;
+    left: 0.4rem;
+    height: 4px;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    background-color: ${theme.color.brown};
+  }
 
-    &:after {
-      content: "";
-      display: block;
-      position: absolute;
-      right: 0.4rem;
-      bottom: 0;
-      left: 0.4rem;
-      height: 4px;
-      transform-origin: right top;
-      transform: scale(0, 1);
-      transition: transform 300ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      background-color: ${theme.color.brown};
-    }
+  ${({ isActive }) => (isActive ? activeNavLink : "")}
 
-    ${props.active ? activeNavLink : ""}
-
-    &:hover {
-      ${activeNavLink}
-    }
-  `
-)
+  &:hover {
+    ${activeNavLink}
+  }
+`
 
 const NavListMobile = styled.ul(
   (props: { isOpened: boolean }) => `
