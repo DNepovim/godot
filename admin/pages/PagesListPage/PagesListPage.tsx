@@ -17,6 +17,7 @@ export const PagesListPage = () => {
     >
       <Table
         loading={!pages}
+        rowKey={"slug"}
         dataSource={
           pages
             ? Object.entries(pages).map(([slug, data]) => ({ slug, ...data }))
