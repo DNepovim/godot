@@ -19,7 +19,7 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable"
-import { Button, Form, Spin, Typography, Row, Col, Space } from "antd"
+import { Button, Form, Spin, Typography, Row, Col, Space, Switch } from "antd"
 import { Formik, FormikHelpers } from "formik"
 import { blockDefs } from "../../../blocks/blocks"
 import { SortableAdminBlockFields } from "../../adminFieldsDef"
@@ -139,12 +139,11 @@ export const PageEditPage = ({ user }: { user: User }) => {
               margin: 0 0 16px;
             `}
           >
-            <Button
-              icon={<DesktopOutlined />}
-              onClick={() => setIsPreviewVisible(!isPreviewVisible)}
-            >
-              {isPreviewVisible ? "Skrýt náhled" : "Zobrazit náhled"}
-            </Button>
+            Náhled:
+            <Switch
+              checked={isPreviewVisible}
+              onChange={() => setIsPreviewVisible(!isPreviewVisible)}
+            />
           </Space>
           <Row
             gutter={16}
@@ -155,9 +154,9 @@ export const PageEditPage = ({ user }: { user: User }) => {
             {isPreviewVisible && (
               <Col span={12}>
                 <Preview zoom={0.4}>
-                  <Global styles={fonts} />
-                  <Global styles={globalStyles} />
-                  <RenderBlocks blocks={page.blocks} />
+                  <div css={[fonts, globalStyles]}>
+                    <RenderBlocks blocks={page.blocks} />
+                  </div>
                 </Preview>
               </Col>
             )}
