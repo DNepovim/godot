@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import EditOutlined from "@ant-design/icons/lib/icons/EditOutlined"
 import { Page } from "../../../data"
 import useSwr from "swr"
-import { PageHeader } from "../../components/PageHeader/PageHeader"
+import { PageWrapper } from "../../components/PageHeader/PageWrapper"
 
 export const PagesListPage = () => {
   const { data: pages } = useSwr<Page>("/api/page/list", async (url) => {
@@ -12,7 +12,7 @@ export const PagesListPage = () => {
   })
 
   return (
-    <PageHeader
+    <PageWrapper
       title={<Typography.Title>Stránky</Typography.Title>}
       breadcrumb={{ routes: [{ breadcrumbName: "Stránky", path: "" }] }}
     >
@@ -50,6 +50,6 @@ export const PagesListPage = () => {
           hideOnSinglePage: true,
         }}
       />
-    </PageHeader>
+    </PageWrapper>
   )
 }

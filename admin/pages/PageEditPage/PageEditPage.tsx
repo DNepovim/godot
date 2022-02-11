@@ -36,7 +36,7 @@ import { fonts } from "../../../styles/fonts"
 import { globalStyles } from "../../../styles/global"
 import { RenderBlocks } from "../../../components/RenderBlocks/RenderBlocks"
 import { Preview } from "../../components/Preview/Preview"
-import { PageHeader } from "../../components/PageHeader/PageHeader"
+import { PageWrapper } from "../../components/PageHeader/PageWrapper"
 
 export const PageEditPage = ({ user }: { user: User }) => {
   const sensors = useSensors(
@@ -104,7 +104,7 @@ export const PageEditPage = ({ user }: { user: User }) => {
       initialValues={page}
     >
       {(props) => (
-        <PageHeader
+        <PageWrapper
           title={<Typography.Title>{page.title}</Typography.Title>}
           subTitle={`naposledny upraveno ${props.values.lastEditedTime} uživatelem ${props.values.lastEditedBy}`}
           breadcrumb={{
@@ -227,7 +227,7 @@ export const PageEditPage = ({ user }: { user: User }) => {
               </Form>
             </Col>
           </Row>
-        </PageHeader>
+        </PageWrapper>
       )}
     </Formik>
   )

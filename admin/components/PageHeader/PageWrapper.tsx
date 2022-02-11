@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { css } from "@emotion/react"
-import { PageHeaderProps } from "antd"
 import React from "react"
+import { css } from "@emotion/react"
+import { PageHeader, PageHeaderProps } from "antd"
 
-export const PageHeader: React.FC<PageHeaderProps> = (props) => (
+export const PageWrapper: React.FC<PageHeaderProps> = (props) => (
   <PageHeader
     {...props}
     css={css`

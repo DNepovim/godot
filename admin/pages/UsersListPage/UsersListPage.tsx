@@ -6,8 +6,6 @@ import {
   Dropdown,
   Menu,
   message,
-  PageHeader,
-  Spin,
   Table,
   Typography,
 } from "antd"
@@ -15,6 +13,7 @@ import { ListUsersResult, UserRecord } from "firebase-admin/auth"
 import { Link } from "react-router-dom"
 import useSwr from "swr"
 import { useEffect, useState } from "react"
+import { PageWrapper } from "../../components/PageHeader/PageWrapper"
 
 export const UsersListPage = () => {
   const [users, setUsers] = useState<UserRecord[]>([])
@@ -49,7 +48,7 @@ export const UsersListPage = () => {
   }
 
   return (
-    <PageHeader
+    <PageWrapper
       title={<Typography.Title>Uživatelé</Typography.Title>}
       breadcrumb={{
         routes: [{ breadcrumbName: "Uživatelé", path: "/admin/uzivatele" }],
@@ -115,6 +114,6 @@ export const UsersListPage = () => {
           hideOnSinglePage: true,
         }}
       />
-    </PageHeader>
+    </PageWrapper>
   )
 }
