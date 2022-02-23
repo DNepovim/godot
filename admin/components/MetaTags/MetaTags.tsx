@@ -1,3 +1,4 @@
+import Head from "next/head"
 import React from "react"
 
 export interface MetaTagsProps {
@@ -146,7 +147,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
     },
   ]
   return (
-    <>
+    <Head>
       {title && <title>{title}</title>}
       {links.map((props, index) => (
         <link key={`link-${index}`} {...props} />
@@ -154,6 +155,6 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
       {metas.map((props, index) => (
         <meta key={`meta-${index}`} {...props} />
       ))}
-    </>
+    </Head>
   )
 }

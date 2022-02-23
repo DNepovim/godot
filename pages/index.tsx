@@ -1,7 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import type { NextPage } from "next"
-import Head from "next/head"
 import { NavigationItem, Page, SiteMeta } from "../data"
 import { Navigation } from "../components/Navigation/Navigation"
 import { css, Global } from "@emotion/react"
@@ -15,23 +14,21 @@ import { fonts } from "../styles/fonts"
 
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
   <div>
-    <Head>
-      <MetaTags
-        title={meta?.title ?? ""}
-        description={meta?.description ?? ""}
-        brandColor={theme.color.yellow}
-        themeColor={theme.color.lighterBlue}
-        url={meta?.url ?? (typeof window !== "undefined" ? window.origin : "")}
-        image="/images/cover.png"
-        manifest="/favicons/site.webmanifest"
-        icons={{
-          appleTouchIcon: "/favicons/apple-touch-icon.png",
-          largeIcon: "/favicons/favicon-32x32.png",
-          smallIcon: "/favicons/favicon-16x16.png",
-          maskIcon: "/favicons/safari-pinned-tab.svg",
-        }}
-      />
-    </Head>
+    <MetaTags
+      title={meta?.title ?? ""}
+      description={meta?.description ?? ""}
+      brandColor={theme.color.yellow}
+      themeColor={theme.color.lighterBlue}
+      url={meta?.url ?? (typeof window !== "undefined" ? window.origin : "")}
+      image="/images/cover.png"
+      manifest="/favicons/site.webmanifest"
+      icons={{
+        appleTouchIcon: "/favicons/apple-touch-icon.png",
+        largeIcon: "/favicons/favicon-32x32.png",
+        smallIcon: "/favicons/favicon-16x16.png",
+        maskIcon: "/favicons/safari-pinned-tab.svg",
+      }}
+    />
 
     <Global styles={fonts} />
     <Global styles={globalStyles} />
