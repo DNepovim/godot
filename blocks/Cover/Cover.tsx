@@ -179,6 +179,7 @@ export const Cover: React.FC<CoverFields> = ({
               display: inline-block;
               font-family: ${theme.fonts.headings};
               font-size: 3.4em;
+              text-transform: uppercase;
               margin: 0 0 16px;
               color: ${theme.color.darkBlue};
               ${underline(theme.color.yellow, 8)}

@@ -23,7 +23,7 @@ export const Navigation: React.FC<{
 }> = ({ title, items }) => {
   const [isOpened, setIsOpened] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [activeItem, setActiveItem] = useState<string | undefined>()
+  const [activeItem, setActiveItem] = useState<string | undefined>(undefined)
   const width = useWindowWidth()
   const scrollPosition = useScrollPosition()
   const navRef = useRef(null)
@@ -68,7 +68,7 @@ export const Navigation: React.FC<{
         `}
       >
         <Nav ref={navRef}>
-          {title && activeItem !== items[0].link && (
+          {title && activeItem && activeItem !== items[0].link && (
             <Title href={items[0].link} onClick={() => setIsOpened(false)}>
               {title}
             </Title>
@@ -77,7 +77,9 @@ export const Navigation: React.FC<{
             <NavList>
               {items
                 .filter((item) =>
-                  activeItem === items[0].link ? !item.showAfterScroll : true
+                  !activeItem || activeItem === items[0].link
+                    ? !item.showAfterScroll
+                    : true
                 )
                 .map((item) => (
                   <NavItem key={item.link} onClick={() => setIsOpened(false)}>
@@ -117,7 +119,7 @@ export const Navigation: React.FC<{
                   {items
                     .filter((item) => item.showAlways)
                     .filter((item) =>
-                      activeItem === items[0].link
+                      activeItem && activeItem === items[0].link
                         ? !item.showAfterScroll
                         : true
                     )
