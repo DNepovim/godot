@@ -22,6 +22,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       url={meta?.url ?? (typeof window !== "undefined" ? window.origin : "")}
       image="/images/cover.png"
       manifest="/favicons/site.webmanifest"
+      fontOrigin="https://cdn.skauting.cz"
       icons={{
         appleTouchIcon: "/favicons/apple-touch-icon.png",
         largeIcon: "/favicons/favicon-32x32.png",

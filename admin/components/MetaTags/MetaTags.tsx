@@ -9,6 +9,7 @@ export interface MetaTagsProps {
   url: string
   image: string
   manifest: string
+  fontOrigin: string
   icons: {
     appleTouchIcon: string
     largeIcon: string
@@ -40,8 +41,9 @@ interface PropertyMeta {
 export type Meta = NameMeta | PropertyMeta
 
 interface BasicLink {
-  rel: "preconnect" | "stylesheet" | "manifest"
+  rel: "preconnect" | "dns-prefetch" | "stylesheet" | "manifest"
   href: string
+  crossOrigin?: ""
 }
 
 interface IconLink {
@@ -63,6 +65,7 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
   image,
   icons,
   manifest,
+  fontOrigin,
 }) => {
   const metas: Meta[] = [
     {
@@ -144,6 +147,15 @@ export const MetaTags: React.FC<MetaTagsProps> = ({
       rel: "mask-icon",
       href: icons.maskIcon,
       color: brandColor,
+    },
+    {
+      rel: "preconnect",
+      href: fontOrigin,
+      crossOrigin: "",
+    },
+    {
+      rel: "dns-prefetch",
+      href: fontOrigin,
     },
   ]
   return (

@@ -34,7 +34,6 @@ export const Quotation: React.FC<QuotationFields> = ({
           font-style: italic;
           font-weight: 700;
           font-size: 1.4rem;
-          font-family: themix;
 
           &:before,
           &:after {

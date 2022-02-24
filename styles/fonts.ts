@@ -15,7 +15,7 @@ export const fonts = css`
         format("svg");
     font-weight: 400;
     font-style: normal;
-    font-display: optional;
+    font-display: fallback;
   }
 
   @font-face {
@@ -30,7 +30,7 @@ export const fonts = css`
         format("svg");
     font-weight: 400;
     font-style: italic;
-    font-display: optional;
+    font-display: fallback;
   }
 
   @font-face {
@@ -45,7 +45,7 @@ export const fonts = css`
         format("svg");
     font-weight: 700;
     font-style: normal;
-    font-display: optional;
+    font-display: fallback;
   }
 
   @font-face {
@@ -60,7 +60,7 @@ export const fonts = css`
         format("svg");
     font-weight: 700;
     font-style: italic;
-    font-display: optional;
+    font-display: fallback;
   }
 
   @font-face {
@@ -76,6 +76,6 @@ export const fonts = css`
         format("svg");
     font-weight: normal;
     font-style: normal;
-    font-display: optional;
+    font-display: fallback;
   }
 `
