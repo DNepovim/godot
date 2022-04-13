@@ -191,7 +191,7 @@ export const Cover: React.FC<CoverFields> = ({
         {subtitle && (
           <p
             css={css`
-              font-family: ${theme.fonts.headings};
+              color: ${theme.color.brown};
               font-size: 1.8em;
               margin: 0 0 4px;
             `}
