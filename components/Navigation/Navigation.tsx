@@ -1,36 +1,27 @@
 /** @jsxImportSource @emotion/react */
 import React, { useCallback, useEffect, useRef, useState } from "react"
-import Image from "next/image"
 import { theme } from "../../styles/theme"
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import Hamburger from "hamburger-react"
-import { useWindowWidth } from "@react-hook/window-size"
 import useScrollPosition from "@react-hook/window-scroll"
-import AnchorLink, { AnchorLinkProps } from "react-anchor-link-smooth-scroll"
+import AnchorLink from "react-anchor-link-smooth-scroll"
 import useOnClickOutside from "use-onclickoutside"
 import { Container } from "../Container/Container"
 import { Button } from "../Button/Button"
 import { NavigationItem, NavigationItemType } from "../../data"
 import { isLinkExternal } from "../../admin/utils/isLinkExternal"
 import { underline } from "../../styles/utils"
-
-const BREAKPOINT = 740
+import { ShowOnDesktop, ShowOnMobile } from "../ShowOnMobile/ShowOnMobile"
 
 export const Navigation: React.FC<{
   title?: string
   items: NavigationItem[]
 }> = ({ title, items }) => {
   const [isOpened, setIsOpened] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
   const [activeItem, setActiveItem] = useState<string | undefined>(undefined)
-  const width = useWindowWidth()
   const scrollPosition = useScrollPosition()
   const navRef = useRef(null)
-
-  useEffect(() => {
-    setIsMobile(width < BREAKPOINT)
-  }, [width])
 
   useOnClickOutside(navRef, () => setIsOpened(false))
 
@@ -73,7 +64,7 @@ export const Navigation: React.FC<{
               {title}
             </Title>
           )}
-          {!isMobile && (
+          <ShowOnDesktop>
             <NavList>
               {items
                 .filter((item) =>
@@ -102,62 +93,58 @@ export const Navigation: React.FC<{
                   </NavItem>
                 ))}
             </NavList>
-          )}
-          {isMobile && (
-            <>
-              {items
-                .filter((item) => item.showAlways)
-                .filter((item) =>
-                  activeItem === items[0].link ? !item.showAfterScroll : true
-                ) && (
-                <div
-                  css={css`
-                    display: flex;
-                    margin: 0 16px 0 auto;
-                  `}
-                >
-                  {items
-                    .filter((item) => item.showAlways)
-                    .filter((item) =>
-                      activeItem && activeItem === items[0].link
-                        ? !item.showAfterScroll
-                        : true
-                    )
-                    .map((item) => (
-                      <Button
-                        key={item.link}
-                        link={item.link}
-                        isSmall
-                        targetBlank={isLinkExternal(item.link)}
-                      >
-                        {item.title}
-                      </Button>
-                    ))}
-                </div>
-              )}
-              <NavListMobile
-                isOpened={isOpened}
-                onClick={() => setIsOpened(false)}
+          </ShowOnDesktop>
+          <ShowOnMobile>
+            {items
+              .filter((item) => item.showAlways)
+              .filter((item) =>
+                activeItem === items[0].link ? !item.showAfterScroll : true
+              ) && (
+              <div
+                css={css`
+                  display: flex;
+                  margin: 0 16px 0 auto;
+                `}
               >
                 {items
-                  .filter((item) => !item.showAlways)
+                  .filter((item) => item.showAlways)
+                  .filter((item) =>
+                    activeItem && activeItem === items[0].link
+                      ? !item.showAfterScroll
+                      : true
+                  )
                   .map((item) => (
-                    <NavItem key={item.link}>
-                      <NavLinkMobile href={item.link}>
-                        {item.title}
-                      </NavLinkMobile>
-                    </NavItem>
+                    <Button
+                      key={item.link}
+                      link={item.link}
+                      isSmall
+                      targetBlank={isLinkExternal(item.link)}
+                    >
+                      {item.title}
+                    </Button>
                   ))}
-              </NavListMobile>
-            </>
-          )}
-          {isMobile && (
+              </div>
+            )}
+            <NavListMobile
+              isOpened={isOpened}
+              onClick={() => setIsOpened(false)}
+            >
+              {items
+                .filter((item) => !item.showAlways)
+                .map((item) => (
+                  <NavItem key={item.link}>
+                    <NavLinkMobile href={item.link}>{item.title}</NavLinkMobile>
+                  </NavItem>
+                ))}
+            </NavListMobile>
+          </ShowOnMobile>
+          <ShowOnMobile>
             <Hamburger
               color={theme.color.lightBlue}
               toggled={isOpened}
               onToggle={() => setIsOpened(!isOpened)}
             />
-          )}
+          </ShowOnMobile>
         </Nav>
       </Container>
     </NavBar>
