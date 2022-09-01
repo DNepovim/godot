@@ -105,7 +105,7 @@ export const Cover: React.FC<CoverFields> = ({
     <Block id={id} backgroundColor={theme.color.sky}>
       <Container
         css={css`
-          height: calc(85vh - 92px);
+          min-height: calc(85vh - 92px);
           *::selection {
             background-color: ${theme.color.darkBlue};
           }
