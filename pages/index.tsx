@@ -18,7 +18,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       title={meta?.title ?? ""}
       description={meta?.description ?? ""}
       brandColor={theme.color.yellow}
-      themeColor={theme.color.lighterBlue}
+      themeColor={theme.color.yellow}
       url={meta?.url ?? (typeof window !== "undefined" ? window.origin : "")}
       image="/images/cover.png"
       manifest="/favicons/site.webmanifest"
