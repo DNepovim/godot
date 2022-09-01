@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import React from "react"
 import { css } from "@emotion/react"
-import { tp } from "../../admin/utils/tp"
+import { tp } from "../../utils/tp"
 import Image from "next/image"
 import { theme } from "../../styles/theme"
 import { Icon } from "../Icon/Icon"

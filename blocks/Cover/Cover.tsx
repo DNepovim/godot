@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 /** @jsxImportSource @emotion/react */
 import React from "react"
-import { tp } from "../../admin/utils/tp"
+import { tp } from "../../utils/tp"
 import { theme } from "../../styles/theme"
 import { css } from "@emotion/react"
 import { Block } from "../../components/Block/Block"
@@ -243,5 +243,5 @@ const Grass = styled.div`
   height: 20px;
   background-image: url("/images/grass.svg");
   background-repeat: repeat-x;
-  background-size: contain:
+  background-size: contain;
 `

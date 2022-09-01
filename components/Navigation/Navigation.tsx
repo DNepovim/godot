@@ -10,7 +10,7 @@ import useOnClickOutside from "use-onclickoutside"
 import { Container } from "../Container/Container"
 import { Button } from "../Button/Button"
 import { NavigationItem, NavigationItemType } from "../../data"
-import { isLinkExternal } from "../../admin/utils/isLinkExternal"
+import { isLinkExternal } from "../../utils/isLinkExternal"
 import { underline } from "../../styles/utils"
 import { ShowOnDesktop, ShowOnMobile } from "../ShowOnMobile/ShowOnMobile"
 

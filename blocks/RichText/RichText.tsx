@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react"
 import React from "react"
-import { tp } from "../../admin/utils/tp"
+import { tp } from "../../utils/tp"
 import { Block } from "../../components/Block/Block"
 import { Container } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"

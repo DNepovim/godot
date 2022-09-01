@@ -9,7 +9,7 @@ import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
 import { getMeta, getNavigation, getPage } from "../firebase/database"
 import { theme } from "../styles/theme"
-import { MetaTags } from "../admin/components/MetaTags/MetaTags"
+import { MetaTags } from "../components/MetaTags/MetaTags"
 import { fonts } from "../styles/fonts"
 
 const Home: NextPage<Props> = ({ meta, navigation, page }) => (
