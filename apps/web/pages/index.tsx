@@ -7,7 +7,7 @@ import { css, Global } from "@emotion/react"
 import { globalStyles } from "../styles/global"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
-import { getMeta, getNavigation, getPage } from "../firebase/database"
+import { getMeta, getNavigation, getPage } from "../firebase/firestore"
 import { theme } from "../styles/theme"
 import { MetaTags } from "../components/MetaTags/MetaTags"
 import { fonts } from "../styles/fonts"
@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
       `}
     >
       <Navigation title={meta?.title} items={navigation} />
-      {page.blocks
+      {page.content
         .filter((block) => !!block)
         .map(({ template, fields }, i) =>
           React.createElement(blockDefs[template as BlockTemplates].component, {
@@ -57,7 +57,7 @@ export const getStaticProps = async () => ({
   props: {
     meta: (await getMeta()) ?? {},
     navigation: (await getNavigation()) ?? [],
-    page: (await getPage("frontPage")) ?? [],
+    page: (await getPage("fnEKcB5B7dsXgHmqDFnN")) ?? [],
   },
 })
 

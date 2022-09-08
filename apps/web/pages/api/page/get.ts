@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next/dist/shared/lib/utils"
-import { getPage } from "../../../firebase/database"
+import { getPage } from "../../../firebase/firestore"
 
 const handler: NextApiHandler = async (req, res) => {
   const body = JSON.parse(req.body)
