@@ -116,7 +116,7 @@ export const Cover: React.FC<CoverFields> = ({
             position: absolute;
             right: 0;
             bottom: 0;
-            width: 60vh;
+            width: 70vh;
             max-width: 100%;
             object-fit: cover;
             user-select: none;
@@ -221,7 +221,7 @@ export const Cover: React.FC<CoverFields> = ({
             right: 0;
             bottom: 0;
             transform: translateY(100%);
-            width: 60vh;
+            width: 70vh;
             max-width: 100%;
           `}
           offset={400}
