@@ -42,7 +42,7 @@ const Home: NextPage<Props> = ({ meta, navigation, page }) => (
     >
       <Navigation title={meta?.title} items={navigation} />
       {page.blocks
-        .filter((block) => !!block)
+        .filter((block) => !!block && !block.isHidden)
         .map(({ template, fields }, i) =>
           React.createElement(blockDefs[template as BlockTemplates].component, {
             ...fields,

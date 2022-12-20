@@ -10,6 +10,7 @@ import { VideoBlock, videoDef } from "./Video/videoDef"
 
 export interface Block {
   id: string
+  isHidden?: boolean
 }
 
 export type BlocksDefs =

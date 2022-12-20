@@ -17,6 +17,7 @@ export interface NavigationItem {
   type?: NavigationItemType.Button
   showAlways?: boolean
   showAfterScroll?: boolean
+  isHidden?: boolean
 }
 export interface SiteMeta {
   title?: string

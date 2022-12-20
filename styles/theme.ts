@@ -18,6 +18,7 @@ export const theme = {
     gray: "#787671",
     beige: "#ffeecb",
     sky: "#d7ecef",
+    snow: "#ffffff99",
   },
   fonts: {
     text: "themix, verdana, sans-serif",

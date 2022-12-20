@@ -12,6 +12,7 @@ import { Container } from "../../components/Container/Container"
 import styled from "@emotion/styled"
 import useScrollPosition from "@react-hook/window-scroll"
 import { underline } from "../../styles/utils"
+import Snowfall from "react-snowfall"
 
 const leaves = [
   {
@@ -99,6 +100,7 @@ export const Cover: React.FC<CoverFields> = ({
   subtitle,
   claim,
   button,
+  isSnowfall,
 }) => {
   const scrollPosition = useScrollPosition()
   return (
@@ -182,7 +184,10 @@ export const Cover: React.FC<CoverFields> = ({
               text-transform: uppercase;
               margin: 0 0 16px;
               color: ${theme.color.darkBlue};
-              ${underline(theme.color.yellow, 8)}
+              ${underline(
+                isSnowfall ? theme.color.snow : theme.color.yellow,
+                8
+              )}
             `}
           >
             {tp(title)}
@@ -227,7 +232,10 @@ export const Cover: React.FC<CoverFields> = ({
           offset={400}
         />
       </Container>
-      <Grass />
+      {isSnowfall && (
+        <Snowfall color={theme.color.snow} style={{ zIndex: 10 }} />
+      )}
+      <Grass isSnowfall={isSnowfall} />
     </Block>
   )
 }
@@ -241,7 +249,8 @@ const Grass = styled.div`
   width: 100vw;
   max-width: 100%;
   height: 20px;
-  background-image: url("/images/grass.svg");
+  background-image: url(${({ isSnowfall }: { isSnowfall?: boolean }) =>
+    isSnowfall ? "/images/grass-white.svg" : "/images/grass.svg"});
   background-repeat: repeat-x;
-  background-size: contain;
+  background-size: contain; ;
 `

@@ -17,11 +17,12 @@ import { ShowOnDesktop, ShowOnMobile } from "../ShowOnMobile/ShowOnMobile"
 export const Navigation: React.FC<{
   title?: string
   items: NavigationItem[]
-}> = ({ title, items }) => {
+}> = ({ title, items: rawItems }) => {
   const [isOpened, setIsOpened] = useState(false)
   const [activeItem, setActiveItem] = useState<string | undefined>(undefined)
   const scrollPosition = useScrollPosition()
   const navRef = useRef(null)
+  const items = rawItems.filter((item) => !item.isHidden)
 
   useOnClickOutside(navRef, () => setIsOpened(false))
 
