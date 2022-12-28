@@ -1,0 +1,69 @@
+import styled from "@emotion/styled"
+import React, { ReactNode } from "react"
+import { theme } from "../../styles/theme"
+
+export interface ButtonProps {
+  link: string
+  targetBlank?: boolean
+  isSmall?: boolean
+  children: ReactNode
+}
+
+export const Button: React.FC<ButtonProps> = ({
+  children,
+  link,
+  targetBlank,
+  isSmall,
+}) => (
+  <StyledButton
+    isSmall={isSmall ?? false}
+    href={link}
+    {...(targetBlank
+      ? {
+          target: "_blank",
+          rel: "noreferrer noopener",
+        }
+      : {})}
+  >
+    <span>{children}</span>
+  </StyledButton>
+)
+
+const StyledButton = styled.a`
+  position: relative;
+  display: inline-block;
+  font-size: ${({ isSmall }: { isSmall: boolean }) => (isSmall ? 0.8 : 1.4)}rem;
+  color: ${theme.color.background};
+  padding: 0.6em 1em;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: ${theme.color.lightBlue};
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: ${theme.color.darkBlue};
+    transition: width 700ms cubic-bezier(0.1, 0.15, 0, 0.97);
+  }
+
+  span {
+    position: relative;
+    z-index: 10;
+  }
+
+  &:hover {
+    text-decoration: none;
+
+    &:before {
+      width: 100%;
+    }
+  }
+  @media (min-width: 400px) {
+    font-size: ${({ isSmall }: { isSmall: boolean }) => (isSmall ? 1 : 1.4)}rem;
+  }
+`
