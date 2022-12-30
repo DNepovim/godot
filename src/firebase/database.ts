@@ -20,8 +20,5 @@ export const getNavigation = async (): Promise<Navigation | undefined> =>
 export const getMeta = async (): Promise<SiteMeta | undefined> =>
   getData("config", "meta")
 
-export const getPage = async (page: string): Promise<Page | undefined> => {
-  const result = (await getData("page", page)) as unknown as Page
-  console.log(result)
-  return result
-}
+export const getPage = async (page: string): Promise<Page | undefined> =>
+  getData("page", page) as unknown as Page
