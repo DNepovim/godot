@@ -12,7 +12,7 @@ export const Quotation: React.FC<QuotationFields> = ({
   source,
   sourceUrl,
 }) => (
-  <Block id={id} theme={"blue"}>
+  <Block id={id} palette={"blue"}>
     <QuotationContainer>
       <Quote>{tp(text)}</Quote>
       <SourceLink href={sourceUrl} target="_blank" rel="noreferrer noopener">

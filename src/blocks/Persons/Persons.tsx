@@ -13,7 +13,7 @@ export const Persons: React.FC<PersonsFields> = ({
   subtitle,
   persons,
 }) => (
-  <Block id={id} theme={"sky"}>
+  <Block id={id} palette={"sky"}>
     <CenteredContainer>
       {title && <Heading>{tp(title)}</Heading>}
       {subtitle && <Subtitle>{tp(subtitle)}</Subtitle>}

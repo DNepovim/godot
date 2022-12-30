@@ -1,84 +1,44 @@
 import { css } from "@emotion/react"
 import styled from "@emotion/styled"
 import React, { ReactNode } from "react"
-import { theme } from "../../styles/theme"
+import { colorPalettes, Styles, theme } from "../../styles/theme"
 
-type Styles = "sky" | "brown" | "beige" | "blue"
 export interface BlockFields {
   id?: string
-  theme?: Styles
+  palette?: Styles
   children: ReactNode
-}
-
-interface Theme {
-  background: string
-  selection: string
-  title: string
-  underline: string
-  text: string
-}
-
-const blockThemes: Record<Styles, Theme> = {
-  ["sky"]: {
-    background: theme.color.sky,
-    selection: theme.color.darkBlue,
-    title: theme.color.darkBlue,
-    underline: theme.color.brown,
-    text: theme.color.black,
-  },
-  ["brown"]: {
-    background: theme.color.brown,
-    selection: theme.color.yellow,
-    title: theme.color.beige,
-    underline: theme.color.yellow,
-    text: theme.color.beige,
-  },
-  ["beige"]: {
-    background: theme.color.beige,
-    selection: theme.color.brown,
-    title: theme.color.brown,
-    underline: theme.color.yellow,
-    text: theme.color.black,
-  },
-  ["blue"]: {
-    background: theme.color.lightBlue,
-    selection: theme.color.darkBlue,
-    title: theme.color.yellow,
-    underline: theme.color.yellow,
-    text: theme.color.beige,
-  },
 }
 
 export const Block: React.FC<BlockFields> = ({
   id,
-  theme: style,
+  palette: style,
   children,
 }) => (
-  <StyledSection theme={style ?? "sky"} id={id}>
+  <StyledSection palette={style ?? "sky"} id={id}>
     {children}
   </StyledSection>
 )
 
 const StyledSection = styled.section`
-  ${({ theme: style }: { theme: Styles }) => css`
+  ${({ palette }: { palette: Styles }) => css`
     position: relative;
-    background-color: ${blockThemes[style].background};
-    color: ${blockThemes[style].text};
+    background-color: ${colorPalettes[palette].background};
+    color: ${colorPalettes[palette].text};
 
     ::selection {
-      background-color: ${blockThemes[style].selection};
+      background-color: ${colorPalettes[palette].selection};
     }
     a {
-      color: ${blockThemes[style].underline};
+      color: ${colorPalettes[palette].underline};
     }
     h1,
     h2,
     h3,
     h4 {
-      color: ${blockThemes[style].title};
+      color: ${colorPalettes[palette].title};
 
       &:after {
-        background-color: ${blockThemes[style].underline};
+        background-color: ${colorPalettes[palette].underline};
       }
     }
   `}

@@ -26,7 +26,7 @@ export const Cover: React.FC<CoverFields> = ({
 }) => {
   const scrollPosition = useScrollPosition()
   return (
-    <Block id={id} theme={"sky"}>
+    <Block id={id} palette={"sky"}>
       <Container minHeight={"calc(85vh - 92px)"}>
         <CoverWrapper>
           <CoverIn>

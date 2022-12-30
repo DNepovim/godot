@@ -13,7 +13,7 @@ export const Contacts: React.FC<ContactsFields> = ({
   subtitle,
   contacts,
 }) => (
-  <Block id={id} theme={"brown"}>
+  <Block id={id} palette={"brown"}>
     <ColumnContainer>
       <ContactHeading>{tp(title)}</ContactHeading>
       <SmallParagraph dangerouslySetInnerHTML={{ __html: subtitle }} />

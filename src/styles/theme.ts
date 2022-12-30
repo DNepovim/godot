@@ -34,3 +34,44 @@ export const min = (breakpoint: "s" | "m" | "l") =>
   `(min-width: ${theme.breakpoints[breakpoint]}px)`
 export const max = (breakpoint: "s" | "m" | "l") =>
   `(min-width: ${theme.breakpoints[breakpoint] - 1}px)`
+
+export type Styles = "sky" | "brown" | "beige" | "blue"
+
+interface Theme {
+  background: string
+  selection: string
+  title: string
+  underline: string
+  text: string
+}
+
+export const colorPalettes: Record<Styles, Theme> = {
+  ["sky"]: {
+    background: theme.color.sky,
+    selection: theme.color.darkBlue,
+    title: theme.color.darkBlue,
+    underline: theme.color.brown,
+    text: theme.color.black,
+  },
+  ["brown"]: {
+    background: theme.color.brown,
+    selection: theme.color.yellow,
+    title: theme.color.beige,
+    underline: theme.color.yellow,
+    text: theme.color.beige,
+  },
+  ["beige"]: {
+    background: theme.color.beige,
+    selection: theme.color.brown,
+    title: theme.color.brown,
+    underline: theme.color.yellow,
+    text: theme.color.black,
+  },
+  ["blue"]: {
+    background: theme.color.lightBlue,
+    selection: theme.color.darkBlue,
+    title: theme.color.yellow,
+    underline: theme.color.yellow,
+    text: theme.color.beige,
+  },
+}

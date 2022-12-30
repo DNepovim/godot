@@ -14,7 +14,7 @@ export const Columns: React.FC<ColumnsFields> = ({
   gridView,
   columns,
 }) => (
-  <Block id={id} theme={"beige"}>
+  <Block id={id} palette={"beige"}>
     <CenteredContainer>
       <Heading>{tp(title)}</Heading>
       <Wrapper gridView={gridView}>
