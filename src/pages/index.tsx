@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { css, Global } from "@emotion/react"
+import { Global } from "@emotion/react"
 import { globalStyles } from "../styles/global"
 import { blockDefs } from "../blocks/blocks"
 import { BlockTemplates } from "../blocks/blockTemplates"
@@ -30,10 +30,11 @@ const IndexPage = () => {
       const meta = await getMeta()
       const navigation = await getNavigation()
       const page = await getPage("hlavni-stranka")
+
       setData({
         meta: meta ?? {},
         navigation: navigation?.items ?? [],
-        pageBlocks: page?.content ?? [],
+        pageBlocks: page?.content?.sort((a, b) => a.order - b.order) ?? [],
       })
     })()
   }, [])

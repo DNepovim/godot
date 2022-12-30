@@ -10,6 +10,7 @@ import { RichTextBlock, richTextDef } from "./RichText/richTextDef"
 export interface Block {
   id: string
   anchor: string
+  order: number
   isHidden?: boolean
 }
 
