@@ -18,7 +18,7 @@ export const Container = styled("div")`
         `
       : ""}
   margin: 0 auto;
-  padding: 100px 16px;
+  padding: 100px ${theme.layout.gap}px;
 `
 
 export const CenteredContainer = styled(Container)`

@@ -10,6 +10,12 @@ export interface GalleryBlock extends Block {
 
 export interface GalleryFields extends BlockFields {
   images: string[]
+  button: {
+    label: string
+    link: string
+    targetBlank?: boolean
+    showButton?: boolean
+  }
 }
 
 export const galleryDef: BlockDef<GalleryFields> = {

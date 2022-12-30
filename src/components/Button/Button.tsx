@@ -6,6 +6,7 @@ export interface ButtonProps {
   link: string
   targetBlank?: boolean
   isSmall?: boolean
+  dark?: boolean
   children: ReactNode
 }
 
@@ -14,30 +15,38 @@ export const Button: React.FC<ButtonProps> = ({
   link,
   targetBlank,
   isSmall,
+  dark,
 }) => (
   <StyledButton
     isSmall={isSmall ?? false}
+    dark={dark}
     href={link}
     {...(targetBlank
       ? {
           target: "_blank",
           rel: "noreferrer noopener",
         }
-      : {})}
+      : null)}
   >
     <span>{children}</span>
   </StyledButton>
 )
 
+interface StyledButtonProps {
+  isSmall: boolean
+  dark?: boolean
+}
+
 const StyledButton = styled.a`
   position: relative;
   display: inline-block;
-  font-size: ${({ isSmall }: { isSmall: boolean }) => (isSmall ? 0.8 : 1.4)}rem;
-  color: ${theme.color.background};
+  font-size: ${({ isSmall }: StyledButtonProps) => (isSmall ? 0.8 : 1.4)}rem;
+  color: ${theme.color.beige} !important;
+  background-color: ${({ dark }: StyledButtonProps) =>
+    dark ? theme.color.darkBlue : theme.color.lightBlue};
   padding: 0.6em 1em;
   border-radius: 4px;
   text-decoration: none;
-  background-color: ${theme.color.lightBlue};
   overflow: hidden;
 
   &:before {
@@ -47,7 +56,8 @@ const StyledButton = styled.a`
     left: 0;
     width: 0;
     height: 100%;
-    background-color: ${theme.color.darkBlue};
+    background-color: ${({ dark }: StyledButtonProps) =>
+      dark ? theme.color.darkerBlue : theme.color.darkBlue};
     transition: width 700ms cubic-bezier(0.1, 0.15, 0, 0.97);
   }
 

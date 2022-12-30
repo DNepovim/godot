@@ -1,6 +1,7 @@
 export const theme = {
   layout: {
     width: 1000,
+    gap: 16,
   },
   breakpoints: {
     s: 500,
@@ -9,9 +10,10 @@ export const theme = {
   },
   color: {
     background: "#ffffff",
+    lighterBlue: "#2fb7d0",
     lightBlue: "#007d94",
     darkBlue: "#02505e",
-    lighterBlue: "#2fb7d0",
+    darkerBlue: "#013741",
     yellow: "#ccc15a",
     brown: "#3a2205",
     lightBrown: "#70330b",
@@ -19,7 +21,7 @@ export const theme = {
     beige: "#ffeecb",
     sky: "#d7ecef",
     snow: "#ffffff99",
-    black: "#000000"
+    black: "#000000",
   },
   fonts: {
     text: "themix, verdana, sans-serif",

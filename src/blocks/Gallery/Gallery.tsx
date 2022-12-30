@@ -1,45 +1,76 @@
-import React from "react"
-import { JustifiedContainer } from "../../components/Container/Container"
-import { min, theme } from "../../styles/theme"
+import React, { useEffect, useState } from "react"
+import {
+  CenteredContainer,
+  Container,
+} from "../../components/Container/Container"
+import { theme } from "../../styles/theme"
 import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
 import styled from "@emotion/styled"
-import { StaticImage } from "gatsby-plugin-image"
+import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage"
+import { firebaseApp } from "../../firebase/firebase"
+import { Image } from "../../components/Image/Image"
+import { Button } from "../../components/Button/Button"
 
 const gap = 4
 
-export const Gallery: React.FC<GalleryFields> = ({ id, images }) => (
-  <Block id={id}>
-    <JustifiedContainer>
-      {images.map((image, i) => (
-        <Figure key={1}>
-          <GalleryImage
-            src={`/images/${image}.webp`}
-            alt={`Fotka ${i}`}
-            width={theme.layout.width / 3}
-            height={(theme.layout.width / 3) * 0.7}
-          />
-        </Figure>
-      ))}
-    </JustifiedContainer>
-  </Block>
-)
+export const Gallery: React.FC<GalleryFields> = ({ id, button }) => {
+  const [imagesList, setImagesList] = useState<string[]>([])
+
+  useEffect(() => {
+    void (async () => {
+      const storage = await getStorage(firebaseApp)
+      const objectRef = await ref(storage, "gallery")
+      const list = await listAll(objectRef)
+      setImagesList(
+        await Promise.all(
+          list.items.map(async (item) => await getDownloadURL(item))
+        )
+      )
+    })()
+  }, [])
+
+  return (
+    <Block id={id} palette="blue">
+      <GrdiContainer>
+        {imagesList.map((image, i) => (
+          <Figure key={image}>
+            <Image
+              src={image}
+              width={theme.layout.width / 3}
+              height={(theme.layout.width / 3) * 0.7}
+              sizes={`(min-width: ${
+                theme.layout.width - theme.layout.gap * 2
+              }px) 268px, (min-width: 640px) calc((100vw - 7rem)/3), (min-width: 500px) calc((100vw - 7rem)/2),  calc((100vw - 5rem)/2)`}
+              backgroundColor={theme.color.darkBlue}
+              alt=""
+            />
+          </Figure>
+        ))}
+      </GrdiContainer>
+      <ButtonContainer>
+        <Button link={button.link} dark targetBlank={button.targetBlank}>
+          {button.label}
+        </Button>
+      </ButtonContainer>
+    </Block>
+  )
+}
 
 const Figure = styled.figure`
   box-sizing: border-box;
   text-align: center;
-  width: calc(100% - ${gap * 2}px);
-  margin: ${gap}px 0;
-
-  @media ${min("s")} {
-    width: calc(100% / 2 - ${gap * 2}px);
-  }
-
-  @media ${min("m")} {
-    width: calc(100% / 3 - ${gap * 2}px);
-  }
+  width: 100%;
+  margin: 0;
 `
 
-const GalleryImage = styled(StaticImage)`
-  background-color: ${theme.color.lightBlue};
+const GrdiContainer = styled(Container)`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: ${theme.layout.gap}px;
+  padding-bottom: 18px;
+`
+
+const ButtonContainer = styled(CenteredContainer)`
+  padding-top: 18px;
 `
