@@ -37,7 +37,6 @@ const IndexPage = () => {
       })
     })()
   }, [])
-  console.log(meta, navigation, page)
 
   return (
     <div>
