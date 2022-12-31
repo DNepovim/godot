@@ -12,54 +12,47 @@ export const MobileNavigation: React.FC<{
   activeItem?: string
 }> = ({ items, activeItem }) => {
   const [isOpened, setIsOpened] = useState(false)
+  const fixedItems = items.filter(
+    ({ showAlways, showAfterScroll }) => showAlways && showAfterScroll
+  )
+  const restItems = items.filter(({ showAlways }) => !showAlways)
+
   return (
     <>
-      {items
-        .filter((item) => item.showAlways)
-        .filter((item) =>
-          activeItem === items[0].link ? !item.showAfterScroll : true
-        ) && (
-        <NavWrapper>
-          {items
-            .filter((item) => item.showAlways)
-            .filter((item) =>
-              activeItem && activeItem === items[0].link
-                ? !item.showAfterScroll
-                : true
-            )
-            .map((item) => (
-              <Button
-                key={item.link}
-                link={item.link}
-                isSmall
-                targetBlank={isLinkExternal(item.link)}
-              >
-                {item.title}
-              </Button>
-            ))}
-        </NavWrapper>
-      )}
-      <NavList isOpened={isOpened} onClick={() => setIsOpened(false)}>
-        {items
-          .filter((item) => !item.showAlways)
-          .map((item) => (
+      <NavWrapper>
+        {fixedItems.length > 0 &&
+          activeItem !== items[0].link &&
+          fixedItems.map((item) => (
+            <Button
+              key={item.link}
+              link={item.link}
+              isSmall
+              targetBlank={isLinkExternal(item.link)}
+            >
+              {item.title}
+            </Button>
+          ))}
+        <NavList isOpened={isOpened} onClick={() => setIsOpened(false)}>
+          {restItems.map((item) => (
             <NavItem key={item.link}>
               <NavLink to={item.link}>{item.title}</NavLink>
             </NavItem>
           ))}
-      </NavList>
-      <Hamburger
-        color={theme.color.lightBlue}
-        toggled={isOpened}
-        onToggle={() => setIsOpened(!isOpened)}
-      />
+        </NavList>
+        <Hamburger
+          color={theme.color.lightBlue}
+          toggled={isOpened}
+          onToggle={() => setIsOpened(!isOpened)}
+        />
+      </NavWrapper>
     </>
   )
 }
 
 const NavWrapper = styled.div`
   display: flex;
-  margin: 0 16px 0 auto;
+  align-items: center;
+  gap: 16px;
 `
 
 const NavItem = styled.li``

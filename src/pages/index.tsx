@@ -51,13 +51,14 @@ const IndexPage = () => {
           )}
           {page
             .filter((block) => !!block && !block.isHidden)
-            .map(({ template, fields, id, anchor }, i) =>
+            .map(({ template, fields, id, anchor, palette }, i) =>
               React.createElement(
                 blockDefs[template as BlockTemplates].component,
                 {
                   ...fields,
                   key: id,
                   id: anchor,
+                  palette,
                 }
               )
             )}

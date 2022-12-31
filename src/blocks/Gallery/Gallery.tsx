@@ -11,15 +11,15 @@ import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage"
 import { firebaseApp } from "../../firebase/firebase"
 import { Image } from "../../components/Image/Image"
 import { Button } from "../../components/Button/Button"
+import { storage } from "../../firebase/storage"
 
 const gap = 4
 
-export const Gallery: React.FC<GalleryFields> = ({ id, button }) => {
+export const Gallery: React.FC<GalleryFields> = ({ button, ...block }) => {
   const [imagesList, setImagesList] = useState<string[]>([])
 
   useEffect(() => {
     void (async () => {
-      const storage = await getStorage(firebaseApp)
       const objectRef = await ref(storage, "gallery")
       const list = await listAll(objectRef)
       setImagesList(
@@ -31,7 +31,7 @@ export const Gallery: React.FC<GalleryFields> = ({ id, button }) => {
   }, [])
 
   return (
-    <Block id={id} palette="blue">
+    <Block {...block}>
       <GrdiContainer>
         {imagesList.map((image, i) => (
           <Figure key={image}>

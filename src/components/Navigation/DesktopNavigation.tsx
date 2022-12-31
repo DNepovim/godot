@@ -3,7 +3,9 @@ import React, { useEffect, useRef, useState } from "react"
 import useScrollPosition from "@react-hook/window-scroll"
 import { Link } from "gatsby"
 import { theme } from "../../styles/theme"
-import { NavigationItem } from "../../data"
+import { NavigationItem, NavigationItemType } from "../../data"
+import { isLinkExternal } from "../../utils/isLinkExternal"
+import { Button } from "../Button/Button"
 
 interface UnderlineProps {
   left: number
@@ -48,13 +50,31 @@ export const DesktopNavigation: React.FC<{
 
   return (
     <NavList ref={navListRef}>
-      {items.map((item) => (
-        <NavItem key={item.link}>
-          <NavLink to={item.link} active={activeItem === item.link ? 1 : 0}>
-            {item.title}
-          </NavLink>
-        </NavItem>
-      ))}
+      {items
+        .filter((item) =>
+          !activeItem || activeItem === items[0].link
+            ? !item.showAfterScroll
+            : true
+        )
+        .map((item) => (
+          <NavItem key={item.link}>
+            {item?.type === NavigationItemType.Button ? (
+              <StyledButton>
+                <Button
+                  link={item.link}
+                  isSmall
+                  targetBlank={isLinkExternal(item.link)}
+                >
+                  {item.title}
+                </Button>
+              </StyledButton>
+            ) : (
+              <NavLink active={item.link === activeItem ? 1 : 0} to={item.link}>
+                {item.title}
+              </NavLink>
+            )}
+          </NavItem>
+        ))}
       {activeItemCor && (
         <Underline left={activeItemCor.left} width={activeItemCor.width} />
       )}
@@ -65,12 +85,20 @@ export const DesktopNavigation: React.FC<{
 const NavList = styled.ul`
   position: relative;
   display: flex;
+  align-items: center;
   list-style: none;
   margin: 0 -0.4rem;
   padding: 0;
+  height: 40px;
 `
 
 const NavItem = styled.li``
+
+const StyledButton = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 0.4rem;
+`
 
 const Underline = styled.div`
   position: absolute;
@@ -87,7 +115,7 @@ const NavLink = styled(Link)`
   position: relative;
   display: block;
   font-weight: bold;
-  padding: 0.4rem;
+  padding: 0 0.4rem;
   color: ${({ active }: { active: 0 | 1 }) =>
     active ? theme.color.brown : theme.color.black};
   cursor: pointer;

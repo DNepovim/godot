@@ -9,12 +9,8 @@ export interface BlockFields {
   children: ReactNode
 }
 
-export const Block: React.FC<BlockFields> = ({
-  id,
-  palette: style,
-  children,
-}) => (
-  <StyledSection palette={style ?? "sky"} id={id}>
+export const Block: React.FC<BlockFields> = ({ id, palette, children }) => (
+  <StyledSection palette={palette ?? "sky"} id={id}>
     {children}
   </StyledSection>
 )

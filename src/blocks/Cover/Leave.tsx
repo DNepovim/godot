@@ -29,10 +29,10 @@ export const Leave = styled.img`
   animation-timing-function: cubic-bezier(0.45, 0.05, 0.55, 0.95);
   @keyframes appearing-${({ index }: LeaveProps) => index} {
     from {
-      transform: rotate(${({ index }: LeaveProps) => index - 5}deg);
+      transform: rotate(${({ rotate }: LeaveProps) => rotate - 5}deg);
     }
     to {
-      transform: rotate(${({ index }: LeaveProps) => index + 5}deg);
+      transform: rotate(${({ rotate }: LeaveProps) => rotate + 5}deg);
     }
   }
 `

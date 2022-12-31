@@ -5,8 +5,8 @@ import { CenteredContainer } from "../../components/Container/Container"
 import { Heading } from "../../components/Heading/Heading"
 import { RichTextFields } from "./richTextDef"
 
-export const RichText: React.FC<RichTextFields> = ({ id, title, text }) => (
-  <Block palette={"brown"} id={id}>
+export const RichText: React.FC<RichTextFields> = ({ title, text, ...block }) => (
+  <Block {...block}>
     <CenteredContainer>
       <Heading>{tp(title)}</Heading>
       <div dangerouslySetInnerHTML={{ __html: tp(text) }} />

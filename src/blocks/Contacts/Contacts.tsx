@@ -8,12 +8,12 @@ import styled from "@emotion/styled"
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 
 export const Contacts: React.FC<ContactsFields> = ({
-  id,
   title,
   subtitle,
   contacts,
+  ...block
 }) => (
-  <Block id={id} palette={"brown"}>
+  <Block {...block}>
     <ColumnContainer>
       <ContactHeading>{tp(title)}</ContactHeading>
       <SmallParagraph dangerouslySetInnerHTML={{ __html: subtitle }} />

@@ -41,7 +41,7 @@ const StyledButton = styled.a`
   position: relative;
   display: inline-block;
   font-size: ${({ isSmall }: StyledButtonProps) => (isSmall ? 0.8 : 1.4)}rem;
-  color: ${theme.color.beige} !important;
+  color: ${theme.color.background} !important;
   background-color: ${({ dark }: StyledButtonProps) =>
     dark ? theme.color.darkBlue : theme.color.lightBlue};
   padding: 0.6em 1em;
@@ -58,7 +58,7 @@ const StyledButton = styled.a`
     height: 100%;
     background-color: ${({ dark }: StyledButtonProps) =>
       dark ? theme.color.darkerBlue : theme.color.darkBlue};
-    transition: width 700ms cubic-bezier(0.1, 0.15, 0, 0.97);
+    transition: width 700ms ${theme.animation.function};
   }
 
   span {

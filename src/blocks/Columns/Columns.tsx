@@ -14,7 +14,7 @@ export const Columns: React.FC<ColumnsFields> = ({
   gridView,
   columns,
 }) => (
-  <Block id={id} palette={"beige"}>
+  <Block id={id} palette="beige">
     <CenteredContainer>
       <Heading>{tp(title)}</Heading>
       <Wrapper gridView={gridView}>
@@ -36,6 +36,10 @@ const Wrapper = styled.div(
     @media ${min("l")} {
       margin-top: 80px;
       margin-bottom: 24px;
+    }
+
+    a {
+      color: ${theme.color.yellow};
     }
 
     ${

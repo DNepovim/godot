@@ -1,34 +1,52 @@
 import styled from "@emotion/styled"
+import { getDownloadURL, ref } from "firebase/storage"
 import { StaticImage } from "gatsby-plugin-image"
-import React from "react"
+import React, { useEffect, useState } from "react"
+import { Image } from "../../components/Image/Image"
+import { storage } from "../../firebase/storage"
 import { min, theme } from "../../styles/theme"
 import { tp } from "../../utils/tp"
+import frameImage from "../../images/frame.svg"
 
 export interface Person {
   image: string
   nick: string
   name: string
   text: string
+  isHidden?: boolean
 }
 
 export interface PersonProps extends Person {}
 
-export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => (
-  <Article>
-    <Figure>
-      <PersonImage
-        src={`/images/${image}.webp`}
-        alt={nick}
-        width={170}
-        height={170}
-      />
-      <Frame src={`/images/frame.svg`} alt="" />
-    </Figure>
-    <PersonNick>{tp(nick)}</PersonNick>
-    <PersonName>{tp(name)}</PersonName>
-    <p dangerouslySetInnerHTML={{ __html: tp(text) }} />
-  </Article>
-)
+export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => {
+  const [imageUrl, setImageUrl] = useState<string>()
+  useEffect(() => {
+    void (async () => {
+      const objectRef = await ref(storage, `/images/${image}.webp`)
+      const imageObjectUrl = await getDownloadURL(objectRef)
+      setImageUrl(imageObjectUrl)
+    })()
+  }, [])
+  return (
+    <Article>
+      <Figure>
+        {imageUrl && (
+          <PersonImage
+            imgStyle={{ width: 170, height: 170 }}
+            src={imageUrl}
+            alt={nick}
+            width={170}
+            height={170}
+          />
+        )}
+        <Frame src={frameImage} alt="" />
+      </Figure>
+      <PersonNick>{tp(nick)}</PersonNick>
+      <PersonName>{tp(name)}</PersonName>
+      <p dangerouslySetInnerHTML={{ __html: tp(text) }} />
+    </Article>
+  )
+}
 
 const Article = styled.article`
   max-width: 900px;
@@ -52,11 +70,8 @@ const Figure = styled.figure`
   }
 `
 
-const PersonImage = styled(StaticImage)`
-  width: 5em;
-  height: 5em;
+const PersonImage = styled(Image)`
   border-radius: 50%;
-  margin: 1em auto;
 `
 
 const Frame = styled.img`

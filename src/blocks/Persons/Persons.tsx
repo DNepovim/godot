@@ -8,20 +8,22 @@ import styled from "@emotion/styled"
 import { Person } from "./Person"
 
 export const Persons: React.FC<PersonsFields> = ({
-  id,
   title,
   subtitle,
   persons,
+  ...block
 }) => (
-  <Block id={id} palette={"sky"}>
+  <Block {...block}>
     <CenteredContainer>
       {title && <Heading>{tp(title)}</Heading>}
       {subtitle && <Subtitle>{tp(subtitle)}</Subtitle>}
     </CenteredContainer>
     <PersonsContianer>
-      {persons.map((person, i) => (
-        <Person key={`${person.nick}-${i}`} {...person} />
-      ))}
+      {persons
+        .filter(({ isHidden }) => !isHidden)
+        .map((person, i) => (
+          <Person key={`${person.nick}-${i}`} {...person} />
+        ))}
     </PersonsContianer>
   </Block>
 )

@@ -1,3 +1,4 @@
+import { Styles } from "../styles/theme"
 import { BlockTemplates } from "./blockTemplates"
 import { ColumnsBlock, columnsDef } from "./Columns/columnsDef"
 import { ContactsBlock, contactsDef } from "./Contacts/contactsDef"
@@ -6,11 +7,16 @@ import { GalleryBlock, galleryDef } from "./Gallery/galleryDef"
 import { PersonsBlock, personsDef } from "./Persons/personsDef"
 import { QuotationBlock, quotationDef } from "./Quotation/quotationDef"
 import { RichTextBlock, richTextDef } from "./RichText/richTextDef"
+import {
+  TestimonialsBlock,
+  testimonialsDef,
+} from "./Testimonials/testimonialsDef"
 
 export interface Block {
   id: string
   anchor: string
   order: number
+  palette?: Styles
   isHidden?: boolean
 }
 
@@ -22,6 +28,7 @@ export type BlocksDefs =
   | PersonsBlock
   | QuotationBlock
   | RichTextBlock
+  | TestimonialsBlock
 
 export const blockDefs: Record<BlockTemplates, BlockDef<any>> = {
   columns: columnsDef,
@@ -31,6 +38,7 @@ export const blockDefs: Record<BlockTemplates, BlockDef<any>> = {
   persons: personsDef,
   quotation: quotationDef,
   richText: richTextDef,
+  testimonials: testimonialsDef,
 }
 
 export interface BlockDef<T> {

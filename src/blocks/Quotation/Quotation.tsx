@@ -7,12 +7,12 @@ import { Container } from "../../components/Container/Container"
 import styled from "@emotion/styled"
 
 export const Quotation: React.FC<QuotationFields> = ({
-  id,
   text,
   source,
   sourceUrl,
+  ...block
 }) => (
-  <Block id={id} palette={"blue"}>
+  <Block {...block}>
     <QuotationContainer>
       <Quote>{tp(text)}</Quote>
       <SourceLink href={sourceUrl} target="_blank" rel="noreferrer noopener">

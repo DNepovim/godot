@@ -10,6 +10,8 @@ import { Link } from "gatsby"
 import { NavigationItem } from "../../data"
 import { Container } from "../Container/Container"
 import { css, Global } from "@emotion/react"
+import logo from "../../images/logo.svg"
+import { StaticImage } from "gatsby-plugin-image"
 
 export const Navigation: React.FC<{
   title?: string
@@ -53,18 +55,20 @@ export const Navigation: React.FC<{
       />
       <NavContainer>
         <Nav>
-          {title && activeItem && activeItem !== items[0].link && (
-            <Title to={items[0].link}>{title}</Title>
+          {activeItem && activeItem !== items[0].link && (
+            <LogoWrapper>
+              <ImageWrapper>
+                <Image src={logo} alt="logo" />
+              </ImageWrapper>
+              {title && <Title to={items[0].link}>{title}</Title>}
+            </LogoWrapper>
           )}
           <NavList>
             <ShowOnDesktop>
               <DesktopNavigation items={items} activeItem={activeItem} />
             </ShowOnDesktop>
             <ShowOnMobile>
-              <MobileNavigation
-                items={items.slice(1)}
-                activeItem={activeItem}
-              />
+              <MobileNavigation items={items} activeItem={activeItem} />
             </ShowOnMobile>
           </NavList>
         </Nav>
@@ -73,7 +77,7 @@ export const Navigation: React.FC<{
   )
 }
 
-const NavBar = styled("div")`
+const NavBar = styled.div`
   position: fixed;
   z-index: 1000;
   top: 0;
@@ -89,9 +93,8 @@ const NavContainer = styled(Container)`
   padding-bottom: 0;
 `
 
-const Nav = styled("nav")`
+const Nav = styled.nav`
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: 3.2em;
@@ -99,7 +102,7 @@ const Nav = styled("nav")`
 
 const Title = styled(Link)`
   display: flex;
-  margin: 0 auto 0 0;
+  margin: 0;
   font-size: 1em;
   font-family: ${theme.fonts.headings};
   color: ${theme.color.darkBlue};
@@ -110,10 +113,27 @@ const Title = styled(Link)`
   }
 `
 
-const NavList = styled("ul")`
+const NavList = styled.div`
   display: flex;
   align-items: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 0 auto;
+`
+
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 auto 0 0;
+`
+
+const ImageWrapper = styled.div`
+  height: 100%;
+  width: 3.6rem;
+  padding: 0.4rem 1rem 0.4rem 0;
+  box-sizing: border-box;
+`
+
+const Image = styled.img`
+  max-height: 100%;
+  height: auto;
 `

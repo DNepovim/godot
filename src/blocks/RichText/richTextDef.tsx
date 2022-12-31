@@ -11,7 +11,6 @@ export interface RichTextBlock extends Block {
 export interface RichTextFields extends BlockFields {
   title: string
   text: string
-  textAlign: string
 }
 
 export const richTextDef: BlockDef<RichTextFields> = {

@@ -17,16 +17,16 @@ import coverImage from "../../images/cover.svg"
 import leaveImage from "../../images/leave.svg"
 
 export const Cover: React.FC<CoverFields> = ({
-  id,
   title,
   subtitle,
   claim,
   button,
   isSnowfall,
+  ...block
 }) => {
   const scrollPosition = useScrollPosition()
   return (
-    <Block id={id} palette={"sky"}>
+    <Block {...block}>
       <Container minHeight={"calc(85vh - 92px)"}>
         <CoverWrapper>
           <CoverIn>
@@ -47,9 +47,7 @@ export const Cover: React.FC<CoverFields> = ({
           <CoverTitle isSnowfall={isSnowfall ?? false}>{tp(title)}</CoverTitle>
         )}
         {subtitle && <CoverSubtitle>{tp(subtitle)}</CoverSubtitle>}
-        {claim && (
-          <CoverClaim dangerouslySetInnerHTML={{ __html: tp(claim) }} />
-        )}
+        {claim && <CoverClaim dangerouslySetInnerHTML={{ __html: claim }} />}
         {button.showButton && (
           <Button link={button.link} targetBlank>
             {button.label}
