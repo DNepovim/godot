@@ -13,8 +13,6 @@ import Snowfall from "react-snowfall"
 import { Grass } from "./Grass"
 import { leaves } from "./leaves"
 import { Leave } from "./Leave"
-import coverImage from "../../images/cover.svg"
-import leaveImage from "../../images/leave.svg"
 
 export const Cover: React.FC<CoverFields> = ({
   title,
@@ -33,14 +31,14 @@ export const Cover: React.FC<CoverFields> = ({
             {leaves.map((leave, i) => (
               <Leave
                 key={i}
-                src={leaveImage}
+                src="../../images/leave.svg"
                 alt=""
                 scrollPosition={scrollPosition}
                 index={i}
                 {...leave}
               />
             ))}
-            <CoverImage src={coverImage} alt="" />
+            <CoverImage src="../../images/cover.svg" alt="" />
           </CoverIn>
         </CoverWrapper>
         {title && (

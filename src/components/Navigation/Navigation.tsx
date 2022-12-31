@@ -10,7 +10,7 @@ import { Link } from "gatsby"
 import { NavigationItem } from "../../data"
 import { Container } from "../Container/Container"
 import { css, Global } from "@emotion/react"
-import logo from "../../images/logo.svg"
+// import logo from "../../images/logo.svg"
 import { StaticImage } from "gatsby-plugin-image"
 
 export const Navigation: React.FC<{
@@ -58,7 +58,7 @@ export const Navigation: React.FC<{
           {activeItem && activeItem !== items[0].link && (
             <LogoWrapper>
               <ImageWrapper>
-                <Image src={logo} alt="logo" />
+                <Image src="../../images/logo.svg" alt="logo" />
               </ImageWrapper>
               {title && <Title to={items[0].link}>{title}</Title>}
             </LogoWrapper>

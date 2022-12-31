@@ -3,10 +3,9 @@ import { getDownloadURL, ref } from "firebase/storage"
 import { StaticImage } from "gatsby-plugin-image"
 import React, { useEffect, useState } from "react"
 import { Image } from "../../components/Image/Image"
-import { storage } from "../../firebase/storage"
+import { storage } from "../../../firebase/storage"
 import { min, theme } from "../../styles/theme"
 import { tp } from "../../utils/tp"
-import frameImage from "../../images/frame.svg"
 
 export interface Person {
   image: string
@@ -39,7 +38,7 @@ export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => {
             height={170}
           />
         )}
-        <Frame src={frameImage} alt="" />
+        <Frame src="../../images/frame.svg" alt="" />
       </Figure>
       <PersonNick>{tp(nick)}</PersonNick>
       <PersonName>{tp(name)}</PersonName>

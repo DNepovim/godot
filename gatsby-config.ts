@@ -4,7 +4,7 @@ import path from "path"
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `ČLK Godot`,
-    siteUrl: `https://www.yourdomain.tld`,
+    siteUrl: `https://godot.skauting.cz`,
   },
   // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
   // If you use VSCode you can also use the GraphQL plugin
@@ -14,12 +14,6 @@ const config: GatsbyConfig = {
     "gatsby-plugin-emotion",
     "gatsby-plugin-image",
     "gatsby-plugin-sitemap",
-    {
-      resolve: "gatsby-plugin-manifest",
-      options: {
-        icon: "src/images/favicons/favicon-32x32.png",
-      },
-    },
     "gatsby-transformer-sharp",
     {
       resolve: `gatsby-plugin-sharp`,
@@ -29,14 +23,11 @@ const config: GatsbyConfig = {
         },
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: path.join(__dirname, `src`, `images`),
-      },
-    },
   ],
 }
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 export default config

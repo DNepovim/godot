@@ -1,6 +1,4 @@
 import styled from "@emotion/styled"
-import grassWhiteImage from "../../images/grass-white.svg"
-import grassImage from "../../images/grass.svg"
 
 export const Grass = styled.div`
   position: absolute;
@@ -12,7 +10,7 @@ export const Grass = styled.div`
   max-width: 100%;
   height: 20px;
   background-image: url(${({ isSnowfall }: { isSnowfall?: boolean }) =>
-    isSnowfall ? grassWhiteImage : grassImage});
+    isSnowfall ? "../../images/grass-white.svg" : "../../images/grass.svg"});
   background-repeat: repeat-x;
   background-size: contain; ;
 `

@@ -8,10 +8,10 @@ import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
 import styled from "@emotion/styled"
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage"
-import { firebaseApp } from "../../firebase/firebase"
+import { firebaseApp } from "../../../firebase/firebase"
 import { Image } from "../../components/Image/Image"
 import { Button } from "../../components/Button/Button"
-import { storage } from "../../firebase/storage"
+import { storage } from "../../../firebase/storage"
 
 const gap = 4
 
