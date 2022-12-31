@@ -75,8 +75,8 @@ export const Head: HeadFC = () => {
     void (async () => {
       const meta = await getMeta()
       setMeta(meta ?? {})
-    })
-  })
+    })()
+  }, [])
 
   return (
     <MetaTags
