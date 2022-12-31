@@ -13,7 +13,7 @@ const urlBuilder = ({
   width,
   height,
 }: IUrlBuilderArgs<unknown>): string => {
-  const imagesUrl = process.env.FIREBASE_IMAGES_URL
+  const imagesUrl = process.env.GATSBY_FIREBASE_IMAGES_URL
   if (!imagesUrl) {
     throw new Error(`Env variable FIREBASE_IMAGES_URL must be defined.`)
   }
