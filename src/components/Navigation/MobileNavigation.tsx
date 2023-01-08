@@ -1,11 +1,12 @@
 import styled from "@emotion/styled"
 import { Link } from "gatsby"
-import React, { useState } from "react"
+import React, { useRef, useState } from "react"
 import { isLinkExternal } from "../../utils/isLinkExternal"
 import { Button } from "../Button/Button"
 import { NavigationItem } from "../../data"
 import Hamburger from "hamburger-react"
 import { theme } from "../../styles/theme"
+import useOnClickOutside from "use-onclickoutside"
 
 export const MobileNavigation: React.FC<{
   items: NavigationItem[]
@@ -16,10 +17,12 @@ export const MobileNavigation: React.FC<{
     ({ showAlways, showAfterScroll }) => showAlways && showAfterScroll
   )
   const restItems = items.filter(({ showAlways }) => !showAlways)
+  const ref = useRef(null)
+  useOnClickOutside(ref, () => setIsOpened(false))
 
   return (
     <>
-      <NavWrapper>
+      <NavWrapper ref={ref}>
         {fixedItems.length > 0 &&
           activeItem !== items[0].link &&
           fixedItems.map((item) => (
