@@ -2,7 +2,6 @@ import { getMeta, getNavigation, getPage } from "./firebase/database"
 import path from "path"
 import { ref, listAll, getDownloadURL } from "firebase/storage"
 import { storage } from "./firebase/storage"
-import { QueryFieldFilterConstraint } from "firebase/firestore"
 
 exports.createPages = async ({ actions: { createPage } }) => {
   const page = await getPage("hlavni-stranka")
@@ -17,8 +16,25 @@ exports.createPages = async ({ actions: { createPage } }) => {
         const images = await Promise.all(
           list.items.map(async (item) => await getDownloadURL(item))
         )
-
         return { ...block, fields: { ...block.fields, images } }
+      }
+      if (block.template === "persons") {
+        return {
+          ...block,
+          fields: {
+            ...block.fields,
+            persons: await Promise.all(
+              block.fields.persons.map(async (person) => {
+                const objectRef = await ref(
+                  storage,
+                  `/images/${person.image}.webp`
+                )
+                const image = await getDownloadURL(objectRef)
+                return { ...person, image }
+              })
+            ),
+          },
+        }
       }
       return block
     })

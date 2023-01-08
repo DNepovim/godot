@@ -1,9 +1,6 @@
 import styled from "@emotion/styled"
-import { getDownloadURL, ref } from "firebase/storage"
-import { StaticImage } from "gatsby-plugin-image"
-import React, { useEffect, useState } from "react"
+import React from "react"
 import { Image } from "../../components/Image/Image"
-import { storage } from "../../../firebase/storage"
 import { min, theme } from "../../styles/theme"
 import { tp } from "../../utils/tp"
 
@@ -17,35 +14,25 @@ export interface Person {
 
 export interface PersonProps extends Person {}
 
-export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => {
-  const [imageUrl, setImageUrl] = useState<string>()
-  useEffect(() => {
-    void (async () => {
-      const objectRef = await ref(storage, `/images/${image}.webp`)
-      const imageObjectUrl = await getDownloadURL(objectRef)
-      setImageUrl(imageObjectUrl)
-    })()
-  }, [])
-  return (
-    <Article>
-      <Figure>
-        {imageUrl && (
-          <PersonImage
-            imgStyle={{ width: 170, height: 170 }}
-            src={imageUrl}
-            alt={nick}
-            width={170}
-            height={170}
-          />
-        )}
-        <Frame src="../../images/frame.svg" alt="" />
-      </Figure>
-      <PersonNick>{tp(nick)}</PersonNick>
-      <PersonName>{tp(name)}</PersonName>
-      <p dangerouslySetInnerHTML={{ __html: tp(text) }} />
-    </Article>
-  )
-}
+export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => (
+  <Article>
+    <Figure>
+      {image && (
+        <PersonImage
+          imgStyle={{ width: 170, height: 170 }}
+          src={image}
+          alt={nick}
+          width={170}
+          height={170}
+        />
+      )}
+      <Frame src="../../images/frame.svg" alt="" />
+    </Figure>
+    <PersonNick>{tp(nick)}</PersonNick>
+    <PersonName>{tp(name)}</PersonName>
+    <p dangerouslySetInnerHTML={{ __html: tp(text) }} />
+  </Article>
+)
 
 const Article = styled.article`
   max-width: 900px;
