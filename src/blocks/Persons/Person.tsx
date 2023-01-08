@@ -70,7 +70,9 @@ const Figure = styled.figure`
 `
 
 const PersonImage = styled(Image)`
-  border-radius: 50%;
+  img {
+    border-radius: 50%;
+  }
 `
 
 const Frame = styled.img`
