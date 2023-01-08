@@ -22,8 +22,9 @@ export const Person: React.FC<PersonProps> = ({ image, nick, name, text }) => (
           imgStyle={{ width: 170, height: 170 }}
           src={image}
           alt={nick}
-          width={170}
-          height={170}
+          sizes="174px"
+          breakpoints={[174, 348]}
+          aspectRatio={1}
         />
       )}
       <Frame src="../../images/frame.svg" alt="" />

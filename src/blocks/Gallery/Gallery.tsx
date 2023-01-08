@@ -1,50 +1,46 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import {
   CenteredContainer,
   Container,
 } from "../../components/Container/Container"
-import { theme } from "../../styles/theme"
+import { min, theme } from "../../styles/theme"
 import { Block } from "../../components/Block/Block"
 import { GalleryFields } from "./galleryDef"
 import styled from "@emotion/styled"
-import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage"
 import { Image } from "../../components/Image/Image"
 import { Button } from "../../components/Button/Button"
-import { storage } from "../../../firebase/storage"
-
-const gap = 4
 
 export const Gallery: React.FC<GalleryFields> = ({
   button,
   images,
   ...block
-}) => {
-  return (
-    <Block {...block}>
-      <GrdiContainer>
-        {images.map((image, i) => (
-          <Figure key={image}>
-            <Image
-              src={image}
-              width={theme.layout.width / 3}
-              height={(theme.layout.width / 3) * 0.7}
-              sizes={`(min-width: ${
-                theme.layout.width - theme.layout.gap * 2
-              }px) 268px, (min-width: 640px) calc((100vw - 7rem)/3), (min-width: 500px) calc((100vw - 7rem)/2),  calc((100vw - 5rem)/2)`}
-              backgroundColor={theme.color.darkBlue}
-              alt=""
-            />
-          </Figure>
-        ))}
-      </GrdiContainer>
-      <ButtonContainer>
-        <Button link={button.link} dark targetBlank={button.targetBlank}>
-          {button.label}
-        </Button>
-      </ButtonContainer>
-    </Block>
-  )
-}
+}) => (
+  <Block {...block}>
+    <GrdiContainer>
+      {images.map((image, i) => (
+        <Figure key={image}>
+          <Image
+            src={image}
+            breakpoints={[624, 500, 400, 312, 250, 200, 150, 100]}
+            sizes={`${min("l")} ${
+              (theme.layout.width - 4 * theme.layout.gap) / 3
+            }px, ${min("s")} calc((100vw - ${
+              4 * theme.layout.gap
+            }px) / 3), calc((100vw - ${3 * theme.layout.gap}px) / 2)`}
+            aspectRatio={1.7}
+            backgroundColor={theme.color.darkBlue}
+            alt=""
+          />
+        </Figure>
+      ))}
+    </GrdiContainer>
+    <ButtonContainer>
+      <Button link={button.link} dark targetBlank={button.targetBlank}>
+        {button.label}
+      </Button>
+    </ButtonContainer>
+  </Block>
+)
 
 const Figure = styled.figure`
   box-sizing: border-box;
@@ -55,9 +51,12 @@ const Figure = styled.figure`
 
 const GrdiContainer = styled(Container)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: ${theme.layout.gap}px;
   padding-bottom: 18px;
+  @media ${min("s")} {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `
 
 const ButtonContainer = styled(CenteredContainer)`
