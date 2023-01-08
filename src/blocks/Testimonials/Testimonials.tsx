@@ -1,20 +1,44 @@
-import React, { useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { tp } from "../../utils/tp"
 import { theme } from "../../styles/theme"
-import { Container } from "../../components/Container/Container"
 import { Block } from "../../components/Block/Block"
 import styled from "@emotion/styled"
 import { TestimonialsFields } from "./testimonialsDef"
 import { Carousel } from "react-responsive-carousel"
-// import "react-responsive-carousel/lib/styles/carousel.css"
+import { useWindowSize } from "rooks"
 
 export const Testimonials: React.FC<TestimonialsFields> = ({
   testimonials,
   ...block
 }) => {
+  const { innerWidth } = useWindowSize()
+  const activeIndicatorRef = useRef<HTMLLIElement>(null)
+  const [indicatorPosition, setIndicatorPosition] = useState<number | null>(
+    null
+  )
   const [selectedItem, setSelectedItem] = useState(
     Math.floor(testimonials.length / 2)
   )
+
+  useEffect(() => {
+    const activeIndicatorItemRec =
+      activeIndicatorRef.current?.getBoundingClientRect()
+    const indicatorContainerRect =
+      activeIndicatorRef.current?.parentElement?.getBoundingClientRect()
+    if (innerWidth && activeIndicatorItemRec && indicatorContainerRect) {
+      const activeIndicatorItemLeft = activeIndicatorItemRec.left
+      const activeIndicatorItemWidth = activeIndicatorItemRec.width
+      const indicatorContainerLeft = indicatorContainerRect!.left
+
+      setIndicatorPosition(
+        innerWidth / 2 -
+          (activeIndicatorItemLeft -
+            indicatorContainerLeft +
+            activeIndicatorItemWidth / 2)
+      )
+    }
+  }, [innerWidth, selectedItem])
+
   return (
     <Block {...block}>
       <CarouselWrapper
@@ -25,12 +49,22 @@ export const Testimonials: React.FC<TestimonialsFields> = ({
         showStatus={false}
         showThumbs={false}
         transitionTime={600}
-      >
-        {testimonials?.map(({ name, text }, i) => (
+        renderIndicator={(onClick, isSelected, index) => (
           <>
-            <p>{tp(text)}</p>
-            <Name>{name}</Name>
+            <Name
+              ref={isSelected ? activeIndicatorRef : undefined}
+              onClick={onClick}
+              isSelected={isSelected}
+            >
+              {testimonials[index].name}
+            </Name>
+            {index < testimonials.length - 1 && "–"}
           </>
+        )}
+        indicatorContainerPosition={indicatorPosition ?? 0}
+      >
+        {testimonials?.map(({ text }, i) => (
+          <p>{tp(text)}</p>
         ))}
       </CarouselWrapper>
     </Block>
@@ -52,7 +86,7 @@ const CarouselWrapper = styled(Carousel)`
       margin: 0 auto;
       padding: 0;
       list-style: none;
-      transition: all 300ms ${theme.animation.function};
+      transition: all 600ms ${theme.animation.function};
     }
 
     .slide {
@@ -85,8 +119,12 @@ const CarouselWrapper = styled(Carousel)`
     .control-dots {
       position: absolute;
       bottom: 0;
+      left: ${({
+        indicatorContainerPosition,
+      }: {
+        indicatorContainerPosition: number
+      }) => indicatorContainerPosition}px;
       padding: 0;
-      width: 100%;
       z-index: 1;
       display: flex;
       justify-content: center;
@@ -95,6 +133,7 @@ const CarouselWrapper = styled(Carousel)`
       list-style: none;
       margin: 16px 0;
       height: 18px;
+      transition: left 600ms ${theme.animation.function};
 
       .dot {
         background: ${theme.color.darkBlue};
@@ -102,7 +141,7 @@ const CarouselWrapper = styled(Carousel)`
         width: 12px;
         height: 12px;
         cursor: pointer;
-        transition: background-color 300ms, height 300ms, width 300ms;
+        transition: background-color 600ms, height 600ms, width 600ms;
 
         &.selected {
           background-color: ${theme.color.yellow};
@@ -121,8 +160,15 @@ const CarouselWrapper = styled(Carousel)`
   }
 `
 
+interface NameProps {
+  isSelected: boolean
+}
+
 const Name = styled.strong`
+  cursor: pointer;
   justify-self: flex-end;
-  color: ${theme.color.brown};
-  font-size: 1.4rem;
+  color: ${({ isSelected }: NameProps) =>
+    isSelected ? theme.color.darkerBlue : theme.color.lightBlue};
+  font-size: ${({ isSelected }: NameProps) => (isSelected ? "1.4rem" : "1rem")};
+  transition: font-size 600ms ${theme.animation.function};
 `
