@@ -1,8 +1,7 @@
 {
-  "name": "lk-godot",
+  "name": "godot",
   "version": "1.0.0",
   "private": true,
-  "description": "lk-godot",
   "author": "Dominik Bláha",
   "keywords": [
     "gatsby"
