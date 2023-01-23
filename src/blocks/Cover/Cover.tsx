@@ -105,6 +105,7 @@ const CoverClaim = styled.p`
   font-size: 1.4rem;
   color: ${theme.color.brown};
   margin: 0 0 32px;
+  max-width: 25rem;
 `
 
 const RootsWrapper = styled.div`
