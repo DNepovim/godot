@@ -54,7 +54,7 @@ export const DesktopNavigation: React.FC<{
         .filter((item) =>
           !activeItem || activeItem === items[0].link
             ? !item.showAfterScroll
-            : true
+            : true && !item.isHidden
         )
         .map((item) => (
           <NavItem key={item.link}>

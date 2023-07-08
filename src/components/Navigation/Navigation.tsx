@@ -10,8 +10,6 @@ import { Link } from "gatsby"
 import { NavigationItem } from "../../data"
 import { Container } from "../Container/Container"
 import { css, Global } from "@emotion/react"
-// import logo from "../../images/logo.svg"
-import { StaticImage } from "gatsby-plugin-image"
 
 export const Navigation: React.FC<{
   title?: string

@@ -14,9 +14,12 @@ export const MobileNavigation: React.FC<{
 }> = ({ items, activeItem }) => {
   const [isOpened, setIsOpened] = useState(false)
   const fixedItems = items.filter(
-    ({ showAlways, showAfterScroll }) => showAlways && showAfterScroll
+    ({ showAlways, showAfterScroll, isHidden }) =>
+      showAlways && showAfterScroll && !isHidden
   )
-  const restItems = items.filter(({ showAlways }) => !showAlways)
+  const restItems = items.filter(
+    ({ showAlways, isHidden }) => !showAlways && !isHidden
+  )
   const ref = useRef(null)
   useOnClickOutside(ref, () => setIsOpened(false))
 
