@@ -48,7 +48,7 @@ exports.createPages = async ({ actions: { createPage } }) => {
         blocks
           .filter(({ isHidden }) => !isHidden)
           .sort((a, b) => a.order - b.order) ?? [],
-      navigation: navigation?.items ?? [],
+      navigation: navigation?.items.filter(({isHidden}) => !isHidden) ?? [],
       meta,
     },
   })
