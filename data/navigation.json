@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "title": "Tým",
+      "link": "#tym"
+    },
+    {
+      "title": "O kurzu",
+      "link": "#o-kurzu"
+    },
+    {
+      "title": "Godot",
+      "link": "#godot"
+    },
+    {
+      "title": "Kontakt",
+      "link": "#kontakt"
+    }
+  ]
+}

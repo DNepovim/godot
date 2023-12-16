@@ -1,0 +1,81 @@
+import { LeaveParams } from "./Leave"
+
+export const leaves: LeaveParams[] = [
+  {
+    top: 17,
+    left: 83,
+    rotate: 90,
+    position: 60,
+    duration: 1,
+  },
+  {
+    top: 39,
+    left: 15,
+    rotate: -133,
+    position: 100,
+    duration: 1.7,
+  },
+  {
+    top: 5,
+    left: 51,
+    rotate: 100,
+    position: 40,
+    duration: 1.2,
+  },
+  {
+    top: 53,
+    left: 83,
+    rotate: 205,
+    position: 120,
+    duration: 2,
+  },
+  {
+    top: 27,
+    left: 60,
+    rotate: 112,
+    position: 95,
+    duration: 1.1,
+  },
+  {
+    top: 26,
+    left: 27,
+    rotate: 190,
+    position: 80,
+    duration: 1.9,
+  },
+  {
+    top: 10,
+    left: 80,
+    rotate: 183,
+    position: 35,
+    duration: 1.3,
+  },
+  {
+    top: 14,
+    left: 69,
+    rotate: 119,
+    position: 70,
+    duration: 1.4,
+  },
+  {
+    top: 14,
+    left: 40,
+    rotate: 188,
+    position: 80,
+    duration: 2.1,
+  },
+  {
+    top: 54,
+    left: 21,
+    rotate: 136,
+    position: 110,
+    duration: 1.2,
+  },
+  {
+    top: 36,
+    left: 47,
+    rotate: 160,
+    position: 75,
+    duration: 2.2,
+  },
+]
