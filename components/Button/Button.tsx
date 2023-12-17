@@ -1,25 +1,19 @@
-import styled from "@emotion/styled"
-import React, { ReactNode } from "react"
-import { theme } from "../../styles/theme"
+import styled from "@emotion/styled";
+import React, { ReactNode } from "react";
+import { theme } from "../../styles/theme";
 
 export interface ButtonProps {
-  link: string
-  targetBlank?: boolean
-  isSmall?: boolean
-  dark?: boolean
-  children: ReactNode
+  link: string;
+  targetBlank?: boolean;
+  isSmall?: boolean;
+  dark?: boolean;
+  children: ReactNode;
 }
 
-export const Button: React.FC<ButtonProps> = ({
-  children,
-  link,
-  targetBlank,
-  isSmall,
-  dark,
-}) => (
+export const Button: React.FC<ButtonProps> = ({ children, link, targetBlank, isSmall, dark }) => (
   <StyledButton
     isSmall={isSmall ?? false}
-    dark={dark}
+    isDark={dark}
     href={link}
     {...(targetBlank
       ? {
@@ -30,20 +24,19 @@ export const Button: React.FC<ButtonProps> = ({
   >
     <span>{children}</span>
   </StyledButton>
-)
+);
 
 interface StyledButtonProps {
-  isSmall: boolean
-  dark?: boolean
+  isSmall: boolean;
+  isDark?: boolean;
 }
 
-const StyledButton = styled.a`
+const StyledButton = styled.a<StyledButtonProps>`
   position: relative;
   display: inline-block;
-  font-size: ${({ isSmall }: StyledButtonProps) => (isSmall ? 0.8 : 1.4)}rem;
+  font-size: ${({ isSmall, isDark }) => (isSmall && isDark ? 0.8 : 1.4)}rem;
   color: ${theme.color.background} !important;
-  background-color: ${({ dark }: StyledButtonProps) =>
-    dark ? theme.color.darkBlue : theme.color.lightBlue};
+  background-color: ${({ isDark }) => (isDark ? theme.color.darkBlue : theme.color.lightBlue)};
   padding: 0.6em 1em;
   border-radius: 4px;
   text-decoration: none;
@@ -56,8 +49,7 @@ const StyledButton = styled.a`
     left: 0;
     width: 0;
     height: 100%;
-    background-color: ${({ dark }: StyledButtonProps) =>
-      dark ? theme.color.darkerBlue : theme.color.darkBlue};
+    background-color: ${({ isDark }: StyledButtonProps) => (isDark ? theme.color.darkerBlue : theme.color.darkBlue)};
     transition: width 700ms ${theme.animation.function};
   }
 
@@ -76,4 +68,4 @@ const StyledButton = styled.a`
   @media (min-width: 400px) {
     font-size: ${({ isSmall }: { isSmall: boolean }) => (isSmall ? 1 : 1.4)}rem;
   }
-`
+`;

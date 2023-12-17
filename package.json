@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "tinacms dev -c \"next dev\"",
     "build": "tinacms build && next build",
+    "build:web": "next build",
     "start": "tinacms build && next start",
     "lint": "next lint"
   },
@@ -25,7 +26,7 @@
   },
   "devDependencies": {
     "@tinacms/cli": "^1.5.39",
-    "@types/node": "20.10.4",
+    "@types/node": "^20.10.5",
     "eslint": "8.55.0",
     "eslint-config-next": "14.0.4",
     "typescript": "^5.3.3"

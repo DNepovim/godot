@@ -4,11 +4,10 @@ import React, { ElementRef, useRef } from "react";
 import { theme } from "../../styles/theme";
 import { useWindowHeight } from "@react-hook/window-size";
 import useScrollPosition from "@react-hook/window-scroll";
-import { Icons } from "../../blocks/PageBlocksColumns";
 
 const defaultStrokeDashOffset = 1800;
 
-export const Icon: React.FC<{ icon: Icons }> = ({ icon }) => {
+export const Icon: React.FC<{ icon: string }> = ({ icon }) => {
   const iconRef = useRef<ElementRef<"svg">>(null);
   const windowHeight = useWindowHeight();
   const scrollPosition = useScrollPosition();
