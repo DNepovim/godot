@@ -12,7 +12,7 @@ async function getNavigation() {
     relativePath: "navigation.json",
   });
 
-  return navigation;
+  return navigation.filter((item) => !item.isHidden);
 }
 
 async function getSettings() {

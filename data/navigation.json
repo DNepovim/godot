@@ -1,20 +1,32 @@
 {
   "items": [
     {
-      "title": "Tým",
-      "link": "#tym"
+      "title": "Godot",
+      "link": "#godot"
     },
     {
       "title": "O kurzu",
       "link": "#o-kurzu"
     },
     {
-      "title": "Godot",
-      "link": "#godot"
+      "title": "Ročník 2024",
+      "link": "#rocnik-24"
+    },
+    {
+      "title": "Tým",
+      "link": "#tym"
     },
     {
       "title": "Kontakt",
       "link": "#kontakt"
+    },
+    {
+      "title": "Přihlásit",
+      "link": "https://is.skaut.cz/",
+      "isHidden": true,
+      "isButton": true,
+      "showAlways": true,
+      "showAfterScroll": true
     }
   ]
 }

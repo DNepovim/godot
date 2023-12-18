@@ -13,13 +13,8 @@ export const MobileNavigation: React.FC<{
   activeItem?: string;
 }> = ({ items, activeItem }) => {
   const [isOpened, setIsOpened] = useState(false);
-  const fixedItems = items.filter(
-    ({ showAlways, showAfterScroll, isHidden }) =>
-      showAlways && showAfterScroll && !isHidden
-  );
-  const restItems = items.filter(
-    ({ showAlways, isHidden }) => !showAlways && !isHidden
-  );
+  const fixedItems = items.filter(({ showAlways, showAfterScroll }) => showAlways && showAfterScroll);
+  const restItems = items.filter(({ showAlways }) => !showAlways);
   const ref = useRef(null);
   useOnClickOutside(ref, () => setIsOpened(false));
 
@@ -29,12 +24,7 @@ export const MobileNavigation: React.FC<{
         {fixedItems.length > 0 &&
           activeItem !== items[0].link &&
           fixedItems.map((item) => (
-            <Button
-              key={item.link}
-              link={item.link}
-              isSmall
-              targetBlank={isLinkExternal(item.link)}
-            >
+            <Button key={item.link} link={item.link} isSmall targetBlank={isLinkExternal(item.link)}>
               {item.title}
             </Button>
           ))}
@@ -45,11 +35,7 @@ export const MobileNavigation: React.FC<{
             </NavItem>
           ))}
         </NavList>
-        <Hamburger
-          color={theme.color.lightBlue}
-          toggled={isOpened}
-          onToggle={() => setIsOpened(!isOpened)}
-        />
+        <Hamburger color={theme.color.lightBlue} toggled={isOpened} onToggle={() => setIsOpened(!isOpened)} />
       </NavWrapper>
     </>
   );

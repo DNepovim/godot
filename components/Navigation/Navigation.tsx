@@ -25,24 +25,25 @@ export const Navigation: React.FC<{
 }> = ({ title, items }) => {
   const [activeItem, setActiveItem] = useState<string | undefined>();
   const scrollPosition = useScrollPosition();
+  const anchorLinks = items.filter(({ link }) => link.startsWith("#"));
   const onScrollHandler = useCallback(
     (scrollPossition: number) => {
       if (document.body.scrollHeight - (scrollPosition + window.innerHeight) < 100) {
-        setActiveItem(items[items.length - 2].link);
+        setActiveItem(anchorLinks[anchorLinks.length - 1].link);
         return;
       }
       setActiveItem(
-        items.slice(0, -1).reduce<string | undefined>((acc, item) => {
+        anchorLinks.reduce<string | undefined>((acc, item) => {
           const block = document.getElementById(item.link.substring(1));
           if (!block) {
-            return;
+            return acc;
           }
           const { top } = block.getBoundingClientRect();
           return top < 100 ? item.link : acc;
         }, undefined)
       );
     },
-    [items, scrollPosition]
+    [anchorLinks, scrollPosition]
   );
   useEffect(() => {
     onScrollHandler(scrollPosition);

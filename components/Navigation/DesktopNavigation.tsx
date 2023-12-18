@@ -12,10 +12,7 @@ interface UnderlineProps {
   width: number;
 }
 
-const getUnderlineCor = (
-  container: HTMLElement | null,
-  item: Element | null
-): UnderlineProps | undefined => {
+const getUnderlineCor = (container: HTMLElement | null, item: Element | null): UnderlineProps | undefined => {
   const navListRect = container?.getBoundingClientRect();
   const activeItemRect = item?.getBoundingClientRect();
 
@@ -33,54 +30,38 @@ export const DesktopNavigation: React.FC<{
   items: NavigationItem[];
   activeItem?: string;
 }> = ({ items, activeItem }) => {
-  const [activeItemCor, setActiveItemCor] = useState<
-    UnderlineProps | undefined
-  >();
+  const [activeItemCor, setActiveItemCor] = useState<UnderlineProps | undefined>();
   const scrollPosition = useScrollPosition();
   const navListRef = useRef<HTMLUListElement | null>(null);
 
-  const fallbackedActiveItem = activeItem ?? items[0].link;
-
   useEffect(() => {
-    const activeNavItem = document.querySelector(
-      `a[href$='${fallbackedActiveItem}']`
-    );
+    if (!activeItem) {
+      return;
+    }
+    const activeNavItem = document.querySelector(`a[href$='${activeItem.substring(1)}']`);
     setActiveItemCor(getUnderlineCor(navListRef.current, activeNavItem));
-  }, [scrollPosition]);
+  }, [activeItem, scrollPosition]);
 
   return (
     <NavList ref={navListRef}>
       {items
-        .filter((item) =>
-          !activeItem || activeItem === items[0].link
-            ? !item.showAfterScroll
-            : true && !item.isHidden
-        )
+        .filter((item) => (!activeItem || activeItem === items[0].link ? !item.showAfterScroll : true))
         .map((item) => (
           <NavItem key={item.link}>
             {item?.isButton ? (
               <StyledButton>
-                <Button
-                  link={item.link}
-                  isSmall
-                  targetBlank={isLinkExternal(item.link)}
-                >
+                <Button link={item.link} isSmall targetBlank={isLinkExternal(item.link)}>
                   {item.title}
                 </Button>
               </StyledButton>
             ) : (
-              <NavLink
-                active={item.link === activeItem ? 1 : 0}
-                href={item.link}
-              >
+              <NavLink active={item.link === activeItem ? 1 : 0} href={item.link}>
                 {item.title}
               </NavLink>
             )}
           </NavItem>
         ))}
-      {activeItemCor && (
-        <Underline left={activeItemCor.left} width={activeItemCor.width} />
-      )}
+      {activeItemCor && <Underline left={activeItemCor.left} width={activeItemCor.width} />}
     </NavList>
   );
 };
@@ -109,8 +90,7 @@ const Underline = styled.div`
   bottom: 0;
   height: 4px;
   width: ${({ width }: UnderlineProps) => width}px;
-  transition: left 300ms ${theme.animation.function},
-    width 300ms ${theme.animation.function};
+  transition: left 300ms ${theme.animation.function}, width 300ms ${theme.animation.function};
   background-color: ${theme.color.brown};
 `;
 
@@ -119,8 +99,7 @@ const NavLink = styled(Link)`
   display: block;
   font-weight: bold;
   padding: 0 0.4rem;
-  color: ${({ active }: { active: 0 | 1 }) =>
-    active ? theme.color.brown : theme.color.black};
+  color: ${({ active }: { active: 0 | 1 }) => (active ? theme.color.brown : theme.color.black)};
   cursor: pointer;
   transition: color 300ms;
 
