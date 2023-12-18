@@ -17,6 +17,9 @@ const globalBlockFields: Template["fields"] = [
 const columnsBlock: Template = {
   name: "columns",
   label: "Sloupce",
+  ui: {
+    itemProps: (item) => ({ label: `${item.title} [sloupce]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -44,7 +47,7 @@ const columnsBlock: Template = {
           name: "title",
         },
         {
-          type: "string",
+          type: "rich-text",
           label: "Text",
           name: "text",
         },
@@ -62,6 +65,9 @@ const columnsBlock: Template = {
 const contactsBlock: Template = {
   name: "contacts",
   label: "Kontakty",
+  ui: {
+    itemProps: (item) => ({ label: `${item.title} [kontakty]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -80,6 +86,9 @@ const contactsBlock: Template = {
 const coverBlock: Template = {
   name: "cover",
   label: "Úvod",
+  ui: {
+    itemProps: (item) => ({ label: `${item.title} [úvod]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -135,6 +144,9 @@ const coverBlock: Template = {
 const galleryBlock: Template = {
   name: "gallery",
   label: "Galerie",
+  ui: {
+    itemProps: (item) => ({ label: `Galerie [galerie]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -176,6 +188,9 @@ const galleryBlock: Template = {
 const personsBlock: Template = {
   name: "persons",
   label: "Medailonky",
+  ui: {
+    itemProps: (item) => ({ label: `${item.title} [medailonky]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -232,6 +247,9 @@ const personsBlock: Template = {
 const quotationBlock: Template = {
   name: "quotation",
   label: "Citát",
+  ui: {
+    itemProps: (item) => ({ label: `Citát [citát]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -255,6 +273,9 @@ const quotationBlock: Template = {
 const richTextBlock: Template = {
   name: "richText",
   label: "Text",
+  ui: {
+    itemProps: (item) => ({ label: `${item.title} [text]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -273,6 +294,9 @@ const richTextBlock: Template = {
 const testimonialsBlock: Template = {
   name: "testimonials",
   label: "Reference",
+  ui: {
+    itemProps: (item) => ({ label: `Reference [reference]` }),
+  },
   fields: [
     ...globalBlockFields,
     {
@@ -389,11 +413,6 @@ export const config = defineConfig({
           allowedActions: { delete: false, create: false },
         },
         fields: [
-          {
-            type: "string",
-            label: "Název stránky",
-            name: "title",
-          },
           {
             type: "object",
             list: true,
