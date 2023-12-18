@@ -63,9 +63,7 @@ const Figure = styled.figure`
 `;
 
 const PersonImage = styled(Image)`
-  img {
-    border-radius: 50%;
-  }
+  border-radius: 50%;
 `;
 
 const Frame = styled.img`
