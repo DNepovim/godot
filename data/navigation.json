@@ -23,7 +23,7 @@
     {
       "title": "Přihlásit",
       "link": "https://is.skaut.cz/Junak/Events/Education/EventEducationEnroll.aspx?ID_EventEducation=2788&ID_EventEducationCourse=2938",
-      "isHidden": false,
+      "isHidden": true,
       "isButton": true,
       "showAlways": true,
       "showAfterScroll": true
