@@ -20,7 +20,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-snowfall": "^1.2.1",
     "rooks": "^7.14.1",
-    "tinacms": "^1.5.28",
+    "tinacms": "^1.6.1",
     "typopo": "^2.5.5",
     "use-onclickoutside": "^0.4.1"
   },
