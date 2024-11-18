@@ -9,8 +9,9 @@
       "link": "#o-kurzu"
     },
     {
-      "title": "Ročník 2024",
-      "link": "#rocnik-24"
+      "title": "Ročník 2025",
+      "link": "#rocnik-25",
+      "isHidden": true
     },
     {
       "title": "Tým",
