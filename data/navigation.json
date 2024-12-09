@@ -15,7 +15,8 @@
     },
     {
       "title": "Tým",
-      "link": "#tym"
+      "link": "#tym",
+      "isHidden": true
     },
     {
       "title": "Kontakt",
