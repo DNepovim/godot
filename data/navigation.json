@@ -11,7 +11,8 @@
     {
       "title": "Ročník 2026",
       "link": "#rocnik-26",
-      "isHidden": false
+      "isHidden": false,
+      "isButton": true
     },
     {
       "title": "Tým",
