@@ -19,8 +19,8 @@ const Gallery: React.FC<PageBlocksGallery> = ({ button, images, ...block }) => (
             height={183}
             // breakpoints={[624, 500, 400, 312, 250, 200, 150, 100]}
             sizes={`${min("l")} ${(theme.layout.width - 4 * theme.layout.gap) / 3}px, ${min("s")} calc((100vw - ${
-              4 * theme.layout.gap
-            }px) / 3), calc((100vw - ${3 * theme.layout.gap}px) / 2)`}
+              3 * theme.layout.gap
+            }px) / 2), calc(100vw - ${2 * theme.layout.gap}px)`}
             // aspectRatio={1.7}
             // backgroundColor={theme.color.darkBlue}
             alt=""
@@ -43,14 +43,22 @@ const Figure = styled.figure`
   text-align: center;
   width: 100%;
   margin: 0;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 const GrdiContainer = styled(Container)`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: ${theme.layout.gap}px;
   padding-bottom: 18px;
   @media ${min("s")} {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media ${min("l")} {
     grid-template-columns: repeat(3, 1fr);
   }
 `;
