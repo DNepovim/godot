@@ -2,6 +2,7 @@ allowBuilds:
   better-sqlite3: false
   esbuild: true
   unrs-resolver: true
+  yarn: set this to true or false
 
 overrides:
   react: ^18.2.0
