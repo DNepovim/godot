@@ -23,7 +23,8 @@
     "rooks": "^7.14.1",
     "tinacms": "1.5.28",
     "typopo": "^2.5.5",
-    "use-onclickoutside": "^0.4.1"
+    "use-onclickoutside": "^0.4.1",
+    "yet-another-react-lightbox": "^3.33.0"
   },
   "devDependencies": {
     "@tinacms/cli": "1.5.39",
@@ -39,7 +40,7 @@
     "react-dom": "^18.2.0"
   },
   "engines": {
-    "node": ">=24"
+    "node": "26.x"
   },
   "packageManager": "pnpm@11.22.0"
 }
